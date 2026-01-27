@@ -98,8 +98,8 @@ export class Character extends PIXI.AnimatedSprite {
     const yOffset = this.height / 2;
 
     const config: JumpConfig = {
-      from: { x: startX, y: startY - yOffset },
-      to: { x: targetX, y: targetY - yOffset },
+      from: { x: startX, y: startY },
+      to: { x: targetX, y: targetY },
       duration,
       jumpHeight: jumpHeightBase * Math.abs(this.scale.y),
       totalFrames,

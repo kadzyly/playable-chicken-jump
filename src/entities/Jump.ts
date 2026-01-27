@@ -36,16 +36,18 @@ export class Jump {
 
     const movementSpan = Math.max(0.0001, endFraction - startFraction);
 
-    // map global progress (0..1 with delays) to "movement" progress (0..1)
-    let movementProgress: number;
-
+    // stay at the start point
     if (progress <= startFraction) {
-      movementProgress = 0;
-    } else if (progress >= endFraction) {
-      movementProgress = 1;
-    } else {
-      movementProgress = (progress - startFraction) / movementSpan;
+      return { x: from.x, y: from.y };
     }
+
+    // stay after the jump at the end point
+    if (progress >= endFraction) {
+      return { x: to.x, y: to.y };
+    }
+
+    // progress on the jump
+    const movementProgress = (progress - startFraction) / movementSpan;
 
     // line between two points
     const x = from.x + (to.x - from.x) * movementProgress;
