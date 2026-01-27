@@ -5,7 +5,7 @@ export interface JumpConfig {
   jumpHeight: number;
 }
 
-export class JumpAnimator {
+export class Jump {
   static getTransform(progress: number, config: JumpConfig) {
     const { from, to, jumpHeight } = config;
 
@@ -13,7 +13,7 @@ export class JumpAnimator {
     const x = from.x + (to.x - from.x) * progress;
     const lineY = from.y + (to.y - from.y) * progress;
 
-    // jump's line 
+    // jump's line
     const arc = Math.sin(progress * Math.PI) * jumpHeight;
     const y = lineY - arc;
 

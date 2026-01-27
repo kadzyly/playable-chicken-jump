@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { JumpAnimator, JumpConfig } from './JumpAnimator';
+import { Jump, JumpConfig } from './Jump';
 import { CHARACTER_ANIMATIONS } from './CharacterConfig';
 
 type CharacterState = keyof typeof CHARACTER_ANIMATIONS;
@@ -25,14 +25,12 @@ export class Character extends PIXI.AnimatedSprite {
         state === 'idle'
           ? playerIdleSheet
           : state === 'jump'
-            ? playerJumpSheet
-            : state === 'win'
-              ? playerWinSheet
-              : imposterSheet;
+          ? playerJumpSheet
+          : state === 'win'
+          ? playerWinSheet
+          : imposterSheet;
 
-      this.textureCache[state] = config.frames
-        .map((frame) => sheet.textures[frame])
-        .filter(Boolean);
+      this.textureCache[state] = config.frames.map((frame) => sheet.textures[frame]).filter(Boolean);
     });
 
     // update textures after init
@@ -104,7 +102,7 @@ export class Character extends PIXI.AnimatedSprite {
         const elapsed = performance.now() - startTime;
         const progress = Math.min(elapsed / duration, 1);
 
-        const { x, y } = JumpAnimator.getTransform(progress, config);
+        const { x, y } = Jump.getTransform(progress, config);
 
         this.x = x;
         this.y = y;
