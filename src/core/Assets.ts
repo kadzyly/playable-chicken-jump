@@ -6,9 +6,6 @@ import sofaAsset from 'assets/chair.png';
 import bgFloorAsset from 'assets/BG_seg_floor.png';
 import bgWallAsset from 'assets/BG_seg_wall.png';
 
-import { dustData } from '../data/dustData';
-import dustImage from 'assets/dust/dust.png';
-
 import { PLAYER_IDLE_FRAMES } from '../data/player-idle-frames';
 import playerIdleImage from 'assets/player_idle_texture.png';
 import { PLAYER_JUMP_FRAMES } from '../data/player-jump-frames';
@@ -23,16 +20,10 @@ export async function loadAssets(): Promise<void> {
     { alias: 'char', src: charAsset },
     { alias: 'shelf', src: shelfAsset },
     { alias: 'sofa', src: sofaAsset },
-    { alias: 'dustTexture', src: dustImage },
     { alias: 'playerIdleTexture', src: playerIdleImage },
     { alias: 'playerJumpTexture', src: playerJumpImage },
     { alias: 'playerWinTexture', src: playerWinImage }
   ]);
-
-  const dustTexture = PIXI.Assets.get('dustTexture');
-  const dustSheet = new PIXI.Spritesheet(dustTexture, dustData);
-  await dustSheet.parse();
-  PIXI.Cache.set('dustSheet', dustSheet);
 
   const playerIdleTexture = PIXI.Assets.get('playerIdleTexture');
   const playerIdleSheet = new PIXI.Spritesheet(playerIdleTexture, PLAYER_IDLE_FRAMES);
