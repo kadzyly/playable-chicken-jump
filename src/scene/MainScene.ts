@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { sdk } from '@smoud/playable-sdk';
 import { Character } from '../entities/Character';
-import { Shelf } from '../entities/Shelf';
+import { StartIsland } from '../entities/StartIsland';
 import { Ice } from '../entities/Ice';
 import { RoundControls } from '../ui/organisms/RoundControls';
 
@@ -9,7 +9,7 @@ export class MainScene {
   private floorBg: PIXI.TilingSprite;
   private wallBg: PIXI.TilingSprite;
   private character: Character;
-  private shelf: Shelf;
+  private startIsland: StartIsland;
   private ice: Ice;
   private interactionCount = 0;
   private roundControls!: RoundControls;
@@ -48,7 +48,7 @@ export class MainScene {
     const centerOfWaterY = waterTopY + floorHeight / 2;
 
     this.character.scale.set(entityScale);
-    this.shelf.scale.set(entityScale);
+    this.startIsland.scale.set(entityScale);
     this.ice.scale.set(entityScale);
 
     // Делаем ширину ice равной 30% ширины экрана
@@ -57,18 +57,18 @@ export class MainScene {
     const iceScale = targetIceWidth / iceBaseWidth;
     this.ice.scale.set(iceScale);
 
-    // shelf слева внизу (на полу)
-    this.shelf.x = 0;
-    this.shelf.y = centerOfWaterY;
+    // startIsland слева внизу (на полу)
+    this.startIsland.x = 0;
+    this.startIsland.y = centerOfWaterY;
 
     // ice справа внизу (на полу)
     this.ice.x = width * 0.8;
     this.ice.y = centerOfWaterY;
 
     if (this.interactionCount === 0) {
-      // персонаж стартует на shelf
-      this.character.x = this.shelf.x;
-      this.character.y = this.shelf.y;
+      // персонаж стартует на startIsland
+      this.character.x = this.startIsland.x;
+      this.character.y = this.startIsland.y;
     } else {
       this.character.x = this.ice.x;
       this.character.y = this.ice.y;
@@ -101,11 +101,11 @@ export class MainScene {
   }
 
   private createEntities(): void {
-    this.shelf = new Shelf();
+    this.startIsland = new StartIsland();
     this.ice = new Ice();
     this.character = new Character();
 
-    this.app.stage.addChild(this.shelf, this.ice, this.character);
+    this.app.stage.addChild(this.startIsland, this.ice, this.character);
   }
 
   private createBottomUI() {
@@ -125,7 +125,7 @@ export class MainScene {
 
   private onClick(): void {
     if (this.interactionCount === 0) {
-      // find coordinates for character to jump from shelf to ice
+      // find coordinates for character to jump from startIsland to ice
       const toX = this.ice.x;
       const tempY = this.character.y;
       const iceTopSurfaceY = this.ice.y - this.ice.height;
