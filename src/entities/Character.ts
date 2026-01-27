@@ -12,13 +12,23 @@ export class Character extends PIXI.AnimatedSprite {
   constructor() {
     const imposterSheet = PIXI.Cache.get('imposterSheet') as PIXI.Spritesheet;
     const playerIdleSheet = PIXI.Cache.get('playerIdleSheet') as PIXI.Spritesheet;
+    const playerJumpSheet = PIXI.Cache.get('playerJumpSheet') as PIXI.Spritesheet;
+    const playerWinSheet = PIXI.Cache.get('playerWinSheet') as PIXI.Spritesheet;
 
     // init with a default texture first
     super([PIXI.Texture.EMPTY]);
 
     (Object.keys(CHARACTER_ANIMATIONS) as CharacterState[]).forEach((state) => {
       const config = CHARACTER_ANIMATIONS[state];
-      const sheet = state === 'idle' ? playerIdleSheet : imposterSheet;
+
+      const sheet =
+        state === 'idle'
+          ? playerIdleSheet
+          : state === 'jump'
+            ? playerJumpSheet
+            : state === 'win'
+              ? playerWinSheet
+              : imposterSheet;
 
       this.textureCache[state] = config.frames
         .map((frame) => sheet.textures[frame])
@@ -49,6 +59,23 @@ export class Character extends PIXI.AnimatedSprite {
     this.animationSpeed = config.speed;
     this.loop = config.loop;
     this.gotoAndPlay(0);
+  }
+
+  public playWin(): Promise<void> {
+    // остановить прыжок/движение и проиграть победную анимацию один раз
+    this.isJumping = false;
+    this.rotation = 0;
+    this.anchor.set(0.5, 1);
+    this.setState('win');
+
+    return new Promise((resolve) => {
+      const onComplete = () => {
+        this.off('complete', onComplete);
+        resolve();
+      };
+
+      this.on('complete', onComplete);
+    });
   }
 
   public async jumpTo(targetX: number, targetY: number, duration: number = 1000): Promise<void> {

@@ -1,4 +1,6 @@
 import { PLAYER_IDLE_FRAMES } from '../data/player-idle-frames';
+import { PLAYER_JUMP_FRAMES } from '../data/player-jump-frames';
+import { PLAYER_WIN_FRAMES } from '../data/player-win-frames';
 
 export const CHARACTER_ANIMATIONS = {
   idle: {
@@ -7,8 +9,13 @@ export const CHARACTER_ANIMATIONS = {
     loop: true
   },
   jump: {
-    frames: Array.from({ length: 19 }, (_, i) => `imp_${i}.png`),
+    frames: Object.keys(PLAYER_JUMP_FRAMES.frames),
     speed: 0.5,
-    loop: true
+    loop: false
+  },
+  win: {
+    frames: Object.keys(PLAYER_WIN_FRAMES.frames),
+    speed: 0.5,
+    loop: false
   }
 };
