@@ -13,14 +13,10 @@ export class JumpAnimator {
     const x = from.x + (to.x - from.x) * progress;
     const lineY = from.y + (to.y - from.y) * progress;
 
-    // jump's line
+    // jump's line 
     const arc = Math.sin(progress * Math.PI) * jumpHeight;
     const y = lineY - arc;
 
-    // make roll by X
-    const direction = to.x > from.x ? 1 : -1;
-    const rotation = progress * Math.PI * 2 * direction;
-
-    return { x, y, rotation };
+    return { x, y };
   }
 }

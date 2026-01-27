@@ -62,7 +62,7 @@ export class Character extends PIXI.AnimatedSprite {
   }
 
   public playWin(): Promise<void> {
-    // остановить прыжок/движение и проиграть победную анимацию один раз
+    // stop other animations, play win animation once
     this.isJumping = false;
     this.rotation = 0;
     this.anchor.set(0.5, 1);
@@ -104,11 +104,10 @@ export class Character extends PIXI.AnimatedSprite {
         const elapsed = performance.now() - startTime;
         const progress = Math.min(elapsed / duration, 1);
 
-        const { x, y, rotation } = JumpAnimator.getTransform(progress, config);
+        const { x, y } = JumpAnimator.getTransform(progress, config);
 
         this.x = x;
         this.y = y;
-        this.rotation = rotation;
 
         if (progress < 1) {
           requestAnimationFrame(update);
@@ -124,7 +123,6 @@ export class Character extends PIXI.AnimatedSprite {
 
   private onJumpComplete(finalX: number, finalY: number): void {
     this.isJumping = false;
-    this.rotation = 0;
     // anchor: return to bottom
     this.anchor.set(0.5, 1);
     this.x = finalX;
