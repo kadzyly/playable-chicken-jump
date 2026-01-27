@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import { sdk } from '@smoud/playable-sdk';
 import { Character } from '../entities/Character';
 import { Shelf } from '../entities/Shelf';
-import { Sofa } from '../entities/Sofa';
+import { Ice } from '../entities/Ice';
 import { RoundControls } from '../ui/organisms/RoundControls';
 
 export class MainScene {
@@ -10,7 +10,7 @@ export class MainScene {
   private wallBg: PIXI.TilingSprite;
   private character: Character;
   private shelf: Shelf;
-  private sofa: Sofa;
+  private ice: Ice;
   private interactionCount = 0;
   private roundControls!: RoundControls;
 
@@ -49,29 +49,29 @@ export class MainScene {
 
     this.character.scale.set(entityScale);
     this.shelf.scale.set(entityScale);
-    this.sofa.scale.set(entityScale);
+    this.ice.scale.set(entityScale);
 
-    // Делаем ширину sofa равной 30% ширины экрана
-    const targetSofaWidth = width * 0.3;
-    const sofaBaseWidth = this.sofa.width || 1;
-    const sofaScale = targetSofaWidth / sofaBaseWidth;
-    this.sofa.scale.set(sofaScale);
+    // Делаем ширину ice равной 30% ширины экрана
+    const targetIceWidth = width * 0.3;
+    const iceBaseWidth = this.ice.width || 1;
+    const iceScale = targetIceWidth / iceBaseWidth;
+    this.ice.scale.set(iceScale);
 
     // shelf слева внизу (на полу)
     this.shelf.x = 0;
     this.shelf.y = centerOfWaterY;
 
-    // sofa справа внизу (на полу)
-    this.sofa.x = width * 0.8;
-    this.sofa.y = centerOfWaterY;
+    // ice справа внизу (на полу)
+    this.ice.x = width * 0.8;
+    this.ice.y = centerOfWaterY;
 
     if (this.interactionCount === 0) {
       // персонаж стартует на shelf
       this.character.x = this.shelf.x;
       this.character.y = this.shelf.y;
     } else {
-      this.character.x = this.sofa.x;
-      this.character.y = this.sofa.y;
+      this.character.x = this.ice.x;
+      this.character.y = this.ice.y;
     }
   }
 
@@ -102,10 +102,10 @@ export class MainScene {
 
   private createEntities(): void {
     this.shelf = new Shelf();
-    this.sofa = new Sofa();
+    this.ice = new Ice();
     this.character = new Character();
 
-    this.app.stage.addChild(this.shelf, this.sofa, this.character);
+    this.app.stage.addChild(this.shelf, this.ice, this.character);
   }
 
   private createBottomUI() {
@@ -125,11 +125,11 @@ export class MainScene {
 
   private onClick(): void {
     if (this.interactionCount === 0) {
-      // find coordinates for character to jump from shelf to sofa
-      const toX = this.sofa.x;
+      // find coordinates for character to jump from shelf to ice
+      const toX = this.ice.x;
       const tempY = this.character.y;
-      const sofaTopSurfaceY = this.sofa.y - this.sofa.height;
-      this.character.placeOn(sofaTopSurfaceY);
+      const iceTopSurfaceY = this.ice.y - this.ice.height;
+      this.character.placeOn(iceTopSurfaceY);
       const toY = this.character.y;
       this.character.y = tempY;
 

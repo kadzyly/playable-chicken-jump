@@ -1,8 +1,8 @@
 import * as PIXI from 'pixi.js';
 
-export class Sofa extends PIXI.Sprite {
+export class Ice extends PIXI.Sprite {
   constructor() {
-    super(PIXI.Assets.get('sofa'));
+    super(PIXI.Assets.get('ice'));
     this.anchor.set(0.5, 0.5);
   }
 }
