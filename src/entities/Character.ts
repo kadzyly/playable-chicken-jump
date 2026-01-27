@@ -75,7 +75,12 @@ export class Character extends PIXI.AnimatedSprite {
     });
   }
 
-  public async jumpTo(targetX: number, targetY: number, duration: number = 1000): Promise<void> {
+  public async jumpTo(
+    targetX: number,
+    targetY: number,
+    duration: number = 1000,
+    options?: { startDelayFrames?: number; endDelayFrames?: number; jumpHeight?: number }
+  ): Promise<void> {
     if (this.isJumping) return;
     this.isJumping = true;
 
@@ -83,14 +88,23 @@ export class Character extends PIXI.AnimatedSprite {
     const startX = this.x;
     const startY = this.y;
 
-    const yOffset = this.height / 2;
+    // switch to jump animation to know its frame count
     this.setState('jump');
+    const totalFrames = this.textures.length || 1;
+
+    const startDelayFrames = options?.startDelayFrames ?? 8;
+    const endDelayFrames = options?.endDelayFrames ?? 4;
+    const jumpHeightBase = options?.jumpHeight ?? 40;
+    const yOffset = this.height / 2;
 
     const config: JumpConfig = {
       from: { x: startX, y: startY - yOffset },
       to: { x: targetX, y: targetY - yOffset },
       duration,
-      jumpHeight: 150 * Math.abs(this.scale.y)
+      jumpHeight: jumpHeightBase * Math.abs(this.scale.y),
+      totalFrames,
+      startDelayFrames,
+      endDelayFrames
     };
 
     return new Promise((resolve) => {
