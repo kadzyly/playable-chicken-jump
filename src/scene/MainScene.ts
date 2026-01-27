@@ -92,7 +92,7 @@ export class MainScene {
 
     // start character position is start island
     if (this.currentPlatformIndex === 0) {
-      const startSurfaceY = this.startIsland.y - this.startIsland.height / 2;
+      const startSurfaceY = this.startIsland.y;
       this.character.x = this.startIsland.x;
       this.character.placeOn(startSurfaceY);
     }
@@ -171,7 +171,7 @@ export class MainScene {
     const toX = targetPlatform.x;
 
     const tempY = this.character.y;
-    const surfaceY = targetPlatform.y - targetPlatform.height / 2;
+    const surfaceY = targetPlatform.y;
     this.character.placeOn(surfaceY);
     const toY = this.character.y;
     this.character.y = tempY;

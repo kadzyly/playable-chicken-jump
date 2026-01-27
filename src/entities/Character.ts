@@ -5,7 +5,7 @@ import { CHARACTER_ANIMATIONS } from './CharacterConfig';
 type CharacterState = keyof typeof CHARACTER_ANIMATIONS;
 
 export class Character extends PIXI.AnimatedSprite {
-  private readonly footOffsetY = 0;
+  private readonly footOffsetY = 10;
   private isJumping = false;
   private textureCache: Record<string, PIXI.Texture[]> = {};
 
