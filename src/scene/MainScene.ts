@@ -133,7 +133,9 @@ export class MainScene {
       const toY = this.character.y;
       this.character.y = tempY;
 
-      void this.character.jumpTo(toX, toY);
+      void this.character.jumpTo(toX, toY).then(() => {
+        this.ice.setCracked();
+      });
     } else {
       sdk.install();
     }

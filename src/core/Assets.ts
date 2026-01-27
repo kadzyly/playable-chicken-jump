@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 
 import charAsset from 'assets/character.png';
 import startIsland from 'assets/startIsland.png';
-import iceAsset from 'assets/ice.png';
+import iceTextureAsset from 'assets/ice_texture.png';
 import bgFloorAsset from 'assets/BG_seg_floor.png';
 import bgWallAsset from 'assets/BG_seg_wall.png';
 
@@ -12,6 +12,7 @@ import { PLAYER_JUMP_FRAMES } from '../data/player-jump-frames';
 import playerJumpImage from 'assets/player_jump_texture.png';
 import { PLAYER_WIN_FRAMES } from '../data/player-win-frames';
 import playerWinImage from 'assets/player_win_texture .png';
+import { ICE_FRAMES } from '../data/ice-frames';
 
 export async function loadAssets(): Promise<void> {
   await PIXI.Assets.load([
@@ -19,7 +20,7 @@ export async function loadAssets(): Promise<void> {
     { alias: 'bgWall', src: bgWallAsset },
     { alias: 'char', src: charAsset },
     { alias: 'startIsland', src: startIsland },
-    { alias: 'ice', src: iceAsset },
+    { alias: 'iceTexture', src: iceTextureAsset },
     { alias: 'playerIdleTexture', src: playerIdleImage },
     { alias: 'playerJumpTexture', src: playerJumpImage },
     { alias: 'playerWinTexture', src: playerWinImage }
@@ -39,4 +40,9 @@ export async function loadAssets(): Promise<void> {
   const playerWinSheet = new PIXI.Spritesheet(playerWinTexture, PLAYER_WIN_FRAMES);
   await playerWinSheet.parse();
   PIXI.Cache.set('playerWinSheet', playerWinSheet);
+
+  const iceTexture = PIXI.Assets.get('iceTexture');
+  const iceSheet = new PIXI.Spritesheet(iceTexture, ICE_FRAMES);
+  await iceSheet.parse();
+  PIXI.Cache.set('iceSheet', iceSheet);
 }
