@@ -53,8 +53,8 @@ export class MainScene {
     this.startIsland.scale.set(entityScale);
     this.ices.forEach((ice) => ice.scale.set(entityScale));
 
-    // ice width = 30% of screen
-    const targetIceWidth = width * 0.3;
+    // ice width = 35% of screen
+    const targetIceWidth = width * 0.35;
     this.ices.forEach((ice) => {
       const iceBaseWidth = ice.width || 1;
       const iceScale = targetIceWidth / iceBaseWidth;
@@ -64,15 +64,15 @@ export class MainScene {
     // horizontal placement of platforms
     // - at the first: start island and one ice
     // - next: 2 ices on the screen
-    this.startIsland.x = 0;
-    this.startIsland.y = centerOfWaterY;
+    this.startIsland.x = -80;
+    this.startIsland.y = centerOfWaterY - 190;
 
-    const firstIceOffsetX = width * 0.6;
+    const firstIceOffsetX = width * 0.8;
     const iceStepX = width * 0.6;
 
     this.ices.forEach((ice, index) => {
       ice.x = firstIceOffsetX + index * iceStepX;
-      ice.y = centerOfWaterY;
+      ice.y = centerOfWaterY - 50;
     });
 
     const lastIce = this.ices[this.ices.length - 1];
@@ -92,8 +92,8 @@ export class MainScene {
 
     // start character position is start island
     if (this.currentPlatformIndex === 0) {
-      const startSurfaceY = this.startIsland.y;
-      this.character.x = this.startIsland.x;
+      const startSurfaceY = centerOfWaterY - 60;
+      this.character.x = 100;
       this.character.placeOn(startSurfaceY);
     }
 
