@@ -5,7 +5,7 @@ import { CHARACTER_ANIMATIONS } from './CharacterConfig';
 type CharacterState = keyof typeof CHARACTER_ANIMATIONS;
 
 export class Character extends PIXI.AnimatedSprite {
-  private readonly footOffsetY = 20;
+  private readonly footOffsetY = 0;
   private isJumping = false;
   private textureCache: Record<string, PIXI.Texture[]> = {};
 
@@ -17,6 +17,7 @@ export class Character extends PIXI.AnimatedSprite {
 
     // init with a default texture first
     super([PIXI.Texture.EMPTY]);
+    this.anchor.set(0.5, 1);
 
     (Object.keys(CHARACTER_ANIMATIONS) as CharacterState[]).forEach((state) => {
       const config = CHARACTER_ANIMATIONS[state];
@@ -35,7 +36,6 @@ export class Character extends PIXI.AnimatedSprite {
 
     // update textures after init
     this.textures = this.textureCache['idle'];
-    this.anchor.set(0.5, 1);
     this.setState('idle');
   }
 
@@ -63,7 +63,6 @@ export class Character extends PIXI.AnimatedSprite {
     // stop other animations, play win animation once
     this.isJumping = false;
     this.rotation = 0;
-    this.anchor.set(0.5, 1);
     this.setState('win');
 
     return new Promise((resolve) => {
@@ -83,7 +82,6 @@ export class Character extends PIXI.AnimatedSprite {
     // anchor: change to center for the jump
     const startX = this.x;
     const startY = this.y;
-    this.anchor.set(0.5, 0.5);
 
     const yOffset = this.height / 2;
     this.setState('jump');
@@ -121,8 +119,6 @@ export class Character extends PIXI.AnimatedSprite {
 
   private onJumpComplete(finalX: number, finalY: number): void {
     this.isJumping = false;
-    // anchor: return to bottom
-    this.anchor.set(0.5, 1);
     this.x = finalX;
     this.y = finalY;
     this.setState('idle');
