@@ -10,13 +10,19 @@ export class Character extends PIXI.AnimatedSprite {
   private textureCache: Record<string, PIXI.Texture[]> = {};
 
   constructor() {
-    const sheet = PIXI.Cache.get('imposterSheet') as PIXI.Spritesheet;
+    const imposterSheet = PIXI.Cache.get('imposterSheet') as PIXI.Spritesheet;
+    const playerIdleSheet = PIXI.Cache.get('playerIdleSheet') as PIXI.Spritesheet;
 
     // init with a default texture first
     super([PIXI.Texture.EMPTY]);
 
     (Object.keys(CHARACTER_ANIMATIONS) as CharacterState[]).forEach((state) => {
-      this.textureCache[state] = CHARACTER_ANIMATIONS[state].frames.map((frame) => sheet.textures[frame]).filter(Boolean);
+      const config = CHARACTER_ANIMATIONS[state];
+      const sheet = state === 'idle' ? playerIdleSheet : imposterSheet;
+
+      this.textureCache[state] = config.frames
+        .map((frame) => sheet.textures[frame])
+        .filter(Boolean);
     });
 
     // update textures after init

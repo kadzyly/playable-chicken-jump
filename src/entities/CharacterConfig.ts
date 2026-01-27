@@ -1,7 +1,9 @@
+import { PLAYER_IDLE_FRAMES } from '../data/player-idle-frames';
+
 export const CHARACTER_ANIMATIONS = {
   idle: {
-    frames: ['imp_7.png', 'imp_8.png'],
-    speed: 0.08,
+    frames: Object.keys(PLAYER_IDLE_FRAMES.frames),
+    speed: 0.3,
     loop: true
   },
   jump: {
