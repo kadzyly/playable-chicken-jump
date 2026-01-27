@@ -41,8 +41,8 @@ export class MainScene {
     this.roundControls.updatePosition(width, height);
 
     // heights: sky 60%, water 40%
-    const skyHeight = height * 0.6;
-    const waterHeight = height * 0.4;
+    const skyHeight = height * 0.62;
+    const waterHeight = height * 0.38;
 
     const entityScale = Math.min(width / 400, height / 600) * 0.5;
 
