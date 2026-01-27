@@ -3,6 +3,7 @@ import { sdk } from '@smoud/playable-sdk';
 import { Character } from '../entities/Character';
 import { Shelf } from '../entities/Shelf';
 import { Sofa } from '../entities/Sofa';
+import { RoundControls } from '../ui/organisms/RoundControls';
 
 export class MainScene {
   private floorBg: PIXI.TilingSprite;
@@ -11,15 +12,19 @@ export class MainScene {
   private shelf: Shelf;
   private sofa: Sofa;
   private interactionCount = 0;
+  private roundControls!: RoundControls;
 
   constructor(private app: PIXI.Application) {
     this.createBackground();
     this.createEntities();
+    this.createBottomUI();
     this.setupInteraction();
   }
 
   public resize(width: number, height: number): void {
     if (!this.floorBg || !this.wallBg) return;
+
+    this.roundControls.updatePosition(width, height);
 
     const floorTexture = this.floorBg.texture;
     const wallTexture = this.wallBg.texture;
@@ -100,6 +105,12 @@ export class MainScene {
     this.character = new Character();
 
     this.app.stage.addChild(this.shelf, this.sofa, this.character);
+  }
+
+  private createBottomUI() {
+    const { width, height } = this.app.screen;
+    this.roundControls = new RoundControls(width, height);
+    this.app.stage.addChild(this.roundControls);
   }
 
   private setupInteraction(): void {
