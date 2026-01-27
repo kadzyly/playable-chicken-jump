@@ -6,9 +6,6 @@ import sofaAsset from 'assets/chair.png';
 import bgFloorAsset from 'assets/BG_seg_floor.png';
 import bgWallAsset from 'assets/BG_seg_wall.png';
 
-import { imposterData } from '../data/imposterData';
-import imposterImage from 'assets/imposter/imposter.png';
-
 import { dustData } from '../data/dustData';
 import dustImage from 'assets/dust/dust.png';
 
@@ -26,17 +23,11 @@ export async function loadAssets(): Promise<void> {
     { alias: 'char', src: charAsset },
     { alias: 'shelf', src: shelfAsset },
     { alias: 'sofa', src: sofaAsset },
-    { alias: 'imposterTexture', src: imposterImage },
     { alias: 'dustTexture', src: dustImage },
     { alias: 'playerIdleTexture', src: playerIdleImage },
     { alias: 'playerJumpTexture', src: playerJumpImage },
     { alias: 'playerWinTexture', src: playerWinImage }
   ]);
-
-  const imposterTexture = PIXI.Assets.get('imposterTexture');
-  const imposterSheet = new PIXI.Spritesheet(imposterTexture, imposterData);
-  await imposterSheet.parse();
-  PIXI.Cache.set('imposterSheet', imposterSheet);
 
   const dustTexture = PIXI.Assets.get('dustTexture');
   const dustSheet = new PIXI.Spritesheet(dustTexture, dustData);
