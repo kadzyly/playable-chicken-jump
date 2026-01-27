@@ -26,51 +26,52 @@ export class MainScene {
 
     this.roundControls.updatePosition(width, height);
 
-    const floorTexture = this.floorBg.texture;
-    const wallTexture = this.wallBg.texture;
+    // Высоты зон: стена 60%, пол 40%
+    const wallHeight = height * 0.6;
+    const floorHeight = height * 0.4;
 
-    const totalTextureHeight = floorTexture.height + wallTexture.height;
-    const bgScale = height / totalTextureHeight;
+    // Настраиваем фон стены (сверху, занимает 60% высоты)
+    this.wallBg.scale.set(1);
+    this.wallBg.width = width;
+    this.wallBg.height = wallHeight;
+    this.wallBg.position.set(0, wallHeight);
 
-    this.floorBg.scale.set(bgScale);
-    this.wallBg.scale.set(bgScale);
-
-    const wallHeight = wallTexture.height * bgScale;
-    const floorHeight = floorTexture.height * bgScale;
-
-    this.floorBg.width = width / bgScale;
+    // Настраиваем фон пола (снизу, занимает 40% высоты)
+    this.floorBg.scale.set(1);
+    this.floorBg.width = width;
+    this.floorBg.height = floorHeight;
     this.floorBg.position.set(0, height);
-
-    this.wallBg.width = width / bgScale;
-    this.wallBg.position.set(0, height - floorHeight);
 
     const entityScale = Math.min(width / 400, height / 600) * 0.5;
 
-    // position between wall and floor
-    const floorY = height - floorHeight;
+    const waterTopY = height - floorHeight;
+    const centerOfWaterY = waterTopY + floorHeight / 2;
 
     this.character.scale.set(entityScale);
     this.shelf.scale.set(entityScale);
     this.sofa.scale.set(entityScale);
 
-    // place on center of the wall
-    this.shelf.x = width * 0.25;
-    this.shelf.placeOn(wallHeight / 2);
+    // Делаем ширину sofa равной 30% ширины экрана
+    const targetSofaWidth = width * 0.3;
+    const sofaBaseWidth = this.sofa.width || 1;
+    const sofaScale = targetSofaWidth / sofaBaseWidth;
+    this.sofa.scale.set(sofaScale);
 
-    // place sofa on top of the floor
-    const sofaHeight = this.sofa.height;
-    const sofaTargetY = floorY + sofaHeight * 0.3;
+    // shelf слева внизу (на полу)
+    this.shelf.x = 0;
+    this.shelf.y = centerOfWaterY;
 
-    this.sofa.x = width * 0.7;
-    this.sofa.placeOn(sofaTargetY);
+    // sofa справа внизу (на полу)
+    this.sofa.x = width * 0.8;
+    this.sofa.y = centerOfWaterY;
 
     if (this.interactionCount === 0) {
+      // персонаж стартует на shelf
       this.character.x = this.shelf.x;
-      this.character.placeOn(this.shelf.y);
+      this.character.y = this.shelf.y;
     } else {
-      const sofaTopY = sofaTargetY - this.sofa.height;
       this.character.x = this.sofa.x;
-      this.character.placeOn(sofaTopY);
+      this.character.y = this.sofa.y;
     }
   }
 
