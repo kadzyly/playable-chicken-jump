@@ -8,6 +8,8 @@ import { SoundManager } from '../core/SoundManager';
 import { WinInfoUI } from '../ui/organisms/WinInfoUI';
 import { ScoreManager } from '../core/ScoreManager';
 import { PopupManager } from '../core/PopupManager';
+import { StartBonusPopup } from '../ui/organisms/StartBonusPopup';
+import { FinalResultPopup } from '../ui/organisms/FinalResultPopup';
 
 export class MainScene {
   private world: PIXI.Container;
@@ -39,6 +41,7 @@ export class MainScene {
     this.createStatsUI();
     this.setupInteraction();
     this.setupMusic();
+    this.createPopups();
 
     // camera follow the character
     this.app.ticker.add(this.updateCamera, this);
@@ -51,6 +54,7 @@ export class MainScene {
 
     this.roundControls.updatePosition(width, height);
     this.statsDisplay.updatePosition(width, height);
+    this.popupManager.resize(width, height);
 
     // heights: sky 60%, water 40%
     const skyHeight = height * 0.62;
@@ -113,6 +117,19 @@ export class MainScene {
     this.world.x = 0;
   }
 
+  private createPopups() {
+    const startBonusPopup = new StartBonusPopup();
+
+    this.app.stage.addChild(startBonusPopup);
+    void this.popupManager.show(startBonusPopup);
+
+    startBonusPopup.on('closeClick', () => {
+      this.popupManager.hideCurrent().then(() => {
+        this.app.stage.removeChild(startBonusPopup);
+      });
+    });
+  }
+
   private createBackground(): void {
     const waterTexture = PIXI.Assets.get('bgFloor');
     const skyTexture = PIXI.Assets.get('bgWall');
@@ -165,6 +182,15 @@ export class MainScene {
   private setupInteraction(): void {
     const goButton = this.roundControls.getGoButton();
     goButton.on('click', this.onGoClick, this);
+
+    const cashButton = this.roundControls.getCashButton();
+
+    cashButton.on('click', () => {
+      const finalResultPopup = new FinalResultPopup();
+
+      this.app.stage.addChild(finalResultPopup);
+      void this.popupManager.show(finalResultPopup);
+    });
   }
 
   private setupMusic(): void {

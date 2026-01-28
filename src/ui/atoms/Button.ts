@@ -40,15 +40,12 @@ const DEFAULTS: Required<Omit<ButtonOptions, 'backgroundTexture'>> = {
 export class Button extends Container {
   private bg!: Sprite | Graphics;
   private textField: Text;
-
   private opts: Required<Omit<ButtonOptions, 'backgroundTexture'>> & {
     backgroundTexture: Texture | null;
   };
-
   private targetScale = 1;
   private currentScale = 1;
   private animationSpeed = 0.15;
-
   private disabledBackgroundColor!: number;
   private disabledTextColor!: number;
 

@@ -25,7 +25,7 @@ export abstract class PopupUI extends Container {
     this.addChild(this.panel);
   }
 
-  resize(width: number, height: number) {
+  public resize(width: number, height: number) {
     this.bg.width = width;
     this.bg.height = height;
 
@@ -38,7 +38,9 @@ export abstract class PopupUI extends Container {
   }
 
   hide(onHidden?: () => void) {
-    this.startAnim(1, 0, onHidden);
+    this.startAnim(1, 0, () => {
+      this.startAnim(1, 0, onHidden);
+    });
   }
 
   private startAnim(from: number, to: number, cb?: () => void) {
