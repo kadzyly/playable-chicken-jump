@@ -36,7 +36,7 @@ export class RoundControls extends Container {
 
   private createHintText(screenWidth: number) {
     const hintStyle = new TextStyle({
-      fontFamily: 'CustomFont, Arial, sans-serif',
+      fontFamily: 'Marvin400, Arial, sans-serif',
       fontSize: 20,
       fontWeight: '400',
       wordWrap: true,

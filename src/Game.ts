@@ -3,6 +3,7 @@ import { createApp } from './core/App';
 import { loadAssets } from './core/Assets';
 import { SoundManager } from './core/SoundManager';
 import { MainScene } from './scene/MainScene';
+import { loadFonts } from './core/Fonts';
 
 export class Game {
   private app!: PIXI.Application;
@@ -22,6 +23,7 @@ export class Game {
   private async init(width: number, height: number): Promise<void> {
     this.app = await createApp(width, height);
     await loadAssets();
+    await loadFonts();
 
     SoundManager.init();
 

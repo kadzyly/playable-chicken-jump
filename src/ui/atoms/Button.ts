@@ -131,7 +131,7 @@ export class Button extends Container {
 
   private createLabel() {
     const style = new TextStyle({
-      fontFamily: 'CustomFont, Arial, sans-serif',
+      fontFamily: 'Marvin400, Arial, sans-serif',
       fill: this.opts.textColor,
       fontSize: this.opts.fontSize,
       fontWeight: '400',
