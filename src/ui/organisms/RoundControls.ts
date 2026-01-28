@@ -34,6 +34,18 @@ export class RoundControls extends Container {
     return this.goButton;
   }
 
+  public hideHintText() {
+    this.hintText.visible = false;
+  }
+
+  public disableGoButton() {
+    this.goButton.disable();
+  }
+
+  public enableCashOutButton() {
+    this.cashButton.enable();
+  }
+
   private createHintText(screenWidth: number) {
     const hintStyle = new TextStyle({
       fontFamily: 'Marvin400, Arial, sans-serif',

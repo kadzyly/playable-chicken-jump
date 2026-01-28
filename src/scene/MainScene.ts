@@ -169,6 +169,10 @@ export class MainScene {
   }
 
   private onGoClick(): void {
+    if (this.currentPlatformIndex <= 1) {
+      this.roundControls.hideHintText();
+    }
+
     // if the last ice => open Google / Apple store
     if (this.currentPlatformIndex >= this.totalPlatforms - 1) {
       sdk.install();
@@ -212,8 +216,10 @@ export class MainScene {
       this.isJumping = false;
 
       // show WIN animation on the last platform
-      if (this.currentPlatformIndex >= this.totalPlatforms - 1) {
+      if (this.currentPlatformIndex >= this.scoreManager.getMaxJumpCount()) {
         void this.character.playWin();
+        this.roundControls.disableGoButton();
+        this.roundControls.enableCashOutButton();
       }
     });
   }

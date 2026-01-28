@@ -3,6 +3,7 @@ export class ScoreManager {
 
   private scoreDefault = 500;
   private freeSpinsDefault = 250;
+  private maxJumpCount = 4;
 
   private currentScore: number;
   private currentFreeSpins: number;
@@ -30,6 +31,10 @@ export class ScoreManager {
     return this.freeSpinsDefault;
   }
 
+  public getMaxJumpCount(): number {
+    return this.maxJumpCount;
+  }
+
   public getCurrentScore(): number {
     return this.currentScore;
   }
@@ -49,7 +54,7 @@ export class ScoreManager {
     }
 
     // jump with x4 points
-    if (this.iceJumpCount === this.comboMultiplierJump) {
+    if (this.iceJumpCount === this.maxJumpCount) {
       this.currentFreeSpins -= 1;
       this.currentScore = this.currentScore * 4;
       return this.currentScore;
