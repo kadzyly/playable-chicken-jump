@@ -7,6 +7,7 @@ import { RoundControls } from '../ui/organisms/RoundControls';
 import { SoundManager } from '../core/SoundManager';
 import { WinInfoUI } from '../ui/organisms/WinInfoUI';
 import { ScoreManager } from '../core/ScoreManager';
+import { PopupManager } from '../core/PopupManager';
 
 export class MainScene {
   private world: PIXI.Container;
@@ -18,6 +19,7 @@ export class MainScene {
   private roundControls!: RoundControls;
   private statsDisplay!: WinInfoUI;
   private scoreManager: ScoreManager;
+  private popupManager: PopupManager;
 
   // 0 - start island, then platforms (ice)
   private currentPlatformIndex = 0;
@@ -29,6 +31,7 @@ export class MainScene {
     this.world = new PIXI.Container();
     this.app.stage.addChild(this.world);
     this.scoreManager = ScoreManager.getInstance();
+    this.popupManager = PopupManager.getInstance();
 
     this.createBackground();
     this.createEntities();
