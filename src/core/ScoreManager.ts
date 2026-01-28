@@ -1,7 +1,7 @@
 export class ScoreManager {
   private static instance: ScoreManager;
 
-  private currentScore = 250;
+  private currentScore = 500;
   private iceJumpCount = 0;
 
   private readonly jumpRewards = [40, 150, 250];

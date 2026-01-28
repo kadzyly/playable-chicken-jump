@@ -42,7 +42,7 @@ export class WinInfoUI extends Container {
 
   private createElements(buttonWidth: number, buttonHeight: number) {
     this.summaPanel = new PanelUI({
-      text: this.getFormattedText(250),
+      text: this.getFormattedText(500),
       fontSize: 40,
       width: buttonWidth,
       height: buttonHeight,
