@@ -1,5 +1,6 @@
 import { Container } from 'pixi.js';
 import { PanelUI } from '../atoms/PanelUI';
+import { ScoreManager } from '../../core/ScoreManager';
 
 const elementWidth = 280;
 const buttonHeight = 52;
@@ -14,6 +15,10 @@ export class WinInfoUI extends Container {
 
     this.createElements(elementWidth, buttonHeight);
     this.layoutElements(buttonHeight, horizontalGap);
+
+    const scoreManager = ScoreManager.getInstance();
+    this.updateScore(scoreManager.getCurrentScore());
+    this.updateFreeSpins(scoreManager.getCurrentFreeSpins());
   }
 
   public updatePosition(screenWidth: number, screenHeight: number) {
@@ -32,17 +37,26 @@ export class WinInfoUI extends Container {
   }
 
   public updateScore(score: number): void {
-    const text = this.getFormattedText(score.toString());
+    const text = this.getFormattedScoreText(score.toString());
     this.summaPanel.setText(text);
   }
 
-  private getFormattedText(count: number | string) {
+  public updateFreeSpins(freeSpins: number): void {
+    const text = this.getFormattedFreeSpinText(freeSpins.toString());
+    this.freeSpinPanel.setText(text);
+  }
+
+  private getFormattedScoreText(count: number | string) {
     return `$${count}`;
+  }
+
+  private getFormattedFreeSpinText(count: number | string) {
+    return `${count} FS`;
   }
 
   private createElements(buttonWidth: number, buttonHeight: number) {
     this.summaPanel = new PanelUI({
-      text: this.getFormattedText(500),
+      text: '',
       fontSize: 40,
       width: buttonWidth,
       height: buttonHeight,
@@ -50,7 +64,7 @@ export class WinInfoUI extends Container {
     });
 
     this.freeSpinPanel = new PanelUI({
-      text: '250 FS',
+      text: '',
       fontSize: 34,
       width: buttonWidth,
       height: buttonHeight,

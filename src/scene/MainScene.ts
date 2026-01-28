@@ -202,8 +202,11 @@ export class MainScene {
         currentIce.setCracked();
 
         // Add score for jumping on ice platform
-        const newScore = this.scoreManager.addScoreForIceJump();
-        this.statsDisplay.updateScore(newScore);
+        this.scoreManager.addScoreForIceJump();
+        const score = this.scoreManager.getCurrentScore();
+        const freeSpins = this.scoreManager.getCurrentFreeSpins();
+        this.statsDisplay.updateScore(score);
+        this.statsDisplay.updateFreeSpins(freeSpins);
       }
 
       this.isJumping = false;
