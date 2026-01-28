@@ -9,9 +9,6 @@ export class Character extends PIXI.AnimatedSprite {
   private readonly footOffsetY = 10;
   private isJumping = false;
   private textureCache: Record<string, PIXI.Texture[]> = {};
-  private currentScore = 500;
-  private iceJumpCount = 0;
-  private scoreMultiplier = 1;
 
   constructor() {
     const playerIdleSheet = PIXI.Cache.get('playerIdleSheet') as PIXI.Spritesheet;
@@ -98,7 +95,6 @@ export class Character extends PIXI.AnimatedSprite {
     const startDelayFrames = options?.startDelayFrames ?? 8;
     const endDelayFrames = options?.endDelayFrames ?? 4;
     const jumpHeightBase = options?.jumpHeight ?? 40;
-    const yOffset = this.height / 2;
 
     const config: JumpConfig = {
       from: { x: startX, y: startY },
@@ -132,34 +128,6 @@ export class Character extends PIXI.AnimatedSprite {
 
       update();
     });
-  }
-
-  public getCurrentScore(): number {
-    return this.currentScore;
-  }
-
-  public addScoreForIceJump(): number {
-    this.iceJumpCount++;
-
-    let pointsToAdd = 0;
-
-    if (this.iceJumpCount === 1) {
-      pointsToAdd = 40;
-    } else if (this.iceJumpCount === 2) {
-      pointsToAdd = 150;
-    } else if (this.iceJumpCount === 3) {
-      pointsToAdd = 250;
-    } else if (this.iceJumpCount === 4) {
-      this.scoreMultiplier = 4;
-      pointsToAdd = 0; // other platforms without points
-    } else {
-      this.scoreMultiplier = 1;
-      pointsToAdd = 0;
-    }
-
-    this.currentScore = (this.currentScore + pointsToAdd) * this.scoreMultiplier;
-
-    return this.currentScore;
   }
 
   private onJumpComplete(finalX: number, finalY: number): void {

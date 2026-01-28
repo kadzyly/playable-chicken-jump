@@ -6,6 +6,7 @@ import { Ice } from '../entities/Ice';
 import { RoundControls } from '../ui/organisms/RoundControls';
 import { SoundManager } from '../core/SoundManager';
 import { WinInfoUI } from '../ui/organisms/WinInfoUI';
+import { ScoreManager } from '../core/ScoreManager';
 
 export class MainScene {
   private world: PIXI.Container;
@@ -16,6 +17,7 @@ export class MainScene {
   private ices: Ice[] = [];
   private roundControls!: RoundControls;
   private statsDisplay!: WinInfoUI;
+  private scoreManager: ScoreManager;
 
   // 0 - start island, then platforms (ice)
   private currentPlatformIndex = 0;
@@ -26,6 +28,7 @@ export class MainScene {
   constructor(private app: PIXI.Application) {
     this.world = new PIXI.Container();
     this.app.stage.addChild(this.world);
+    this.scoreManager = ScoreManager.getInstance();
 
     this.createBackground();
     this.createEntities();
@@ -197,9 +200,9 @@ export class MainScene {
       const currentIce = this.ices[this.currentPlatformIndex - 1];
       if (currentIce) {
         currentIce.setCracked();
-        
+
         // Add score for jumping on ice platform
-        const newScore = this.character.addScoreForIceJump();
+        const newScore = this.scoreManager.addScoreForIceJump();
         this.statsDisplay.updateScore(newScore);
       }
 
