@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { Jump, JumpConfig } from './Jump';
 import { CHARACTER_ANIMATIONS } from './CharacterConfig';
+import { SoundManager } from '../core/SoundManager';
 
 type CharacterState = keyof typeof CHARACTER_ANIMATIONS;
 
@@ -88,6 +89,7 @@ export class Character extends PIXI.AnimatedSprite {
 
     // switch to jump animation to know its frame count
     this.setState('jump');
+    SoundManager.playJump();
     const totalFrames = this.textures.length || 1;
 
     const startDelayFrames = options?.startDelayFrames ?? 8;

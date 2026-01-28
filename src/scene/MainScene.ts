@@ -4,6 +4,7 @@ import { Character } from '../entities/Character';
 import { StartIsland } from '../entities/StartIsland';
 import { Ice } from '../entities/Ice';
 import { RoundControls } from '../ui/organisms/RoundControls';
+import { SoundManager } from '../core/SoundManager';
 
 export class MainScene {
   private world: PIXI.Container;
@@ -28,6 +29,7 @@ export class MainScene {
     this.createEntities();
     this.createBottomUI();
     this.setupInteraction();
+    this.setupMusic();
 
     // camera follow the character
     this.app.ticker.add(this.updateCamera, this);
@@ -148,6 +150,10 @@ export class MainScene {
   private setupInteraction(): void {
     const goButton = this.roundControls.getGoButton();
     goButton.on('click', this.onGoClick, this);
+  }
+
+  private setupMusic(): void {
+    SoundManager.playBgMusic();
   }
 
   private onGoClick(): void {

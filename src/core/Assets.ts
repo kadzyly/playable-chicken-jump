@@ -13,6 +13,8 @@ import playerJumpImage from 'assets/player_jump_texture.png';
 import { PLAYER_WIN_FRAMES } from '../data/player-win-frames';
 import playerWinImage from 'assets/player_win_texture .png';
 import { ICE_FRAMES } from '../data/ice-frames';
+import bgMusicAsset from 'assets/bg.mp3';
+import jumpMusicAsset from 'assets/jump.mp3';
 
 export async function loadAssets(): Promise<void> {
   await PIXI.Assets.load([
@@ -23,7 +25,9 @@ export async function loadAssets(): Promise<void> {
     { alias: 'iceTexture', src: iceTextureAsset },
     { alias: 'playerIdleTexture', src: playerIdleImage },
     { alias: 'playerJumpTexture', src: playerJumpImage },
-    { alias: 'playerWinTexture', src: playerWinImage }
+    { alias: 'playerWinTexture', src: playerWinImage },
+    { alias: 'bgMusic', src: bgMusicAsset },
+    { alias: 'jumpMusic', src: jumpMusicAsset }
   ]);
 
   const playerIdleTexture = PIXI.Assets.get('playerIdleTexture');
