@@ -152,8 +152,7 @@ export class MainScene {
   }
 
   private createStatsUI() {
-    const { width, height } = this.app.screen;
-    this.statsDisplay = new WinInfoUI(width, height);
+    this.statsDisplay = new WinInfoUI();
     this.app.stage.addChild(this.statsDisplay);
   }
 

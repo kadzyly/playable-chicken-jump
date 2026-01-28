@@ -1,4 +1,4 @@
-import { Container, Text, TextStyle, Ticker } from 'pixi.js';
+import { Container, Graphics, Sprite, Text, TextStyle, Ticker } from 'pixi.js';
 
 type PanelOptions = {
   text: string;
@@ -23,8 +23,9 @@ const DEFAULTS: Required<PanelOptions> = {
 };
 
 export class PanelUI extends Container {
-  private textField: Text;
   private opts: Required<PanelOptions>;
+  private textField: Text;
+  private bg!: Sprite | Graphics;
 
   private targetScale = 1;
   private currentScale = 1;
@@ -39,11 +40,12 @@ export class PanelUI extends Container {
     };
 
     this.eventMode = 'static';
-    this.pivot.set(0.5, 0.5);
+    this.pivot.set(0.5, 0);
 
     this.textField = this.createLabel();
+    this.createBackground();
 
-    this.addChild(this.textField);
+    this.addChild(this.bg, this.textField);
 
     this.setupAnimation();
   }
@@ -83,5 +85,17 @@ export class PanelUI extends Container {
     text.position.set(this.opts.width / 2, this.opts.height / 2);
 
     return text;
+  }
+
+  private createBackground() {
+    const { width, height, radius } = this.opts;
+
+    const g = new Graphics();
+    g.roundRect(0, 0, width, height, radius);
+    g.fill({
+      color: this.opts.backgroundColor
+    });
+    g.stroke({ color: 0xffffff, width: 3 });
+    this.bg = g;
   }
 }

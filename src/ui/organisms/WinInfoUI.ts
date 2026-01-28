@@ -1,24 +1,26 @@
 import { Container } from 'pixi.js';
 import { PanelUI } from '../atoms/PanelUI';
 
+const elementWidth = 280;
+const buttonHeight = 52;
+const horizontalGap = 20;
+
 export class WinInfoUI extends Container {
   private summaPanel: PanelUI;
   private freeSpinPanel: PanelUI;
 
-  constructor(screenWidth: number, screenHeight: number) {
+  constructor() {
     super();
 
-    const buttonWidth = 160;
-    const buttonHeight = 52;
-    const horizontalGap = 14;
-
-    this.createElements(buttonWidth, buttonHeight);
-    this.layoutElements(buttonWidth, horizontalGap);
+    this.createElements(elementWidth, buttonHeight);
+    this.layoutElements(buttonHeight, horizontalGap);
   }
 
   public updatePosition(screenWidth: number, screenHeight: number) {
-    this.x = screenWidth / 2;
-    this.y = screenHeight - 10 - 52 / 2;
+    // center horizontally
+    this.x = screenWidth / 2 - elementWidth / 2;
+    // top of the screen
+    this.y = horizontalGap;
   }
 
   public getCashButton(): PanelUI {
@@ -31,30 +33,30 @@ export class WinInfoUI extends Container {
 
   private createElements(buttonWidth: number, buttonHeight: number) {
     this.summaPanel = new PanelUI({
-      text: '$1000',
-      fontSize: 24,
+      text: '$500',
+      fontSize: 40,
       width: buttonWidth,
       height: buttonHeight,
       backgroundColor: 0x13bc0b
     });
 
     this.freeSpinPanel = new PanelUI({
-      text: '100 FS',
+      text: '250 FS',
       fontSize: 34,
       width: buttonWidth,
       height: buttonHeight,
-      backgroundColor: 0x13bc0b
+      backgroundColor: 0xaf191a
     });
   }
 
-  private layoutElements(buttonWidth: number, horizontalGap: number) {
-    const buttons = new Container();
-    const totalButtonWidth = buttonWidth + horizontalGap + buttonWidth;
+  private layoutElements(elementHeight: number, horizontalGap: number) {
+    const container = new Container();
 
-    this.summaPanel.x = -totalButtonWidth / 2 + buttonWidth / 2;
-    this.freeSpinPanel.x = totalButtonWidth / 2 - buttonWidth / 2;
+    this.summaPanel.y = 0;
+    this.freeSpinPanel.y = elementHeight + horizontalGap;
 
-    buttons.addChild(this.summaPanel, this.freeSpinPanel);
-    this.addChild(buttons);
+    container.addChild(this.summaPanel, this.freeSpinPanel);
+
+    this.addChild(container);
   }
 }
