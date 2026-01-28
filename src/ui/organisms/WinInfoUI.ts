@@ -3,7 +3,7 @@ import { PanelUI } from '../atoms/PanelUI';
 import { ScoreManager } from '../../core/ScoreManager';
 
 const elementWidth = 280;
-const buttonHeight = 52;
+const elementHeight = 52;
 const horizontalGap = 20;
 
 export class WinInfoUI extends Container {
@@ -13,19 +13,19 @@ export class WinInfoUI extends Container {
   constructor() {
     super();
 
-    this.createElements(elementWidth, buttonHeight);
-    this.layoutElements(buttonHeight, horizontalGap);
+    this.createElements(elementWidth, elementHeight);
+    this.layoutElements(elementHeight, horizontalGap);
 
     const scoreManager = ScoreManager.getInstance();
-    this.updateScore(scoreManager.getCurrentScore());
-    this.updateFreeSpins(scoreManager.getCurrentFreeSpins());
+    this.setScore(scoreManager.getCurrentScore());
+    this.setFreeSpins(scoreManager.getCurrentFreeSpins());
   }
 
   public updatePosition(screenWidth: number, screenHeight: number) {
     // center horizontally
-    this.x = screenWidth / 2 - elementWidth / 2;
+    this.x = screenWidth / 2;
     // top of the screen
-    this.y = horizontalGap;
+    this.y = horizontalGap + elementHeight / 2;
   }
 
   public getCashButton(): PanelUI {
@@ -36,14 +36,24 @@ export class WinInfoUI extends Container {
     return this.freeSpinPanel;
   }
 
-  public updateScore(score: number): void {
+  public setScore(score: number): void {
     const text = this.getFormattedScoreText(score.toString());
     this.summaPanel.setText(text);
   }
 
-  public updateFreeSpins(freeSpins: number): void {
+  public setFreeSpins(freeSpins: number): void {
     const text = this.getFormattedFreeSpinText(freeSpins.toString());
     this.freeSpinPanel.setText(text);
+  }
+
+  public updateScore(score: number): void {
+    this.setScore(score);
+    this.summaPanel.pulseScale();
+  }
+
+  public updateFreeSpins(freeSpins: number): void {
+    this.setFreeSpins(freeSpins);
+    this.freeSpinPanel.pulseScale();
   }
 
   private getFormattedScoreText(count: number | string) {

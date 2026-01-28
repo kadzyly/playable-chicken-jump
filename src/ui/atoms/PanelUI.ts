@@ -40,7 +40,7 @@ export class PanelUI extends Container {
     };
 
     this.eventMode = 'static';
-    this.pivot.set(0.5, 0);
+    this.pivot.set(this.opts.width / 2, this.opts.height / 2);
 
     this.textField = this.createLabel();
     this.createBackground();
@@ -52,6 +52,16 @@ export class PanelUI extends Container {
 
   public setText(text: string) {
     this.textField.text = text;
+  }
+
+  public pulseScale(downScale: number = 0.95, durationMs: number = 100) {
+    const originalScale = this.targetScale;
+
+    this.targetScale = originalScale * downScale;
+
+    setTimeout(() => {
+      this.targetScale = originalScale;
+    }, durationMs);
   }
 
   private setupAnimation() {
