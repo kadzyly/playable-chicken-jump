@@ -197,6 +197,10 @@ export class MainScene {
       const currentIce = this.ices[this.currentPlatformIndex - 1];
       if (currentIce) {
         currentIce.setCracked();
+        
+        // Add score for jumping on ice platform
+        const newScore = this.character.addScoreForIceJump();
+        this.statsDisplay.updateScore(newScore);
       }
 
       this.isJumping = false;

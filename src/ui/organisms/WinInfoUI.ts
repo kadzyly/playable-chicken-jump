@@ -31,9 +31,18 @@ export class WinInfoUI extends Container {
     return this.freeSpinPanel;
   }
 
+  public updateScore(score: number): void {
+    const text = this.getFormattedText(score.toString());
+    this.summaPanel.setText(text);
+  }
+
+  private getFormattedText(count: number | string) {
+    return `$${count}`;
+  }
+
   private createElements(buttonWidth: number, buttonHeight: number) {
     this.summaPanel = new PanelUI({
-      text: '$500',
+      text: this.getFormattedText(250),
       fontSize: 40,
       width: buttonWidth,
       height: buttonHeight,
