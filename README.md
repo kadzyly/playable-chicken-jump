@@ -1,10 +1,11 @@
-# Playable pixi bottle jump
+# Playable chicken jump
 Simple playable ad made with `Pixi.js`, `@smoud/playable-sdk` and `Playable Template with PixiJS`   
 
-![ScreenShot_20260126074432](https://github.com/user-attachments/assets/dc1e4f80-4078-4093-b5dc-ed62ed7780bc)  
+![ScreenShot_20260128161106](https://github.com/user-attachments/assets/c44c19c9-7ffa-4ed3-b536-e9afd1e28cb1)
+
 
 ## Demo  
-Try out: https://kadzyly.github.io/playable-pixi-bottle-jump/ 
+Try out: https://kadzyly.github.io/playable-chicken-jump/ 
 
 ---
 ## Playable Template with PixiJS
