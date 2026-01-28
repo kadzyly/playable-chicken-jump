@@ -5,6 +5,7 @@ import { StartIsland } from '../entities/StartIsland';
 import { Ice } from '../entities/Ice';
 import { RoundControls } from '../ui/organisms/RoundControls';
 import { SoundManager } from '../core/SoundManager';
+import { WinInfoUI } from '../ui/organisms/WinInfoUI';
 
 export class MainScene {
   private world: PIXI.Container;
@@ -14,6 +15,7 @@ export class MainScene {
   private startIsland: StartIsland;
   private ices: Ice[] = [];
   private roundControls!: RoundControls;
+  private statsDisplay!: WinInfoUI;
 
   // 0 - start island, then platforms (ice)
   private currentPlatformIndex = 0;
@@ -28,6 +30,7 @@ export class MainScene {
     this.createBackground();
     this.createEntities();
     this.createBottomUI();
+    this.createStatsUI();
     this.setupInteraction();
     this.setupMusic();
 
@@ -41,6 +44,7 @@ export class MainScene {
     if (!this.waterBg || !this.skyBg) return;
 
     this.roundControls.updatePosition(width, height);
+    this.statsDisplay.updatePosition(width, height);
 
     // heights: sky 60%, water 40%
     const skyHeight = height * 0.62;
@@ -145,6 +149,12 @@ export class MainScene {
     const { width, height } = this.app.screen;
     this.roundControls = new RoundControls(width, height);
     this.app.stage.addChild(this.roundControls);
+  }
+
+  private createStatsUI() {
+    const { width, height } = this.app.screen;
+    this.statsDisplay = new WinInfoUI(width, height);
+    this.app.stage.addChild(this.statsDisplay);
   }
 
   private setupInteraction(): void {
