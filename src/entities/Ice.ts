@@ -2,8 +2,8 @@ import * as PIXI from 'pixi.js';
 
 export type IceState = 'normal' | 'cracked';
 
-const ICE_FRAME_NORMAL = 'ice_00.png';
-const ICE_FRAME_CRACKED = 'ice_01.png';
+const ICE_FRAME_NORMAL = 'ice.png';
+const ICE_FRAME_CRACKED = 'ice_cracked.png';
 
 export class Ice extends PIXI.Sprite {
   constructor() {
