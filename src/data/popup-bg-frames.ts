@@ -21,10 +21,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00001.png': {
       frame: {
@@ -45,10 +41,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00002.png': {
       frame: {
@@ -69,10 +61,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00003.png': {
       frame: {
@@ -93,10 +81,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00004.png': {
       frame: {
@@ -117,10 +101,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00005.png': {
       frame: {
@@ -141,10 +121,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00006.png': {
       frame: {
@@ -165,10 +141,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00007.png': {
       frame: {
@@ -189,10 +161,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00008.png': {
       frame: {
@@ -213,10 +181,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00009.png': {
       frame: {
@@ -237,10 +201,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00010.png': {
       frame: {
@@ -261,10 +221,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00011.png': {
       frame: {
@@ -285,10 +241,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00012.png': {
       frame: {
@@ -309,10 +261,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00013.png': {
       frame: {
@@ -333,10 +281,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00014.png': {
       frame: {
@@ -357,10 +301,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00015.png': {
       frame: {
@@ -381,10 +321,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00016.png': {
       frame: {
@@ -405,10 +341,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00017.png': {
       frame: {
@@ -429,10 +361,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00018.png': {
       frame: {
@@ -453,10 +381,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00019.png': {
       frame: {
@@ -477,10 +401,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00020.png': {
       frame: {
@@ -501,10 +421,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00021.png': {
       frame: {
@@ -525,10 +441,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00022.png': {
       frame: {
@@ -549,10 +461,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00023.png': {
       frame: {
@@ -573,10 +481,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00024.png': {
       frame: {
@@ -597,10 +501,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00025.png': {
       frame: {
@@ -621,10 +521,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00026.png': {
       frame: {
@@ -645,10 +541,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00027.png': {
       frame: {
@@ -669,10 +561,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     },
     'Bonus panel_00028.png': {
       frame: {
@@ -693,10 +581,6 @@ export const POPUP_BG_FRAMES: SpritesheetData = {
         w: 359,
         h: 350
       },
-      pivot: {
-        x: 0.5,
-        y: 0.5
-      }
     }
   },
   meta: {
