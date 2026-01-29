@@ -1,8 +1,11 @@
 import { Container, Sprite, Texture, Ticker } from 'pixi.js';
+import { PopupBackground } from '../atoms/PopupBackground';
 
 export abstract class PopupUI extends Container {
   protected bg: Sprite;
   protected panel: Container;
+
+  private popupBackground: PopupBackground;
 
   private ticker?: Ticker;
   private animTime = 0;
@@ -19,12 +22,15 @@ export abstract class PopupUI extends Container {
     this.bg.tint = 0x000000;
     this.bg.alpha = 0;
     this.bg.interactive = true;
-    this.addChild(this.bg);
 
     this.panel = new Container();
     this.panel.alpha = 0;
     this.panel.scale.set(0);
-    this.addChild(this.panel);
+
+    this.popupBackground = new PopupBackground();
+    this.popupBackground.anchor.set(0.5, 0.5);
+
+    this.addChild(this.bg, this.popupBackground, this.panel);
   }
 
   public resize(width: number, height: number) {
@@ -33,6 +39,9 @@ export abstract class PopupUI extends Container {
 
     this.panel.x = width * 0.5;
     this.panel.y = height * 0.5;
+
+    this.popupBackground.x = width * 0.5;
+    this.popupBackground.y = height * 0.5;
   }
 
   show() {
@@ -71,7 +80,7 @@ export abstract class PopupUI extends Container {
     const dt = ticker.deltaTime;
 
     this.animTime += dt / 60;
-    
+
     // Calculate scale animation
     let scale = 1;
     if (this.animFrom === 0 && this.animTo === 1) {
@@ -79,7 +88,7 @@ export abstract class PopupUI extends Container {
       const phase1Duration = 0.15; // Fast phase (0 to 1.2)
       const phase2Duration = 0.35; // Slow phase (1.2 to 1.0)
       const totalDuration = phase1Duration + phase2Duration;
-      
+
       if (this.animTime < phase1Duration) {
         // Phase 1: 0 to 1.2 (fast)
         const t = this.animTime / phase1Duration;
@@ -87,18 +96,18 @@ export abstract class PopupUI extends Container {
       } else {
         // Phase 2: 1.2 to 1.0 (slow)
         const t = (this.animTime - phase1Duration) / phase2Duration;
-        scale = 1.2 - (0.2 * t);
+        scale = 1.2 - 0.2 * t;
       }
     } else if (this.animFrom === 1 && this.animTo === 0) {
       // Hide animation: 1.0 -> 0 (simple fade)
-      scale = 1 - (this.animTime / this.animDuration);
+      scale = 1 - this.animTime / this.animDuration;
     }
 
     // Calculate alpha animation
     const t = Math.min(this.animTime / this.animDuration, 1);
     const eased = t * t * (3 - 2 * t);
     const v = this.animFrom + (this.animTo - this.animFrom) * eased;
-    
+
     this.bg.alpha = v * 0.8;
     this.panel.alpha = v;
     this.panel.scale.set(scale);
