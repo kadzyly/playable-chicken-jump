@@ -10,6 +10,7 @@ export abstract class PopupUI extends Container {
   private animFrom = 0;
   private animTo = 0;
   private onComplete?: () => void;
+  private scalePhase = 0; // 0: 0->1.2, 1: 1.2->1.0
 
   constructor() {
     super();
@@ -22,6 +23,7 @@ export abstract class PopupUI extends Container {
 
     this.panel = new Container();
     this.panel.alpha = 0;
+    this.panel.scale.set(0);
     this.addChild(this.panel);
   }
 
@@ -34,6 +36,7 @@ export abstract class PopupUI extends Container {
   }
 
   show() {
+    this.scalePhase = 0;
     this.startAnim(0, 1);
   }
 
@@ -52,6 +55,12 @@ export abstract class PopupUI extends Container {
     this.bg.alpha = from * 0.8;
     this.panel.alpha = from;
 
+    if (from === 0 && to === 1) {
+      this.panel.scale.set(0);
+    } else if (from === 1 && to === 0) {
+      this.panel.scale.set(1);
+    }
+
     this.ticker?.destroy();
     this.ticker = new Ticker();
     this.ticker.add(this.updateAnim);
@@ -62,12 +71,37 @@ export abstract class PopupUI extends Container {
     const dt = ticker.deltaTime;
 
     this.animTime += dt / 60;
+    
+    // Calculate scale animation
+    let scale = 1;
+    if (this.animFrom === 0 && this.animTo === 1) {
+      // Show animation: 0 -> 1.2 (fast) -> 1.0 (slow)
+      const phase1Duration = 0.15; // Fast phase (0 to 1.2)
+      const phase2Duration = 0.35; // Slow phase (1.2 to 1.0)
+      const totalDuration = phase1Duration + phase2Duration;
+      
+      if (this.animTime < phase1Duration) {
+        // Phase 1: 0 to 1.2 (fast)
+        const t = this.animTime / phase1Duration;
+        scale = t * 1.2;
+      } else {
+        // Phase 2: 1.2 to 1.0 (slow)
+        const t = (this.animTime - phase1Duration) / phase2Duration;
+        scale = 1.2 - (0.2 * t);
+      }
+    } else if (this.animFrom === 1 && this.animTo === 0) {
+      // Hide animation: 1.0 -> 0 (simple fade)
+      scale = 1 - (this.animTime / this.animDuration);
+    }
+
+    // Calculate alpha animation
     const t = Math.min(this.animTime / this.animDuration, 1);
     const eased = t * t * (3 - 2 * t);
-
     const v = this.animFrom + (this.animTo - this.animFrom) * eased;
+    
     this.bg.alpha = v * 0.8;
     this.panel.alpha = v;
+    this.panel.scale.set(scale);
 
     if (t === 1) {
       ticker.destroy();
