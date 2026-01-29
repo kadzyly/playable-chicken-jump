@@ -20,10 +20,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00001.png': {
@@ -44,10 +40,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00002.png': {
@@ -68,10 +60,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00003.png': {
@@ -92,10 +80,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00004.png': {
@@ -116,10 +100,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00006.png': {
@@ -140,10 +120,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00007.png': {
@@ -164,10 +140,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00008.png': {
@@ -188,10 +160,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00009.png': {
@@ -212,10 +180,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00011.png': {
@@ -236,10 +200,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00012.png': {
@@ -260,10 +220,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00013.png': {
@@ -284,10 +240,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00014.png': {
@@ -308,10 +260,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00016.png': {
@@ -332,10 +280,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00005.png': {
@@ -356,10 +300,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00010.png': {
@@ -380,10 +320,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_idle_00015.png': {
@@ -404,10 +340,6 @@ export const PLAYER_IDLE_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 180,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     }
   },

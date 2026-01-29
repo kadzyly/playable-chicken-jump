@@ -20,10 +20,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00002.png': {
@@ -44,10 +40,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00003.png': {
@@ -68,10 +60,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00005.png': {
@@ -92,10 +80,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00006.png': {
@@ -116,10 +100,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00007.png': {
@@ -140,10 +120,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00008.png': {
@@ -164,10 +140,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00010.png': {
@@ -188,10 +160,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00011.png': {
@@ -212,10 +180,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00012.png': {
@@ -236,10 +200,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00013.png': {
@@ -260,10 +220,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00015.png': {
@@ -284,10 +240,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00016.png': {
@@ -308,10 +260,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00017.png': {
@@ -332,10 +280,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00018.png': {
@@ -356,10 +300,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00020.png': {
@@ -380,10 +320,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00021.png': {
@@ -404,10 +340,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00022.png': {
@@ -428,10 +360,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00023.png': {
@@ -452,10 +380,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00025.png': {
@@ -476,10 +400,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00026.png': {
@@ -500,10 +420,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00027.png': {
@@ -524,10 +440,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00028.png': {
@@ -548,10 +460,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00030.png': {
@@ -572,10 +480,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00031.png': {
@@ -596,10 +500,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00032.png': {
@@ -620,10 +520,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00033.png': {
@@ -644,10 +540,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00035.png': {
@@ -668,10 +560,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00004.png': {
@@ -692,10 +580,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00009.png': {
@@ -716,10 +600,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00014.png': {
@@ -740,10 +620,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00019.png': {
@@ -764,10 +640,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00024.png': {
@@ -788,10 +660,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00029.png': {
@@ -812,10 +680,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     },
     'player_win_00034.png': {
@@ -836,10 +700,6 @@ export const PLAYER_WIN_FRAMES: SpritesheetData = {
       sourceSize: {
         w: 185,
         h: 230
-      },
-      pivot: {
-        x: 0.5,
-        y: 0.5
       }
     }
   },
