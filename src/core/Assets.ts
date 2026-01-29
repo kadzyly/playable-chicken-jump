@@ -17,7 +17,7 @@ import playerIdleImage from 'assets/player_idle_texture.png';
 import { PLAYER_JUMP_FRAMES } from '../data/player-jump-frames';
 import playerJumpImage from 'assets/player_jump_texture.png';
 import { PLAYER_WIN_FRAMES } from '../data/player-win-frames';
-import playerWinImage from 'assets/player_win_texture .png';
+import playerWinImage from 'assets/player_win_texture.png';
 import { ICE_FRAMES } from '../data/ice-frames';
 import popupBgAnimation from 'assets/popup_bg_animation.png';
 import { POPUP_BG_FRAMES } from '../data/popup-bg-frames';
