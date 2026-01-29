@@ -1,8 +1,7 @@
 import * as PIXI from 'pixi.js';
 
 // simple images
-import charAsset from 'assets/character.png';
-import startIsland from 'assets/startIsland.png';
+import startIsland from 'assets/start_island.png';
 import iceTextureAsset from 'assets/ice_texture.png';
 import bgFloorAsset from 'assets/BG_seg_floor.png';
 import bgWallAsset from 'assets/BG_seg_wall.png';
@@ -26,7 +25,6 @@ export async function loadAssets(): Promise<void> {
   await PIXI.Assets.load([
     { alias: 'bgFloor', src: bgFloorAsset },
     { alias: 'bgWall', src: bgWallAsset },
-    { alias: 'char', src: charAsset },
     { alias: 'startIsland', src: startIsland },
     { alias: 'iceTexture', src: iceTextureAsset },
     { alias: 'playerIdleTexture', src: playerIdleImage },

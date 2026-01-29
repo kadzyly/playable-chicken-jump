@@ -2,44 +2,44 @@ import type { SpritesheetData } from 'pixi.js';
 
 export const ICE_FRAMES: SpritesheetData = {
   frames: {
-    'ice_00.png': {
+    'ice_cracked.png': {
       frame: {
         x: 0,
         y: 0,
-        w: 1526,
-        h: 1024
+        w: 298,
+        h: 86
       },
       rotated: false,
       trimmed: true,
       spriteSourceSize: {
-        x: 0,
-        y: 0,
-        w: 1526,
-        h: 1024
+        x: 4,
+        y: 14,
+        w: 298,
+        h: 86
       },
       sourceSize: {
-        w: 1536,
-        h: 1024
+        w: 310,
+        h: 100
       }
     },
-    'ice_01.png': {
+    'ice.png': {
       frame: {
-        x: 1526,
-        y: 0,
-        w: 1525,
-        h: 1024
+        x: 0,
+        y: 86,
+        w: 297,
+        h: 81
       },
       rotated: false,
       trimmed: true,
       spriteSourceSize: {
-        x: 0,
-        y: 0,
-        w: 1525,
-        h: 1024
+        x: 5,
+        y: 11,
+        w: 297,
+        h: 81
       },
       sourceSize: {
-        w: 1536,
-        h: 1024
+        w: 310,
+        h: 100
       }
     }
   },
@@ -49,8 +49,8 @@ export const ICE_FRAMES: SpritesheetData = {
     image: 'ice_texture.png',
     format: 'RGBA8888',
     size: {
-      w: 3051,
-      h: 1024
+      w: 298,
+      h: 167
     },
     scale: 1
   }

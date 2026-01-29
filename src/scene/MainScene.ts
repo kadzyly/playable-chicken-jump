@@ -80,8 +80,8 @@ export class MainScene {
     // horizontal placement of platforms
     // - at the first: start island and one ice
     // - next: 2 ices on the screen
-    this.startIsland.x = -80;
-    this.startIsland.y = centerOfWaterY - 190;
+    this.startIsland.x = 0;
+    this.startIsland.y = centerOfWaterY;
 
     const firstIceOffsetX = width * 0.8;
     const iceStepX = width * 0.6;
