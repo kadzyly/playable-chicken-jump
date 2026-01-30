@@ -18,7 +18,7 @@ export class Ice extends PIXI.Sprite {
         text: bonusText,
         style: {
           fontFamily: 'Marvin400, Arial, sans-serif',
-          fontSize: 40,
+          fontSize: 70,
           fontWeight: 'bold',
           fill: 0xffffff,
           stroke: { color: 0x4a4a4a, width: 3 },
