@@ -51,7 +51,9 @@ export class StartBonusPopup extends PopupUI {
       width: 370,
       height: 84,
       backgroundColor: 0x326d01,
-      fontSize: 48
+      fontSize: 48,
+      borderColor: 0xffc501,
+      borderWidth: 3
     });
     button.y = 100;
 

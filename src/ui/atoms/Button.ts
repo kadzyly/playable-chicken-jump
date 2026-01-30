@@ -20,6 +20,9 @@ type ButtonOptions = {
   pressedScale?: number;
 
   isDisabled?: boolean;
+
+  borderColor?: number;
+  borderWidth?: number;
 };
 
 const DEFAULTS: Required<Omit<ButtonOptions, 'backgroundTexture'>> = {
@@ -36,7 +39,10 @@ const DEFAULTS: Required<Omit<ButtonOptions, 'backgroundTexture'>> = {
 
   pressedScale: 0.9,
 
-  isDisabled: false
+  isDisabled: false,
+
+  borderColor: 0x000000,
+  borderWidth: 0
 };
 
 export class Button extends Container {
@@ -143,7 +149,7 @@ export class Button extends Container {
   }
 
   private createBackground() {
-    const { width, height, radius, backgroundTexture } = this.opts;
+    const { width, height, radius, backgroundTexture, borderColor, borderWidth } = this.opts;
 
     if (backgroundTexture) {
       const sprite = new Sprite(backgroundTexture);
@@ -157,6 +163,11 @@ export class Button extends Container {
         color: this.opts.backgroundColor,
         alpha: this.opts.backgroundAlpha
       });
+      
+      if (borderWidth > 0) {
+        g.stroke({ color: borderColor, width: borderWidth });
+      }
+      
       this.bg = g;
     }
   }
@@ -230,6 +241,10 @@ export class Button extends Container {
         color: this.disabledBackgroundColor,
         alpha: this.opts.backgroundAlpha
       });
+      
+      if (this.opts.borderWidth > 0) {
+        this.bg.stroke({ color: this.opts.borderColor, width: this.opts.borderWidth });
+      }
     }
 
     // Update text color
@@ -245,6 +260,10 @@ export class Button extends Container {
         color: this.opts.backgroundColor,
         alpha: this.opts.backgroundAlpha
       });
+      
+      if (this.opts.borderWidth > 0) {
+        this.bg.stroke({ color: this.opts.borderColor, width: this.opts.borderWidth });
+      }
     }
 
     // Update text color
