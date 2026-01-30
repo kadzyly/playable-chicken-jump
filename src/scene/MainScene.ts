@@ -103,7 +103,7 @@ export class MainScene {
     this.worldWidth = lastIce ? lastIce.x + lastIce.width / 2 + paddingRight : width;
 
     // background width = world width
-    const skyScale = Math.max(this.worldWidth / this.skyBg.texture.width, skyHeight / this.skyBg.texture.height);
+    const skyScale = skyHeight / this.skyBg.texture.height;
     this.skyBg.tileScale.set(skyScale);
     this.skyBg.width = this.worldWidth;
     this.skyBg.height = skyHeight;
@@ -150,6 +150,10 @@ export class MainScene {
     // repeat water texture horizontally
     waterTexture.source.addressModeU = 'repeat';
     waterTexture.source.addressModeV = 'clamp-to-edge';
+
+    // repeat sky texture horizontally
+    skyTexture.source.addressModeU = 'repeat';
+    skyTexture.source.addressModeV = 'clamp-to-edge';
 
     this.waterBg = new PIXI.TilingSprite({
       texture: waterTexture,
