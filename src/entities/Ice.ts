@@ -21,12 +21,20 @@ export class Ice extends PIXI.Sprite {
           fontSize: 70,
           fontWeight: 'bold',
           fill: 0xffffff,
-          stroke: { color: 0x4a4a4a, width: 3 },
-          align: 'center'
+          stroke: { color: 0x000000, width: 2 },
+          align: 'center',
+
+          dropShadow: {
+            alpha: 0.5,
+            angle: Math.PI / 4,
+            blur: 0,
+            color: 0x4a4a4a,
+            distance: 6
+          }
         }
       });
       this._bonusText.anchor.set(0.5, 1);
-      this._bonusText.y = -20;
+      this._bonusText.y = -10;
       this.addChild(this._bonusText);
     }
   }

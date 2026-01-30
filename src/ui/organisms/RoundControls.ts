@@ -54,7 +54,7 @@ export class RoundControls extends Container {
       wordWrap: true,
       wordWrapWidth: screenWidth * 0.8,
       fill: '#ffffff',
-      stroke: '#000000',
+      stroke: { color: 0x000000, width: 2 },
       align: 'center'
     });
 

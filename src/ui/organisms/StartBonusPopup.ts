@@ -17,7 +17,8 @@ export class StartBonusPopup extends PopupUI {
       fontFamily: 'Marvin400, Arial',
       fontSize: 32,
       fill: 0xffffff,
-      align: 'center'
+      align: 'center',
+      stroke: { color: 0x000000, width: 2 }
     });
 
     const titleText = new Text({

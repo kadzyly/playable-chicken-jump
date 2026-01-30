@@ -166,7 +166,15 @@ export class Button extends Container {
       fill: this.opts.textColor,
       fontSize: this.opts.fontSize,
       fontWeight: '400',
-      align: 'center'
+      align: 'center',
+
+      dropShadow: {
+        alpha: 0.5,
+        angle: Math.PI / 4,
+        blur: 0,
+        color: 0x4a4a4a,
+        distance: 3
+      }
     });
 
     const text = new Text({
