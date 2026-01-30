@@ -76,12 +76,29 @@ export class MainScene {
     this.startIsland.scale.set(entityScale);
     this.ices.forEach((ice) => ice.scale.set(entityScale));
 
-    // ice width = 35% of screen
-    const targetIceWidth = width * 0.35;
+    let targetIceWidth = 200;
+    const minSpacing = 50; // Minimum spacing between ices
+
+    // if 2 ices + spacing fit
+    // 2 * 200 + minSpacing <= width?
+    if (2 * targetIceWidth + minSpacing > width) {
+      // Doesn't fit, resize to 40% of width
+      targetIceWidth = width * 0.4;
+    }
+
+    const iceStepX = targetIceWidth + minSpacing; // Distance between centers or left edges?
+
+    const spacing = Math.max(minSpacing, (width - 2 * targetIceWidth) / 3); // Distribute space evenly?
+
+    const finalIceStepX = targetIceWidth + minSpacing;
+
     this.ices.forEach((ice) => {
-      const iceBaseWidth = ice.width || 1;
-      const iceScale = targetIceWidth / iceBaseWidth;
-      ice.scale.set(iceScale);
+      const iceBaseWidth = ice.width / ice.scale.x;
+
+      ice.scale.set(1);
+      const originalWidth = ice.width;
+      const scale = targetIceWidth / originalWidth;
+      ice.scale.set(scale);
     });
 
     // horizontal placement of platforms
@@ -90,11 +107,11 @@ export class MainScene {
     this.startIsland.x = 0;
     this.startIsland.y = centerOfWaterY;
 
-    const firstIceOffsetX = width * 0.8;
-    const iceStepX = width * 0.6;
+    // const firstIceOffsetX = width * 0.6;
+    const firstIceOffsetX = this.startIsland.width + finalIceStepX;
 
     this.ices.forEach((ice, index) => {
-      ice.x = firstIceOffsetX + index * iceStepX;
+      ice.x = firstIceOffsetX + index * finalIceStepX;
       ice.y = centerOfWaterY - 50;
     });
 
