@@ -13,6 +13,7 @@ export abstract class PopupUI extends Container {
   private animFrom = 0;
   private animTo = 0;
   private onComplete?: () => void;
+  private baseScale = 1;
 
   constructor() {
     super();
@@ -39,6 +40,16 @@ export abstract class PopupUI extends Container {
 
     this.panel.x = width * 0.5;
     this.panel.y = height * 0.5;
+
+    const contentWidth = this.popupBackground.width;
+    // looks like ~0.9, because has gradient effect
+    const maxW = width * 1.2;
+
+    this.baseScale = contentWidth > maxW ? maxW / contentWidth : 1;
+
+    if (!this.ticker && this.animTo === 1) {
+      this.panel.scale.set(this.baseScale);
+    }
   }
 
   show() {
@@ -67,7 +78,7 @@ export abstract class PopupUI extends Container {
     if (from === 0 && to === 1) {
       this.panel.scale.set(0);
     } else if (from === 1 && to === 0) {
-      this.panel.scale.set(1);
+      this.panel.scale.set(this.baseScale);
     }
 
     this.ticker?.destroy();
@@ -106,7 +117,7 @@ export abstract class PopupUI extends Container {
 
     this.bg.alpha = v * 0.8;
     this.panel.alpha = v;
-    this.panel.scale.set(scale);
+    this.panel.scale.set(scale * this.baseScale);
 
     if (t >= 1) {
       ticker.destroy();
