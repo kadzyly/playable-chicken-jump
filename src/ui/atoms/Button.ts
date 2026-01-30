@@ -4,21 +4,15 @@ import { SoundManager } from '../../core/SoundManager';
 
 type ButtonOptions = {
   text?: string;
-
   width?: number;
   height?: number;
   radius?: number;
-
   fontSize?: number;
   textColor?: number;
-
   backgroundColor?: number;
   backgroundAlpha?: number;
-
   backgroundTexture?: Texture | null;
-
   pressedScale?: number;
-
   isDisabled?: boolean;
 
   borderColor?: number;
@@ -34,20 +28,14 @@ const DEFAULTS: Required<Omit<ButtonOptions, 'backgroundTexture'>> = {
   width: 160,
   height: 52,
   radius: 10,
-
   fontSize: 24,
   textColor: 0xffffff,
-
   backgroundColor: 0x000000,
   backgroundAlpha: 1,
-
   pressedScale: 0.9,
-
   isDisabled: false,
-
   borderColor: 0x000000,
   borderWidth: 0,
-
   glowColor: 0x000000,
   glowAlpha: 0,
   glowSize: 0
@@ -102,13 +90,9 @@ export class Button extends Container {
     }
   }
 
-  // ---------- background ----------
-
   public setText(text: string) {
     this.textField.text = text;
   }
-
-  // ---------- label ----------
 
   public disable() {
     this.opts.isDisabled = true;
@@ -116,8 +100,6 @@ export class Button extends Container {
     this.cursor = 'default';
     this.updateDisabledStyle();
   }
-
-  // ---------- interaction ----------
 
   public enable() {
     this.opts.isDisabled = false;
@@ -173,38 +155,32 @@ export class Button extends Container {
         color: this.opts.backgroundColor,
         alpha: this.opts.backgroundAlpha
       });
-      
+
       if (borderWidth > 0) {
         g.stroke({ color: borderColor, width: borderWidth });
       }
-      
+
       this.bg = g;
     }
   }
 
   private createGlow() {
     const { width, height, radius, glowColor, glowAlpha, glowSize } = this.opts;
-    
+
     const g = new Graphics();
-    
+
     if (glowSize > 0 && glowAlpha > 0) {
       const glowPadding = glowSize;
-      g.roundRect(
-        -glowPadding, 
-        -glowPadding, 
-        width + glowPadding * 2, 
-        height + glowPadding * 2, 
-        radius + glowPadding
-      );
+      g.roundRect(-glowPadding, -glowPadding, width + glowPadding * 2, height + glowPadding * 2, radius + glowPadding);
       g.fill({
         color: glowColor,
         alpha: glowAlpha
       });
-      
-      // Apply blur filter for glow effect
+
+      // blur filter for glow effect
       g.filters = [new PIXI.BlurFilter(glowSize)];
     }
-    
+
     this.glow = g;
   }
 
@@ -266,8 +242,6 @@ export class Button extends Container {
     this.emit('click', event);
   }
 
-  // ---------- public api ----------
-
   private updateDisabledStyle() {
     // Update background color
     if (this.bg instanceof Graphics) {
@@ -277,18 +251,18 @@ export class Button extends Container {
         color: this.disabledBackgroundColor,
         alpha: this.opts.backgroundAlpha
       });
-      
+
       if (this.opts.borderWidth > 0) {
         this.bg.stroke({ color: this.opts.borderColor, width: this.opts.borderWidth });
       }
     }
 
-    // Update text color
+    // update text color
     this.textField.style.fill = this.disabledTextColor;
   }
 
   private updateNormalStyle() {
-    // Update background color
+    // update background color
     if (this.bg instanceof Graphics) {
       this.bg.clear();
       this.bg.roundRect(0, 0, this.opts.width, this.opts.height, this.opts.radius);
@@ -296,13 +270,13 @@ export class Button extends Container {
         color: this.opts.backgroundColor,
         alpha: this.opts.backgroundAlpha
       });
-      
+
       if (this.opts.borderWidth > 0) {
         this.bg.stroke({ color: this.opts.borderColor, width: this.opts.borderWidth });
       }
     }
 
-    // Update text color
+    // update text color
     this.textField.style.fill = this.opts.textColor;
   }
 
