@@ -84,7 +84,6 @@ export class Button extends Container {
     if (this.opts.isDisabled) {
       this.disable();
     }
-    
   }
 
   // ---------- background ----------
@@ -185,7 +184,7 @@ export class Button extends Container {
     });
 
     text.anchor.set(0.5);
-    text.position.set(this.opts.width / 2, this.opts.height / 2);
+    text.position.set(this.opts.width / 2, this.opts.height / 2 + text.height * 0.1);
 
     return text;
   }
