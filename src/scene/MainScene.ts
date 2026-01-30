@@ -103,12 +103,16 @@ export class MainScene {
     this.worldWidth = lastIce ? lastIce.x + lastIce.width / 2 + paddingRight : width;
 
     // background width = world width
-    this.skyBg.scale.set(1);
+    const skyScale = Math.max(this.worldWidth / this.skyBg.texture.width, skyHeight / this.skyBg.texture.height);
+    this.skyBg.tileScale.set(skyScale);
     this.skyBg.width = this.worldWidth;
     this.skyBg.height = skyHeight;
     this.skyBg.position.set(0, skyHeight);
+    this.skyBg.anchor.set(0, 1);
 
-    this.waterBg.scale.set(1);
+    // Water should repeat horizontally, but scale vertically to fit height
+    const waterScaleY = waterHeight / this.waterBg.texture.height;
+    this.waterBg.tileScale.set(waterScaleY);
     this.waterBg.width = this.worldWidth;
     this.waterBg.height = waterHeight;
     this.waterBg.position.set(0, height);
@@ -143,8 +147,9 @@ export class MainScene {
     const waterTexture = PIXI.Assets.get('bgFloor');
     const skyTexture = PIXI.Assets.get('bgWall');
 
-    waterTexture.source.addressModeX = 'repeat';
-    skyTexture.source.addressModeX = 'repeat';
+    // repeat water texture horizontally
+    waterTexture.source.addressModeU = 'repeat';
+    waterTexture.source.addressModeV = 'clamp-to-edge';
 
     this.waterBg = new PIXI.TilingSprite({
       texture: waterTexture,
