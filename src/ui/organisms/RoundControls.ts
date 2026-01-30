@@ -85,11 +85,11 @@ export class RoundControls extends Container {
 
   private setupButtonEvents() {
     this.cashButton.on('click', () => {
-      console.log('Cash out');
+      this.cashButton.hideHand();
     });
 
     this.goButton.on('click', () => {
-      console.log('Go');
+      this.goButton.hideHand();
     });
   }
 

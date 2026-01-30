@@ -125,6 +125,8 @@ export class MainScene {
 
     startBonusPopup.on('closeClick', () => {
       this.popupManager.hideCurrent().then(() => {
+        this.roundControls.getGoButton().showHand();
+
         this.app.stage.removeChild(startBonusPopup);
       });
     });
@@ -247,12 +249,16 @@ export class MainScene {
       }
 
       this.isJumping = false;
+      const isWin = this.currentPlatformIndex >= this.scoreManager.getMaxJumpCount();
 
       // show WIN animation on the last platform
-      if (this.currentPlatformIndex >= this.scoreManager.getMaxJumpCount()) {
+      if (isWin) {
         void this.character.playWin();
         this.roundControls.disableGoButton();
         this.roundControls.enableCashOutButton();
+        this.roundControls.getCashButton().showHand();
+      } else {
+        this.roundControls.getGoButton().showHand();
       }
     });
   }

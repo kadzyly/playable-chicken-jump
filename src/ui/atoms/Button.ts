@@ -73,8 +73,9 @@ export class Button extends Container {
     this.textField = this.createLabel();
     const handAsset = PIXI.Assets.get('hand') || PIXI.Texture.EMPTY;
     this.handSprite = new Sprite(handAsset);
+    this.handSprite.visible = false;
 
-    this.addChild(this.bg, this.textField);
+    this.addChild(this.bg, this.textField, this.handSprite);
     this.setupEvents();
     this.setupAnimation();
 
@@ -113,17 +114,16 @@ export class Button extends Container {
   }
 
   public showHand() {
-    this.handSprite.anchor.set(0, 0);
+    this.handSprite.anchor.set(1, 0);
     // position: bottom right
-    this.handSprite.position.set(this.opts.width - 20, this.opts.height - 20);
-    this.addChild(this.handSprite);
+    this.handSprite.position.set(this.opts.width, this.opts.height * 0.6);
     this.handSprite.visible = true;
 
     let time = 0;
     this.handAnimationTicker = (ticker: Ticker) => {
       time += ticker.deltaTime * 0.05;
-      // from 1 to 0.95
-      const scale = 0.95 + Math.sin(time) * 0.05;
+      // from 0.65 to 0.70
+      const scale = 0.65 + Math.sin(time) * 0.05;
       if (this.handSprite) {
         this.handSprite.scale.set(scale);
       }
