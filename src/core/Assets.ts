@@ -7,6 +7,8 @@ import bgFloorAsset from 'assets/BG_seg_floor.png';
 import bgWallAsset from 'assets/BG_seg_wall.png';
 import handAsset from 'assets/hand.png';
 import finalSceneBackgroundAsset from 'assets/bg_final_scene.png';
+import decorHatAsset from 'assets/decor_hat.png';
+import decorSnowAsset from 'assets/decor_snow.png';
 
 // music
 import bgMusicAsset from 'assets/bg.mp3';
@@ -44,7 +46,9 @@ export async function loadAssets(): Promise<void> {
     { alias: 'buttonClickMusic', src: buttonClickMusic },
     { alias: 'winMusic', src: winMusic },
     { alias: 'startBonusMusic', src: startBonusMusic },
-    { alias: 'addPointsMusicMusic', src: addPointsMusicMusic }
+    { alias: 'addPointsMusicMusic', src: addPointsMusicMusic },
+    { alias: 'decorHat', src: decorHatAsset },
+    { alias: 'decorSnow', src: decorSnowAsset }
   ]);
 
   const playerIdleTexture = PIXI.Assets.get('playerIdleTexture');

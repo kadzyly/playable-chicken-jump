@@ -1,4 +1,4 @@
-import { Container, Sprite, Texture, Ticker } from 'pixi.js';
+import { Assets, Container, Sprite, Texture, Ticker } from 'pixi.js';
 import { PopupBackground } from '../atoms/PopupBackground';
 
 export abstract class PopupUI extends Container {
@@ -29,8 +29,25 @@ export abstract class PopupUI extends Container {
 
     this.popupBackground = new PopupBackground();
     this.popupBackground.anchor.set(0.5, 0.5);
-    this.panel.addChild(this.popupBackground);
 
+    const decorSnowAsset = Assets.get('decorSnow');
+    const decorSnow = new Sprite(decorSnowAsset);
+    decorSnow.anchor.set(0.5, 0.5);
+    decorSnow.y = -180;
+    decorSnow.x = -35;
+    // revert by X
+    decorSnow.scale.set(-1, 0.9);
+
+    const decorHatAsset = Assets.get('decorHat');
+    const decorHat = new Sprite(decorHatAsset);
+    decorHat.anchor.set(0.5, 0.5);
+    decorHat.y = -190;
+    decorHat.x = 200;
+    // rotate
+    decorHat.rotation = Math.PI / 7;
+    decorHat.scale.set(0.9, 0.9);
+
+    this.panel.addChild(this.popupBackground, decorSnow, decorHat);
     this.addChild(this.bg, this.panel);
   }
 
