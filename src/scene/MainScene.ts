@@ -10,6 +10,7 @@ import { ScoreManager } from '../core/ScoreManager';
 import { PopupManager } from '../core/PopupManager';
 import { StartBonusPopup } from '../ui/organisms/StartBonusPopup';
 import { FinalResultPopup } from '../ui/organisms/FinalResultPopup';
+import { FinalScene } from '../ui/organisms/FinalScene';
 
 export class MainScene {
   private world: PIXI.Container;
@@ -22,6 +23,7 @@ export class MainScene {
   private statsDisplay!: WinInfoUI;
   private scoreManager: ScoreManager;
   private popupManager: PopupManager;
+  private finalScene: FinalScene | null = null;
 
   // 0 - start island, then platforms (ice)
   private currentPlatformIndex = 0;
@@ -50,6 +52,11 @@ export class MainScene {
   }
 
   public resize(width: number, height: number): void {
+    if (this.finalScene) {
+      this.finalScene.resize(width, height);
+      return;
+    }
+
     if (!this.waterBg || !this.skyBg) return;
 
     this.roundControls.updatePosition(width, height);
@@ -194,7 +201,21 @@ export class MainScene {
 
       this.app.stage.addChild(finalResultPopup);
       void this.popupManager.show(finalResultPopup);
+
+      setTimeout(() => {
+        this.showFinalScene();
+      }, 2000);
     });
+  }
+
+  private showFinalScene() {
+    // clear stage
+    this.app.stage.removeChildren();
+
+    // create and add FinalScene
+    const { width, height } = this.app.screen;
+    this.finalScene = new FinalScene(width, height);
+    this.app.stage.addChild(this.finalScene);
   }
 
   private setupMusic(): void {
@@ -271,6 +292,7 @@ export class MainScene {
   }
 
   private updateCamera(): void {
+    if (this.finalScene) return;
     if (!this.character || this.worldWidth <= 0) return;
 
     const screenWidth = this.app.screen.width;
