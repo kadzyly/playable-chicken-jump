@@ -57,7 +57,7 @@ export class WinInfoUI extends Container {
   }
 
   private getFormattedScoreText(count: number | string) {
-    return `$${count}`;
+    return `€${count}`;
   }
 
   private getFormattedFreeSpinText(count: number | string) {

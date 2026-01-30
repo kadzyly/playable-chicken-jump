@@ -12,9 +12,9 @@ export class ScoreManager {
   private iceJumpCount = 0;
 
   private _bonuses: TBonus[] = [
-    { title: '$40', count: 40 },
-    { title: '$150', count: 150 },
-    { title: '$250', count: 250 },
+    { title: '€40', count: 40 },
+    { title: '€150', count: 150 },
+    { title: '€250', count: 250 },
     { title: 'x4', multiplier: 4 }
   ];
 

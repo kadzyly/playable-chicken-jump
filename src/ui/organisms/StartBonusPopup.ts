@@ -28,7 +28,7 @@ export class StartBonusPopup extends PopupUI {
     titleText.y = -40;
 
     const sumText = new Text({
-      text: '$500 + 250',
+      text: '€500 + 250',
       style: style2
     });
     sumText.anchor.set(0.5);

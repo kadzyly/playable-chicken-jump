@@ -27,7 +27,7 @@ export class FinalResultPopup extends PopupUI {
     line2.anchor.set(0.5);
     line2.y = 0;
 
-    const line3 = new Text({ text: `+$3,760.0`, style: style2 });
+    const line3 = new Text({ text: `+€3,760.0`, style: style2 });
     line3.anchor.set(0.5);
     line3.y = 40;
 

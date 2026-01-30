@@ -37,7 +37,7 @@ export class FinalScene extends PIXI.Container {
     this.topContainer = new PIXI.Container();
     this.topBg = new Graphics();
     this.topText = new Text({
-      text: 'Claim bonus $500\n+ 250 Freespins',
+      text: 'Claim bonus €500\n+ 250 Freespins',
       style: new TextStyle({
         fontFamily: 'Marvin400, Arial, sans-serif',
         fill: 0xfaed6d,
