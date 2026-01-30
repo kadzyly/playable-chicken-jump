@@ -53,7 +53,11 @@ export class StartBonusPopup extends PopupUI {
       backgroundColor: 0x326d01,
       fontSize: 48,
       borderColor: 0xffc501,
-      borderWidth: 3
+      borderWidth: 2,
+      // glowColor: 0xffc501,
+      glowColor: 0xc6961a,
+      glowAlpha: 0.3,
+      glowSize: 10
     });
     button.y = 100;
 

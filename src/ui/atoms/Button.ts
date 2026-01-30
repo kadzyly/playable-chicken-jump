@@ -23,6 +23,10 @@ type ButtonOptions = {
 
   borderColor?: number;
   borderWidth?: number;
+
+  glowColor?: number;
+  glowAlpha?: number;
+  glowSize?: number;
 };
 
 const DEFAULTS: Required<Omit<ButtonOptions, 'backgroundTexture'>> = {
@@ -42,11 +46,16 @@ const DEFAULTS: Required<Omit<ButtonOptions, 'backgroundTexture'>> = {
   isDisabled: false,
 
   borderColor: 0x000000,
-  borderWidth: 0
+  borderWidth: 0,
+
+  glowColor: 0x000000,
+  glowAlpha: 0,
+  glowSize: 0
 };
 
 export class Button extends Container {
   private bg!: Sprite | Graphics;
+  private glow!: Graphics;
   private textField: Text;
   private opts: Required<Omit<ButtonOptions, 'backgroundTexture'>> & {
     backgroundTexture: Texture | null;
@@ -77,12 +86,13 @@ export class Button extends Container {
     this.disabledTextColor = this.darkenColor(this.opts.textColor, 0.7);
 
     this.createBackground();
+    this.createGlow();
     this.textField = this.createLabel();
     const handAsset = PIXI.Assets.get('hand') || PIXI.Texture.EMPTY;
     this.handSprite = new Sprite(handAsset);
     this.handSprite.visible = false;
 
-    this.addChild(this.bg, this.textField, this.handSprite);
+    this.addChild(this.glow, this.bg, this.textField, this.handSprite);
     this.setupEvents();
     this.setupAnimation();
 
@@ -170,6 +180,32 @@ export class Button extends Container {
       
       this.bg = g;
     }
+  }
+
+  private createGlow() {
+    const { width, height, radius, glowColor, glowAlpha, glowSize } = this.opts;
+    
+    const g = new Graphics();
+    
+    if (glowSize > 0 && glowAlpha > 0) {
+      const glowPadding = glowSize;
+      g.roundRect(
+        -glowPadding, 
+        -glowPadding, 
+        width + glowPadding * 2, 
+        height + glowPadding * 2, 
+        radius + glowPadding
+      );
+      g.fill({
+        color: glowColor,
+        alpha: glowAlpha
+      });
+      
+      // Apply blur filter for glow effect
+      g.filters = [new PIXI.BlurFilter(glowSize)];
+    }
+    
+    this.glow = g;
   }
 
   private createLabel() {
