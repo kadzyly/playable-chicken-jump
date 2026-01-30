@@ -208,10 +208,11 @@ export class MainScene {
 
     // create 6 ices
     this.ices = [];
+    const defaultIceText = 'x10';
     for (let i = 0; i < 6; i++) {
       const bonus = this.scoreManager.Bonuses[i];
 
-      this.ices.push(new Ice(bonus ? bonus.title : undefined));
+      this.ices.push(new Ice(bonus ? bonus.title : defaultIceText));
     }
 
     this.world.addChild(this.startIsland, ...this.ices, this.character);
