@@ -1,3 +1,4 @@
+import * as PIXI from 'pixi.js';
 import { Container, FederatedPointerEvent, Graphics, Sprite, Text, TextStyle, Texture, Ticker } from 'pixi.js';
 
 type ButtonOptions = {
@@ -48,6 +49,8 @@ export class Button extends Container {
   private animationSpeed = 0.15;
   private disabledBackgroundColor!: number;
   private disabledTextColor!: number;
+  private handSprite: Sprite;
+  private handAnimationTicker: ((ticker: Ticker) => void) | null = null;
 
   constructor(options: ButtonOptions = {}) {
     super();
@@ -68,6 +71,8 @@ export class Button extends Container {
 
     this.createBackground();
     this.textField = this.createLabel();
+    const handAsset = PIXI.Assets.get('hand') || PIXI.Texture.EMPTY;
+    this.handSprite = new Sprite(handAsset);
 
     this.addChild(this.bg, this.textField);
     this.setupEvents();
@@ -105,6 +110,35 @@ export class Button extends Container {
 
   public isDisabled() {
     return this.opts.isDisabled;
+  }
+
+  public showHand() {
+    this.handSprite.anchor.set(0, 0);
+    // position: bottom right
+    this.handSprite.position.set(this.opts.width - 20, this.opts.height - 20);
+    this.addChild(this.handSprite);
+    this.handSprite.visible = true;
+
+    let time = 0;
+    this.handAnimationTicker = (ticker: Ticker) => {
+      time += ticker.deltaTime * 0.05;
+      // from 1 to 0.95
+      const scale = 0.95 + Math.sin(time) * 0.05;
+      if (this.handSprite) {
+        this.handSprite.scale.set(scale);
+      }
+    };
+    Ticker.shared.add(this.handAnimationTicker);
+  }
+
+  public hideHand() {
+    if (this.handSprite) {
+      if (this.handAnimationTicker) {
+        Ticker.shared.remove(this.handAnimationTicker);
+        this.handAnimationTicker = null;
+      }
+      this.handSprite.visible = false;
+    }
   }
 
   private createBackground() {

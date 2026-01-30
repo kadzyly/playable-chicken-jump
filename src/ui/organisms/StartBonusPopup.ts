@@ -49,5 +49,7 @@ export class StartBonusPopup extends PopupUI {
     });
 
     this.panel.addChild(titleText, sumText, freeSpinsText, button);
+
+    button.showHand();
   }
 }

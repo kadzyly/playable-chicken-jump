@@ -5,6 +5,7 @@ import startIsland from 'assets/start_island.png';
 import iceTextureAsset from 'assets/ice_texture.png';
 import bgFloorAsset from 'assets/BG_seg_floor.png';
 import bgWallAsset from 'assets/BG_seg_wall.png';
+import handAsset from 'assets/hand.png';
 
 // music
 import bgMusicAsset from 'assets/bg.mp3';
@@ -25,6 +26,7 @@ export async function loadAssets(): Promise<void> {
   await PIXI.Assets.load([
     { alias: 'bgFloor', src: bgFloorAsset },
     { alias: 'bgWall', src: bgWallAsset },
+    { alias: 'hand', src: handAsset },
     { alias: 'startIsland', src: startIsland },
     { alias: 'iceTexture', src: iceTextureAsset },
     { alias: 'playerIdleTexture', src: playerIdleImage },
