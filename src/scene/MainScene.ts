@@ -162,7 +162,9 @@ export class MainScene {
     // create 6 ices
     this.ices = [];
     for (let i = 0; i < 6; i++) {
-      this.ices.push(new Ice('$40'));
+      const bonus = this.scoreManager.Bonuses[i];
+
+      this.ices.push(new Ice(bonus ? bonus.title : undefined));
     }
 
     this.world.addChild(this.startIsland, ...this.ices, this.character);

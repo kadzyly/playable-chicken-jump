@@ -1,3 +1,5 @@
+type TBonus = { title: string; count?: number; multiplier?: number };
+
 export class ScoreManager {
   private static instance: ScoreManager;
 
@@ -9,11 +11,19 @@ export class ScoreManager {
   private currentFreeSpins: number;
   private iceJumpCount = 0;
 
-  private readonly jumpRewards = [40, 150, 250];
-  private readonly comboMultiplierJump = 4;
+  private _bonuses: TBonus[] = [
+    { title: '$40', count: 40 },
+    { title: '$150', count: 150 },
+    { title: '$250', count: 250 },
+    { title: 'x4', multiplier: 4 }
+  ];
 
   private constructor() {
     this.resetScore();
+  }
+
+  get Bonuses(): TBonus[] {
+    return this._bonuses;
   }
 
   public static getInstance(): ScoreManager {
@@ -47,16 +57,21 @@ export class ScoreManager {
     this.iceJumpCount++;
     let pointsToAdd = 0;
 
+    const currentBonus = this._bonuses[this.iceJumpCount - 1];
+    const isAdd = currentBonus.count !== undefined;
+    const isMultiplier = currentBonus.multiplier !== undefined;
+
     // regular jump
-    if (this.iceJumpCount <= this.jumpRewards.length) {
+    if (isAdd && this.iceJumpCount <= this._bonuses.length) {
       this.currentFreeSpins -= 1;
-      pointsToAdd = this.jumpRewards[this.iceJumpCount - 1];
+      pointsToAdd = currentBonus.count || 0;
     }
 
     // jump with x4 points
-    if (this.iceJumpCount === this.maxJumpCount) {
+    if (isMultiplier && this.iceJumpCount === this.maxJumpCount) {
       this.currentFreeSpins -= 1;
-      this.currentScore = this.currentScore * 4;
+      const multiplier = currentBonus.multiplier || 1;
+      this.currentScore = this.currentScore * multiplier;
       return this.currentScore;
     }
 
