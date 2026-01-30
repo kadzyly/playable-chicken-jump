@@ -6,6 +6,7 @@ import iceTextureAsset from 'assets/ice_texture.png';
 import bgFloorAsset from 'assets/BG_seg_floor.png';
 import bgWallAsset from 'assets/BG_seg_wall.png';
 import handAsset from 'assets/hand.png';
+import finalSceneBackgroundAsset from 'assets/bg_final_scene.png';
 
 // music
 import bgMusicAsset from 'assets/bg.mp3';
@@ -27,6 +28,7 @@ export async function loadAssets(): Promise<void> {
     { alias: 'bgFloor', src: bgFloorAsset },
     { alias: 'bgWall', src: bgWallAsset },
     { alias: 'hand', src: handAsset },
+    { alias: 'finalSceneBg', src: finalSceneBackgroundAsset },
     { alias: 'startIsland', src: startIsland },
     { alias: 'iceTexture', src: iceTextureAsset },
     { alias: 'playerIdleTexture', src: playerIdleImage },
