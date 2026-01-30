@@ -9,6 +9,13 @@ export class StartBonusPopup extends PopupUI {
     const style = new TextStyle({
       fontFamily: 'Marvin400, Arial',
       fontSize: 32,
+      fill: 0x19c70e,
+      align: 'center'
+    });
+
+    const style2 = new TextStyle({
+      fontFamily: 'Marvin400, Arial',
+      fontSize: 32,
       fill: 0xffffff,
       align: 'center'
     });
@@ -22,7 +29,7 @@ export class StartBonusPopup extends PopupUI {
 
     const sumText = new Text({
       text: '$500 + 250',
-      style
+      style: style2
     });
     sumText.anchor.set(0.5);
     sumText.y = 0;
@@ -34,7 +41,7 @@ export class StartBonusPopup extends PopupUI {
     freeSpinsText.anchor.set(0.5);
     freeSpinsText.y = 40;
 
-    const button = new Button({ text: 'Claim bonus', width: 200 });
+    const button = new Button({ text: 'Claim bonus', width: 200, backgroundColor: 0x326d01 });
     button.y = 100;
 
     button.on('click', () => {
