@@ -238,6 +238,7 @@ export class MainScene {
 
       this.app.stage.addChild(finalResultPopup);
       void this.popupManager.show(finalResultPopup);
+      SoundManager.playWinMusic();
 
       setTimeout(() => {
         this.showFinalScene();

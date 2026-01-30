@@ -47,6 +47,14 @@ export class SoundManager {
     });
   }
 
+  static playWinMusic(): void {
+    if (!this._enabled) return;
+
+    sound.play('winMusic', {
+      volume: 0.8
+    });
+  }
+
   static mute(): void {
     this._enabled = false;
     sound.volumeAll = 0;
