@@ -1,7 +1,8 @@
 # Playable chicken jump
 Simple playable ad made with `Pixi.js`, `@smoud/playable-sdk` and `Playable Template with PixiJS`   
 
-![ScreenShot_20260128161106](https://github.com/user-attachments/assets/c44c19c9-7ffa-4ed3-b536-e9afd1e28cb1)
+![ScreenShot_20260130074243](https://github.com/user-attachments/assets/5b497b2a-7d78-40ff-8b44-b8c0782bc8ec)
+
 
 
 ## Demo  
