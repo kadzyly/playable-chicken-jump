@@ -16,6 +16,7 @@ export class FinalScene extends PIXI.Container {
     super();
 
     this.background = new Sprite(PIXI.Assets.get('finalSceneBg'));
+    this.background.anchor.set(0.5);
     this.addChild(this.background);
 
     this.character = new Character();
@@ -55,8 +56,10 @@ export class FinalScene extends PIXI.Container {
   }
 
   public resize(width: number, height: number): void {
-    this.background.width = width;
-    this.background.height = height;
+    const scale = Math.max(width / this.background.texture.width, height / this.background.texture.height);
+    this.background.scale.set(scale);
+    this.background.x = width / 2;
+    this.background.y = height / 2;
 
     this.character.anchor.set(0.5);
     this.character.x = width / 2;
