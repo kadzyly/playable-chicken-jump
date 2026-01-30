@@ -77,29 +77,34 @@ export class MainScene {
     this.ices.forEach((ice) => ice.scale.set(entityScale));
 
     let targetIceWidth = 200;
-    const minSpacing = 50; // Minimum spacing between ices
+    const minSpacing = 50;
 
     // if 2 ices + spacing fit
-    // 2 * 200 + minSpacing <= width?
     if (2 * targetIceWidth + minSpacing > width) {
-      // Doesn't fit, resize to 40% of width
       targetIceWidth = width * 0.4;
     }
-
-    const iceStepX = targetIceWidth + minSpacing; // Distance between centers or left edges?
-
-    const spacing = Math.max(minSpacing, (width - 2 * targetIceWidth) / 3); // Distribute space evenly?
 
     const finalIceStepX = targetIceWidth + minSpacing;
 
     this.ices.forEach((ice) => {
-      const iceBaseWidth = ice.width / ice.scale.x;
-
       ice.scale.set(1);
       const originalWidth = ice.width;
       const scale = targetIceWidth / originalWidth;
       ice.scale.set(scale);
     });
+
+    let targetIslandWidth = 420;
+    const islandIceSpacing = minSpacing * 0.8;
+
+    if (targetIslandWidth + islandIceSpacing + targetIceWidth > width) {
+      // 60% of width
+      targetIslandWidth = width * 0.6;
+    }
+
+    this.startIsland.scale.set(1);
+    const originalIslandWidth = this.startIsland.width;
+    const islandScale = targetIslandWidth / originalIslandWidth;
+    this.startIsland.scale.set(islandScale);
 
     // horizontal placement of platforms
     // - at the first: start island and one ice
@@ -107,11 +112,14 @@ export class MainScene {
     this.startIsland.x = 0;
     this.startIsland.y = centerOfWaterY;
 
-    // const firstIceOffsetX = width * 0.6;
-    const firstIceOffsetX = this.startIsland.width + finalIceStepX;
+    const firstIceX = this.startIsland.x + this.startIsland.width + islandIceSpacing + targetIceWidth / 2;
 
     this.ices.forEach((ice, index) => {
-      ice.x = firstIceOffsetX + index * finalIceStepX;
+      if (index === 0) {
+        ice.x = firstIceX;
+      } else {
+        ice.x = firstIceX + index * finalIceStepX;
+      }
       ice.y = centerOfWaterY - 50;
     });
 
@@ -127,7 +135,6 @@ export class MainScene {
     this.skyBg.position.set(0, skyHeight);
     this.skyBg.anchor.set(0, 1);
 
-    // Water should repeat horizontally, but scale vertically to fit height
     const waterScaleY = waterHeight / this.waterBg.texture.height;
     this.waterBg.tileScale.set(waterScaleY);
     this.waterBg.width = this.worldWidth;
@@ -137,7 +144,8 @@ export class MainScene {
     // start character position is start island
     if (this.currentPlatformIndex === 0) {
       const startSurfaceY = centerOfWaterY - 60;
-      this.character.x = 100;
+
+      this.character.x = this.startIsland.x + this.startIsland.width / 2;
       this.character.placeOn(startSurfaceY);
     }
 
