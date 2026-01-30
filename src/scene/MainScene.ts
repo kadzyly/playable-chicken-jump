@@ -306,6 +306,7 @@ export class MainScene {
         this.statsDisplay.updateFreeSpins(freeSpins);
 
         currentIce.hideBonusText();
+        SoundManager.playAddPointsMusic();
       }
 
       this.isJumping = false;

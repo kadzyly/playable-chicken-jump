@@ -14,6 +14,7 @@ import jumpMusicAsset from 'assets/jump.mp3';
 import buttonClickMusic from 'assets/button_click.mp3';
 import winMusic from 'assets/win_audio.mp3';
 import startBonusMusic from 'assets/start_bonus_audio.mp3';
+import addPointsMusicMusic from 'assets/add_points.mp3';
 
 // for animation
 import { PLAYER_IDLE_FRAMES } from '../data/player-idle-frames';
@@ -42,7 +43,8 @@ export async function loadAssets(): Promise<void> {
     { alias: 'jumpMusic', src: jumpMusicAsset },
     { alias: 'buttonClickMusic', src: buttonClickMusic },
     { alias: 'winMusic', src: winMusic },
-    { alias: 'startBonusMusic', src: startBonusMusic }
+    { alias: 'startBonusMusic', src: startBonusMusic },
+    { alias: 'addPointsMusicMusic', src: addPointsMusicMusic }
   ]);
 
   const playerIdleTexture = PIXI.Assets.get('playerIdleTexture');

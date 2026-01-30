@@ -63,6 +63,14 @@ export class SoundManager {
     });
   }
 
+  static playAddPointsMusic(): void {
+    if (!this._enabled) return;
+
+    sound.play('addPointsMusicMusic', {
+      volume: 0.8
+    });
+  }
+
   static mute(): void {
     this._enabled = false;
     sound.volumeAll = 0;
