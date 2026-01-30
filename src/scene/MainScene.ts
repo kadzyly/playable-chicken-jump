@@ -143,10 +143,10 @@ export class MainScene {
 
     // start character position is start island
     if (this.currentPlatformIndex === 0) {
-      const startSurfaceY = centerOfWaterY - 60;
+      this.character.x = this.startIsland.x + this.startIsland.width * 0.58;
 
-      this.character.x = this.startIsland.x + this.startIsland.width / 2;
-      this.character.placeOn(startSurfaceY);
+      const surfaceY = this.startIsland.y - this.startIsland.height * (1 - 0.67);
+      this.character.placeOn(surfaceY);
     }
 
     // start camera position
