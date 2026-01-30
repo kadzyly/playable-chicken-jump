@@ -162,7 +162,7 @@ export class MainScene {
     // create 6 ices
     this.ices = [];
     for (let i = 0; i < 6; i++) {
-      this.ices.push(new Ice());
+      this.ices.push(new Ice('$40'));
     }
 
     this.world.addChild(this.startIsland, ...this.ices, this.character);
@@ -240,6 +240,8 @@ export class MainScene {
         const freeSpins = this.scoreManager.getCurrentFreeSpins();
         this.statsDisplay.updateScore(score);
         this.statsDisplay.updateFreeSpins(freeSpins);
+
+        currentIce.hideBonusText();
       }
 
       this.isJumping = false;
