@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { Container, FederatedPointerEvent, Graphics, Sprite, Text, TextStyle, Texture, Ticker } from 'pixi.js';
+import { SoundManager } from '../../core/SoundManager';
 
 type ButtonOptions = {
   text?: string;
@@ -83,6 +84,7 @@ export class Button extends Container {
     if (this.opts.isDisabled) {
       this.disable();
     }
+    
   }
 
   // ---------- background ----------
@@ -209,6 +211,7 @@ export class Button extends Container {
   private onDown(_: FederatedPointerEvent) {
     if (this.opts.isDisabled) return;
     this.targetScale = this.opts.pressedScale;
+    SoundManager.playClickButton();
   }
 
   private onUp(event: FederatedPointerEvent) {

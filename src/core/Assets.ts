@@ -11,6 +11,7 @@ import finalSceneBackgroundAsset from 'assets/bg_final_scene.png';
 // music
 import bgMusicAsset from 'assets/bg.mp3';
 import jumpMusicAsset from 'assets/jump.mp3';
+import buttonClickMusic from 'assets/button_click.mp3';
 
 // for animation
 import { PLAYER_IDLE_FRAMES } from '../data/player-idle-frames';
@@ -36,7 +37,8 @@ export async function loadAssets(): Promise<void> {
     { alias: 'playerWinTexture', src: playerWinImage },
     { alias: 'popupBgTexture', src: popupBgAnimation },
     { alias: 'bgMusic', src: bgMusicAsset },
-    { alias: 'jumpMusic', src: jumpMusicAsset }
+    { alias: 'jumpMusic', src: jumpMusicAsset },
+    { alias: 'buttonClickMusic', src: buttonClickMusic }
   ]);
 
   const playerIdleTexture = PIXI.Assets.get('playerIdleTexture');

@@ -35,6 +35,11 @@ export class SoundManager {
     if (!this._enabled) return;
 
     sound.play('jumpMusic', {
+
+  static playClickButton(): void {
+    if (!this._enabled) return;
+
+    sound.play('buttonClickMusic', {
       volume: 0.8
     });
   }
