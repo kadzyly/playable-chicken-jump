@@ -110,7 +110,9 @@ export class MainScene {
     // - at the first: start island and one ice
     // - next: 2 ices on the screen
     this.startIsland.x = 0;
-    this.startIsland.y = centerOfWaterY;
+
+    const iceY = centerOfWaterY - 50;
+    this.startIsland.y = iceY + 100 * this.startIsland.scale.y;
 
     const firstIceX = this.startIsland.x + this.startIsland.width + islandIceSpacing + targetIceWidth / 2;
 
@@ -120,7 +122,7 @@ export class MainScene {
       } else {
         ice.x = firstIceX + index * finalIceStepX;
       }
-      ice.y = centerOfWaterY - 50;
+      ice.y = iceY;
     });
 
     const lastIce = this.ices[this.ices.length - 1];
@@ -143,6 +145,7 @@ export class MainScene {
 
     // start character position is start island
     if (this.currentPlatformIndex === 0) {
+      // character position on island: 58% width, 67% height
       this.character.x = this.startIsland.x + this.startIsland.width * 0.58;
 
       const surfaceY = this.startIsland.y - this.startIsland.height * (1 - 0.67);
