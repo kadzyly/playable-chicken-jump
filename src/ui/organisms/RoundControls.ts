@@ -1,4 +1,4 @@
-import { Container, Text, TextStyle } from 'pixi.js';
+import { Container, Text } from 'pixi.js';
 import { Button } from '../atoms/Button';
 
 export class RoundControls extends Container {
@@ -9,10 +9,10 @@ export class RoundControls extends Container {
   constructor(screenWidth: number, screenHeight: number) {
     super();
 
-    const buttonWidth = 160;
-    const buttonHeight = 52;
+    const buttonWidth = 220;
+    const buttonHeight = 70;
     const horizontalGap = 14;
-    const verticalGap = 10;
+    const verticalGap = 18;
 
     this.createHintText(screenWidth);
     this.createButtons(buttonWidth, buttonHeight);
@@ -23,7 +23,7 @@ export class RoundControls extends Container {
 
   public updatePosition(screenWidth: number, screenHeight: number) {
     this.x = screenWidth / 2;
-    this.y = screenHeight - 10 - this.hintText.height - 52 / 2;
+    this.y = screenHeight - this.hintText.height - 52;
   }
 
   public getCashButton(): Button {
@@ -47,27 +47,32 @@ export class RoundControls extends Container {
   }
 
   private createHintText(screenWidth: number) {
-    const hintStyle = new TextStyle({
-      fontFamily: 'Marvin400, Arial, sans-serif',
-      fontSize: 20,
-      fontWeight: '400',
-      wordWrap: true,
-      wordWrapWidth: screenWidth * 0.95,
-      fill: '#ffffff',
-      stroke: { color: 0x000000, width: 2 },
-      align: 'center'
-    });
-
     this.hintText = new Text({
       text: 'Click to make the chicken\njump and collect money',
-      style: hintStyle
+      style: {
+        fontFamily: 'Marvin400, Arial, sans-serif',
+        fontSize: 30,
+        fontWeight: '400',
+        wordWrap: true,
+        wordWrapWidth: screenWidth * 0.95,
+        fill: '#ffffff',
+        stroke: { color: 0x000000, width: 2 },
+        align: 'center',
+        dropShadow: {
+          alpha: 0.8,
+          angle: Math.PI / 4,
+          blur: 0,
+          color: 0x4a4a4a,
+          distance: 2
+        }
+      }
     });
   }
 
   private createButtons(buttonWidth: number, buttonHeight: number) {
     this.cashButton = new Button({
       text: 'CASH OUT',
-      fontSize: 24,
+      fontSize: 38,
       width: buttonWidth,
       height: buttonHeight,
       backgroundColor: 0xffc501,
@@ -76,7 +81,7 @@ export class RoundControls extends Container {
 
     this.goButton = new Button({
       text: 'GO',
-      fontSize: 34,
+      fontSize: 44,
       width: buttonWidth,
       height: buttonHeight,
       backgroundColor: 0x13bc0b
