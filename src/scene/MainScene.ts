@@ -45,11 +45,11 @@ export class MainScene {
     this.createEntities();
     this.createBottomUI();
     this.createStatsUI();
+    this.createLiveWins();
     this.setupInteraction();
     this.setupMusic();
     this.createPopups();
     this.createCoinAnimation();
-    this.createLiveWins();
 
     // camera follow the character
     this.app.ticker.add(this.updateCamera, this);
@@ -179,7 +179,7 @@ export class MainScene {
   private updateLiveWinsPosition() {
     if (!this.liveWins || !this.skyBg) return;
 
-    const { width, height } = this.app.screen;
+    const { height } = this.app.screen;
     const skyHeight = height * 0.62;
     const skyCenterY = skyHeight / 2;
 
