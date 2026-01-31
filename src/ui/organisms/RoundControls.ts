@@ -66,7 +66,7 @@ export class RoundControls extends Container {
 
   private createHintText(screenWidth: number) {
     this.hintText = new Text({
-      text: 'Click to make the chicken\njump and collect money',
+      text: 'Click to make the chicken jump and collect money',
       style: {
         fontFamily: 'Marvin400, Arial, sans-serif',
         fontSize: 30,
