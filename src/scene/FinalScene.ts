@@ -12,6 +12,9 @@ export class FinalScene extends PIXI.Container {
   private topContainer: PIXI.Container;
   private topText: PIXI.Text;
   private topBg: PIXI.Graphics;
+  private characterContainer: PIXI.Container;
+  private baseScale = 1;
+  private characterBaseScale = 1;
 
   constructor(width: number, height: number) {
     super();
@@ -20,9 +23,11 @@ export class FinalScene extends PIXI.Container {
     this.background.anchor.set(0.5);
     this.addChild(this.background);
 
+    this.characterContainer = new PIXI.Container();
+
     this.character = new Character();
     this.character.playWin();
-    this.addChild(this.character);
+    this.characterContainer.addChild(this.character);
 
     this.installButton = new ButtonUI({
       text: 'Install',
@@ -42,8 +47,9 @@ export class FinalScene extends PIXI.Container {
     decorSnow.x = 150;
 
     this.installButton.addChild(decorSnow);
+    this.characterContainer.addChild(this.installButton);
 
-    this.addChild(this.installButton);
+    this.addChild(this.characterContainer);
 
     this.topContainer = new PIXI.Container();
     this.topBg = new Graphics();
@@ -75,11 +81,25 @@ export class FinalScene extends PIXI.Container {
 
     this.character.anchor.set(0.5, 0);
     this.character.scale.set(1.4);
-    this.character.x = width / 2;
-    this.character.y = height / 2 - 80;
+    this.character.x = 0;
+    this.character.y = 0;
 
-    this.installButton.x = width / 2;
-    this.installButton.y = this.character.y + this.character.height + 30;
+    this.installButton.x = 0;
+    this.installButton.y = this.character.height + 30;
+
+    const characterContentWidth = Math.max(this.character.width, this.installButton.width);
+    const characterContentHeight = this.character.height + this.installButton.height + 30;
+    const maxGameW = width * 0.8;
+    const maxGameH = height * 0.6;
+
+    this.characterBaseScale =
+      characterContentWidth > maxGameW || characterContentHeight > maxGameH
+        ? Math.min(maxGameW / characterContentWidth, maxGameH / characterContentHeight)
+        : 1;
+
+    this.characterContainer.scale.set(this.characterBaseScale);
+    this.characterContainer.x = width / 2;
+    this.characterContainer.y = height / 2 - 50;
 
     const topBgWidth = 450;
     const topBgHeight = 220;
@@ -92,6 +112,12 @@ export class FinalScene extends PIXI.Container {
     this.topBanner.x = -topBgWidth / 2 - 24;
     this.topBanner.y = -topBgHeight / 2 - 24;
     this.topBanner.scale.set(1.1);
+
+    const contentWidth = topBgWidth + 48;
+    const maxW = width * 0.9; // 90% of screen width
+
+    this.baseScale = contentWidth > maxW ? maxW / contentWidth : 1;
+    this.topContainer.scale.set(this.baseScale);
 
     this.topContainer.x = width / 2;
     this.topContainer.y = 170;
