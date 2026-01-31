@@ -88,6 +88,35 @@ export class WinInfoUI extends Container {
     this.summaPanel.y = 0;
     this.freeSpinPanel.y = elementHeight + horizontalGap;
 
+    const cookieTexture = Assets.get('cookieTexture');
+    const giftTexture = Assets.get('giftTexture');
+    const cookieImage = new Sprite(cookieTexture);
+    const cookieImage2 = new Sprite(cookieTexture);
+    const giftImage = new Sprite(giftTexture);
+    const giftImage2 = new Sprite(giftTexture);
+
+    giftImage.anchor.set(0.5, 0.5);
+    giftImage2.anchor.set(0.5, 0.5);
+    giftImage.scale.set(0.65, 0.65);
+    giftImage2.scale.set(0.65, -0.65);
+
+    giftImage.y = 32;
+    giftImage2.y = 32;
+
+    giftImage.x = 40;
+    giftImage2.x = 280;
+
+    cookieImage.anchor.set(0.5, 0.5);
+    cookieImage2.anchor.set(0.5, 0.5);
+    cookieImage.scale.set(-0.95, 0.95);
+    cookieImage2.scale.set(0.95, 0.95);
+
+    cookieImage.y = 32;
+    cookieImage2.y = 32;
+
+    cookieImage.x = 50;
+    cookieImage2.x = 280;
+
     const decorSnowBigAsset = Assets.get('decorSnow');
     const decorSnowBig = new Sprite(decorSnowBigAsset);
     decorSnowBig.anchor.set(1, 0);
@@ -102,8 +131,8 @@ export class WinInfoUI extends Container {
     decorSnow.y = -15;
     decorSnow.x = 55;
 
-    this.summaPanel.addChild(decorSnowBig);
-    this.freeSpinPanel.addChild(decorSnow);
+    this.summaPanel.addChild(giftImage, giftImage2, decorSnowBig);
+    this.freeSpinPanel.addChild(cookieImage, cookieImage2, decorSnow);
     container.addChild(this.summaPanel, this.freeSpinPanel);
 
     this.addChild(container);
