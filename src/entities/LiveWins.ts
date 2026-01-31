@@ -25,6 +25,7 @@ export class LiveWins extends Container {
   private winMessageTimer: number = 0;
   private winMessageDuration: number = 180;
   private isTransitioning: boolean = false;
+  private baseScale = 1;
 
   private liveWinsText: Text;
   private onlineText: Text;
@@ -91,6 +92,14 @@ export class LiveWins extends Container {
     this.flagSprite.scale.set(0.2);
 
     this.addChild(decorSnow, this.liveWinsText, this.greenCircle, this.onlineText, this.flagSprite, this.winMessageText);
+  }
+
+  public resize(width: number, height: number) {
+    const contentWidth = 300;
+    const maxW = width * 0.8; // 80% of screen width
+    this.baseScale = contentWidth > maxW ? maxW / contentWidth : 1;
+
+    this.scale.set(this.baseScale);
   }
 
   update(): void {

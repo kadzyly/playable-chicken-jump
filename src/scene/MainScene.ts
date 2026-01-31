@@ -69,6 +69,7 @@ export class MainScene {
     this.roundControls.resize(width, height);
     this.statsDisplay.resize(width, height);
     this.popupManager.resize(width, height);
+    this.liveWins.resize(width, height);
     this.updateLiveWinsPosition();
 
     // heights: sky 60%, water 40%
