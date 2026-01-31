@@ -12,6 +12,7 @@ import { StartBonusPopup } from '../ui/organisms/StartBonusPopup';
 import { FinalResultPopup } from '../ui/organisms/FinalResultPopup';
 import { FinalScene } from '../ui/organisms/FinalScene';
 import { CoinAnimation } from '../entities/CoinAnimation';
+import { LiveWins } from '../entities/LiveWins';
 
 export class MainScene {
   private world: PIXI.Container;
@@ -26,6 +27,7 @@ export class MainScene {
   private popupManager: PopupManager;
   private finalScene: FinalScene | null = null;
   private coinAnimation: CoinAnimation;
+  private liveWins: LiveWins;
 
   // 0 - start island, then platforms (ice)
   private currentPlatformIndex = 0;
@@ -47,9 +49,11 @@ export class MainScene {
     this.setupMusic();
     this.createPopups();
     this.createCoinAnimation();
+    this.createLiveWins();
 
     // camera follow the character
     this.app.ticker.add(this.updateCamera, this);
+    this.app.ticker.add(this.updateLiveWins, this);
 
     sdk.start();
   }
@@ -65,6 +69,7 @@ export class MainScene {
     this.roundControls.updatePosition(width, height);
     this.statsDisplay.updatePosition(width, height);
     this.popupManager.resize(width, height);
+    this.updateLiveWinsPosition();
 
     // heights: sky 60%, water 40%
     const skyHeight = height * 0.62;
@@ -163,6 +168,23 @@ export class MainScene {
     this.coinAnimation = new CoinAnimation();
     this.coinAnimation.visible = false;
     this.world.addChild(this.coinAnimation);
+  }
+
+  private createLiveWins() {
+    this.liveWins = new LiveWins();
+    this.app.stage.addChild(this.liveWins);
+    this.updateLiveWinsPosition();
+  }
+
+  private updateLiveWinsPosition() {
+    if (!this.liveWins || !this.skyBg) return;
+
+    const { width, height } = this.app.screen;
+    const skyHeight = height * 0.62;
+    const skyCenterY = skyHeight / 2;
+
+    this.liveWins.x = 0;
+    this.liveWins.y = skyCenterY;
   }
 
   private createPopups() {
@@ -368,5 +390,11 @@ export class MainScene {
     // smooth camera movement
     const lerp = 0.1;
     this.world.x += (newWorldX - this.world.x) * lerp;
+  }
+
+  private updateLiveWins(): void {
+    if (this.liveWins) {
+      this.liveWins.update();
+    }
   }
 }
