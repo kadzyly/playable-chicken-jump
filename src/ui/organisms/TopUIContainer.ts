@@ -105,11 +105,8 @@ export class TopUIContainer extends Container {
   private layoutMobile(width: number, height: number): void {
     this.winInfoUI.setAutoPositioning(true);
 
-    const skyHeight = height * 0.62;
-    const skyCenterY = skyHeight / 2;
-
     this.liveWins.x = 0;
-    this.liveWins.y = skyCenterY;
+    this.liveWins.y = this.liveWins.height * 2.5;
 
     this.winInfoUI.x = width / 2;
     this.winInfoUI.y = 0;
