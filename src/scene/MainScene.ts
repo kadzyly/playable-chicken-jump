@@ -71,54 +71,33 @@ export class MainScene {
     const skyHeight = height * 0.62;
     const waterHeight = height * 0.38;
 
-    const entityScale = Math.min(width / 400, height / 600) * 0.5;
-
     const waterTopY = height - waterHeight;
     const centerOfWaterY = waterTopY + waterHeight / 2;
 
-    this.character.scale.set(entityScale);
-    this.startIsland.scale.set(entityScale);
-    this.ices.forEach((ice) => ice.scale.set(entityScale));
+    this.character.scale.set(width >= 768 ? 0.9 : 0.8);
+    this.startIsland.scale.set(width >= 768 ? 1.3 : 1.2);
 
-    let targetIceWidth = 200;
-    const minSpacing = 50;
+    const iceScale = width >= 768 ? 0.8 : 0.7;
+    const targetIceWidth = 298 * iceScale;
+    const spaceBetweenIces = 34;
 
-    // if 2 ices + spacing fit
-    if (2 * targetIceWidth + minSpacing > width) {
-      targetIceWidth = width * 0.4;
-    }
+    const finalIceStepX = targetIceWidth + spaceBetweenIces;
 
-    const finalIceStepX = targetIceWidth + minSpacing;
-
-    this.ices.forEach((ice) => {
-      ice.scale.set(1);
-      const originalWidth = ice.width;
-      const scale = targetIceWidth / originalWidth;
-      ice.scale.set(scale);
+    this.ices.forEach((ice, i) => {
+      ice.scale.set(iceScale);
     });
-
-    let targetIslandWidth = 420;
-    const islandIceSpacing = minSpacing * 0.8;
-
-    if (targetIslandWidth + islandIceSpacing + targetIceWidth > width) {
-      // 60% of width
-      targetIslandWidth = width * 0.6;
-    }
-
-    this.startIsland.scale.set(1);
-    const originalIslandWidth = this.startIsland.width;
-    const islandScale = targetIslandWidth / originalIslandWidth;
-    this.startIsland.scale.set(islandScale);
 
     // horizontal placement of platforms
     // - at the first: start island and one ice
     // - next: 2 ices on the screen
-    this.startIsland.x = 0;
+    this.startIsland.scale.set(width >= 768 ? 1.3 : 1.2);
+    this.startIsland.x = width >= 768 ? -70 : -180;
 
-    const iceY = centerOfWaterY - 50;
+    const iceY = centerOfWaterY - 40;
     this.startIsland.y = iceY + 100 * this.startIsland.scale.y;
 
-    const firstIceX = this.startIsland.x + this.startIsland.width + islandIceSpacing + targetIceWidth / 2;
+    const firstIceXOffset = width >= 768 ? 390 : 240;
+    const firstIceX = firstIceXOffset + 50 + targetIceWidth / 2;
 
     this.ices.forEach((ice, index) => {
       if (index === 0) {
@@ -152,7 +131,7 @@ export class MainScene {
       // character position on island: 58% width, 67% height
       this.character.x = this.startIsland.x + this.startIsland.width * 0.58;
 
-      const surfaceY = this.startIsland.y - this.startIsland.height * (1 - 0.67);
+      const surfaceY = this.startIsland.y - this.startIsland.height * (1 - 0.7);
       this.character.placeOn(surfaceY);
     }
 
@@ -275,12 +254,6 @@ export class MainScene {
   private onGoClick(): void {
     if (this.currentPlatformIndex <= 1) {
       this.roundControls.hideHintText();
-    }
-
-    // if the last ice => open Google / Apple store
-    if (this.currentPlatformIndex >= this.totalPlatforms - 1) {
-      sdk.install();
-      return;
     }
 
     if (this.isJumping) return;
