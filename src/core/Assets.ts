@@ -31,6 +31,8 @@ import popupBgAnimation from 'assets/popup_bg_animation.png';
 import { POPUP_BG_FRAMES } from '../data/popup-bg-frames';
 import coinsAnimation from 'assets/coins_texture.png';
 import { COINS_FRAMES } from '../data/coins-frames';
+import flagsImage from 'assets/flags_texture.png';
+import { FLAGS_FRAMES } from '../data/flags-frames';
 
 export async function loadAssets(): Promise<void> {
   await PIXI.Assets.load([
@@ -53,7 +55,8 @@ export async function loadAssets(): Promise<void> {
     { alias: 'addPointsMusicMusic', src: addPointsMusicMusic },
     { alias: 'decorHat', src: decorHatAsset },
     { alias: 'decorSnow', src: decorSnowAsset },
-    { alias: 'decorLiveWinsSnow', src: decorLiveWinsSnowAsset }
+    { alias: 'decorLiveWinsSnow', src: decorLiveWinsSnowAsset },
+    { alias: 'flagsTexture', src: flagsImage }
   ]);
 
   const playerIdleTexture = PIXI.Assets.get('playerIdleTexture');
@@ -85,4 +88,9 @@ export async function loadAssets(): Promise<void> {
   const coinsSheet = new PIXI.Spritesheet(coinsTexture, COINS_FRAMES);
   await coinsSheet.parse();
   PIXI.Cache.set('coinsSheet', coinsSheet);
+
+  const flagsTexture = PIXI.Assets.get('flagsTexture');
+  const flagsSheet = new PIXI.Spritesheet(flagsTexture, FLAGS_FRAMES);
+  await flagsSheet.parse();
+  PIXI.Cache.set('flagsSheet', flagsSheet);
 }

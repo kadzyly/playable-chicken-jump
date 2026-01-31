@@ -1,4 +1,7 @@
-import { Assets, Container, Graphics, Sprite, Text } from 'pixi.js';
+import * as PIXI from 'pixi.js';
+import { Assets, Container, Graphics, Sprite, Spritesheet, Text } from 'pixi.js';
+
+const flagsArray = ['01.png', '08.png', '09.png', '24.png', '32.png', '40.png', '00.png', '16.png', '48.png', '56.png'];
 
 export class LiveWins extends Container {
   private onlineCountValues: number[] = [13826, 13880, 13894, 13849, 13893, 13817, 13821, 13812, 13899, 13815];
@@ -28,6 +31,8 @@ export class LiveWins extends Container {
   private greenCircle: Graphics;
   private winMessageText: Text;
   private background: Graphics;
+  private flagSheet: Spritesheet;
+  private flagSprite: Sprite;
 
   constructor() {
     super();
@@ -68,7 +73,7 @@ export class LiveWins extends Container {
       fontSize: 18,
       fill: 0xffff00
     });
-    this.winMessageText.x = 22;
+    this.winMessageText.x = 58;
     this.winMessageText.y = secondLineTextY;
 
     const decorSnowAsset = Assets.get('decorLiveWinsSnow');
@@ -78,7 +83,14 @@ export class LiveWins extends Container {
     decorSnow.y = -10;
     decorSnow.x = 310;
 
-    this.addChild(decorSnow, this.liveWinsText, this.greenCircle, this.onlineText, this.winMessageText);
+    this.flagSheet = PIXI.Cache.get('flagsSheet') as PIXI.Spritesheet;
+    const flagTexture = this.flagSheet.textures[flagsArray[this.currentWinIndex]];
+    this.flagSprite = new Sprite(flagTexture);
+    this.flagSprite.x = 22;
+    this.flagSprite.y = secondLineTextY;
+    this.flagSprite.scale.set(0.2);
+
+    this.addChild(decorSnow, this.liveWinsText, this.greenCircle, this.onlineText, this.flagSprite, this.winMessageText);
   }
 
   update(): void {
@@ -102,6 +114,8 @@ export class LiveWins extends Container {
 
         this.onlineCount = this.onlineCountValues[this.currentWinIndex];
         this.onlineText.text = `Online: ${this.onlineCount}`;
+
+        this.flagSprite.texture = this.flagSheet.textures[flagsArray[this.currentWinIndex]];
 
         this.winMessageAlpha = 0;
         this.isTransitioning = false;
