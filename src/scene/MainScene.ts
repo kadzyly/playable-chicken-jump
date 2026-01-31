@@ -332,7 +332,7 @@ export class MainScene {
     const worldVisibleWidth = Math.max(this.worldWidth, screenWidth);
 
     // keep character at fixed horizontal position (30% from left edge)
-    const fixedCharacterX = screenWidth * 0.3;
+    const fixedCharacterX = screenWidth * 0.2;
 
     // calculate world position to keep character at fixed position
     const desiredWorldX = fixedCharacterX - this.character.x;
