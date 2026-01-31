@@ -10,6 +10,8 @@ export class WinInfoUI extends Container {
   private summaPanel: PanelUI;
   private freeSpinPanel: PanelUI;
   private baseScale = 1;
+  private isHorizontalLayout = false;
+  private useAutoPositioning = true;
 
   constructor() {
     super();
@@ -23,6 +25,8 @@ export class WinInfoUI extends Container {
   }
 
   public updatePosition(screenWidth: number, screenHeight: number) {
+    if (!this.useAutoPositioning) return;
+
     // center horizontally
     this.x = screenWidth / 2;
     // top of the screen
@@ -37,6 +41,31 @@ export class WinInfoUI extends Container {
     this.scale.set(this.baseScale);
 
     this.updatePosition(width, height);
+  }
+
+  public setLayout(horizontal: boolean): void {
+    this.isHorizontalLayout = horizontal;
+    this.updateLayout();
+  }
+
+  public setAutoPositioning(enabled: boolean): void {
+    this.useAutoPositioning = enabled;
+  }
+
+  public updateLayout(): void {
+    if (this.isHorizontalLayout) {
+      // horizontal layout
+      this.summaPanel.x = 0;
+      this.summaPanel.y = 0;
+      this.freeSpinPanel.x = elementWidth + horizontalGap;
+      this.freeSpinPanel.y = 0;
+    } else {
+      // vertical layout
+      this.summaPanel.x = 0;
+      this.summaPanel.y = 0;
+      this.freeSpinPanel.x = 0;
+      this.freeSpinPanel.y = elementHeight + horizontalGap;
+    }
   }
 
   public getCashButton(): PanelUI {

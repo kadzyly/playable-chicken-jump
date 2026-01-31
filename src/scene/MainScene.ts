@@ -5,14 +5,13 @@ import { StartIsland } from '../entities/StartIsland';
 import { Ice } from '../entities/Ice';
 import { RoundControls } from '../ui/organisms/RoundControls';
 import { SoundManager } from '../core/SoundManager';
-import { WinInfoUI } from '../ui/organisms/WinInfoUI';
 import { ScoreManager } from '../core/ScoreManager';
 import { PopupManager } from '../core/PopupManager';
 import { StartBonusPopup } from '../ui/organisms/StartBonusPopup';
 import { FinalResultPopup } from '../ui/organisms/FinalResultPopup';
 import { FinalScene } from '../ui/organisms/FinalScene';
 import { CoinAnimation } from '../entities/CoinAnimation';
-import { LiveWins } from '../entities/LiveWins';
+import { TopUIContainer } from '../ui/organisms/TopUIContainer';
 
 export class MainScene {
   private world: PIXI.Container;
@@ -22,12 +21,11 @@ export class MainScene {
   private startIsland: StartIsland;
   private ices: Ice[] = [];
   private roundControls!: RoundControls;
-  private statsDisplay!: WinInfoUI;
+  private topUIContainer!: TopUIContainer;
   private scoreManager: ScoreManager;
   private popupManager: PopupManager;
   private finalScene: FinalScene | null = null;
   private coinAnimation: CoinAnimation;
-  private liveWins: LiveWins;
 
   // 0 - start island, then platforms (ice)
   private currentPlatformIndex = 0;
@@ -44,8 +42,7 @@ export class MainScene {
     this.createBackground();
     this.createEntities();
     this.createBottomUI();
-    this.createStatsUI();
-    this.createLiveWins();
+    this.createTopUI();
     this.setupInteraction();
     this.setupMusic();
     this.createPopups();
@@ -53,7 +50,7 @@ export class MainScene {
 
     // camera follow the character
     this.app.ticker.add(this.updateCamera, this);
-    this.app.ticker.add(this.updateLiveWins, this);
+    this.app.ticker.add(this.updateTopUI, this);
 
     sdk.start();
   }
@@ -67,10 +64,8 @@ export class MainScene {
     if (!this.waterBg || !this.skyBg) return;
 
     this.roundControls.resize(width, height);
-    this.statsDisplay.resize(width, height);
+    this.topUIContainer.resize(width, height);
     this.popupManager.resize(width, height);
-    this.liveWins.resize(width, height);
-    this.updateLiveWinsPosition();
 
     // heights: sky 60%, water 40%
     const skyHeight = height * 0.62;
@@ -171,21 +166,9 @@ export class MainScene {
     this.world.addChild(this.coinAnimation);
   }
 
-  private createLiveWins() {
-    this.liveWins = new LiveWins();
-    this.app.stage.addChild(this.liveWins);
-    this.updateLiveWinsPosition();
-  }
-
-  private updateLiveWinsPosition() {
-    if (!this.liveWins || !this.skyBg) return;
-
-    const { height } = this.app.screen;
-    const skyHeight = height * 0.62;
-    const skyCenterY = skyHeight / 2;
-
-    this.liveWins.x = 0;
-    this.liveWins.y = skyCenterY;
+  private createTopUI() {
+    this.topUIContainer = new TopUIContainer();
+    this.app.stage.addChild(this.topUIContainer);
   }
 
   private createPopups() {
@@ -254,11 +237,6 @@ export class MainScene {
     const { width, height } = this.app.screen;
     this.roundControls = new RoundControls(width, height);
     this.app.stage.addChild(this.roundControls);
-  }
-
-  private createStatsUI() {
-    this.statsDisplay = new WinInfoUI();
-    this.app.stage.addChild(this.statsDisplay);
   }
 
   private setupInteraction(): void {
@@ -335,8 +313,8 @@ export class MainScene {
         this.scoreManager.addScoreForIceJump();
         const score = this.scoreManager.getCurrentScore();
         const freeSpins = this.scoreManager.getCurrentFreeSpins();
-        this.statsDisplay.updateScore(score);
-        this.statsDisplay.updateFreeSpins(freeSpins);
+        this.topUIContainer.getWinInfoUI().updateScore(score);
+        this.topUIContainer.getWinInfoUI().updateFreeSpins(freeSpins);
 
         currentIce.hideBonusText();
 
@@ -393,9 +371,9 @@ export class MainScene {
     this.world.x += (newWorldX - this.world.x) * lerp;
   }
 
-  private updateLiveWins(): void {
-    if (this.liveWins) {
-      this.liveWins.update();
+  private updateTopUI(): void {
+    if (this.topUIContainer) {
+      this.topUIContainer.update();
     }
   }
 }
