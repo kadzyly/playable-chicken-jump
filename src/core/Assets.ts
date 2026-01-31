@@ -12,6 +12,7 @@ import decorSnowAsset from 'assets/decor_snow.png';
 import decorLiveWinsSnowAsset from 'assets/live_wins_snow.png';
 import cookieAsset from 'assets/cookie.png';
 import giftAsset from 'assets/gift.png';
+import installBannerAsset from 'assets/install_banner.png';
 
 // music
 import bgMusicAsset from 'assets/bg.mp3';
@@ -60,7 +61,8 @@ export async function loadAssets(): Promise<void> {
     { alias: 'decorLiveWinsSnow', src: decorLiveWinsSnowAsset },
     { alias: 'flagsTexture', src: flagsImage },
     { alias: 'cookieTexture', src: cookieAsset },
-    { alias: 'giftTexture', src: giftAsset }
+    { alias: 'giftTexture', src: giftAsset },
+    { alias: 'installBannerImage', src: installBannerAsset }
   ]);
 
   const playerIdleTexture = PIXI.Assets.get('playerIdleTexture');
