@@ -13,6 +13,7 @@ export class FinalScene extends PIXI.Container {
   private topText: PIXI.Text;
   private topBg: PIXI.Graphics;
   private characterContainer: PIXI.Container;
+  private buttonInnerBorder: PIXI.Graphics;
   private baseScale = 1;
   private characterBaseScale = 1;
 
@@ -38,6 +39,12 @@ export class FinalScene extends PIXI.Container {
       fontSize: 56
     });
     this.installButton.on('click', () => sdk.install());
+
+    // inner border for install button
+    this.buttonInnerBorder = new Graphics();
+    this.buttonInnerBorder.roundRect(5, 5, 289, 69, 7);
+    this.buttonInnerBorder.stroke({ color: 0xfaed6d, width: 3 });
+    this.installButton.addChild(this.buttonInnerBorder);
 
     const decorSnowAsset = Assets.get('decorSnow');
     const decorSnow = new Sprite(decorSnowAsset);
