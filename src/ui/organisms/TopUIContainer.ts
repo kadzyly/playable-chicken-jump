@@ -1,6 +1,6 @@
 import { Container } from 'pixi.js';
-import { LiveWins } from '../../entities/LiveWins';
-import { WinInfoUI } from './WinInfoUI';
+import { LiveWins } from '../molecules/LiveWins';
+import { WinInfoUI } from '../molecules/WinInfoUI';
 
 export class TopUIContainer extends Container {
   private liveWins: LiveWins;
