@@ -1,12 +1,12 @@
 import * as PIXI from 'pixi.js';
 import { Graphics, Sprite, Text, TextStyle } from 'pixi.js';
 import { Character } from '../../entities/Character';
-import { Button } from '../atoms/Button';
+import { ButtonUI } from '../atoms/ButtonUI';
 import { sdk } from '@smoud/playable-sdk';
 
 export class FinalScene extends PIXI.Container {
   private character: Character;
-  private installButton: Button;
+  private installButton: ButtonUI;
   private background: PIXI.Sprite;
   private topContainer: PIXI.Container;
   private topText: PIXI.Text;
@@ -23,7 +23,7 @@ export class FinalScene extends PIXI.Container {
     this.character.playWin();
     this.addChild(this.character);
 
-    this.installButton = new Button({
+    this.installButton = new ButtonUI({
       text: 'Install',
       width: 200,
       height: 60,

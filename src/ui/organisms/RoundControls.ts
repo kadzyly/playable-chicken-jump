@@ -1,9 +1,9 @@
 import { Container, Text } from 'pixi.js';
-import { Button } from '../atoms/Button';
+import { ButtonUI } from '../atoms/ButtonUI';
 
 export class RoundControls extends Container {
-  private cashButton: Button;
-  private goButton: Button;
+  private cashButton: ButtonUI;
+  private goButton: ButtonUI;
   private hintText: Text;
   private baseScale = 1;
 
@@ -44,11 +44,11 @@ export class RoundControls extends Container {
     this.updatePosition(width, height);
   }
 
-  public getCashButton(): Button {
+  public getCashButton(): ButtonUI {
     return this.cashButton;
   }
 
-  public getGoButton(): Button {
+  public getGoButton(): ButtonUI {
     return this.goButton;
   }
 
@@ -88,7 +88,7 @@ export class RoundControls extends Container {
   }
 
   private createButtons(buttonWidth: number, buttonHeight: number) {
-    this.cashButton = new Button({
+    this.cashButton = new ButtonUI({
       text: 'CASH OUT',
       fontSize: 38,
       width: buttonWidth,
@@ -97,7 +97,7 @@ export class RoundControls extends Container {
       isDisabled: true
     });
 
-    this.goButton = new Button({
+    this.goButton = new ButtonUI({
       text: 'GO',
       fontSize: 44,
       width: buttonWidth,

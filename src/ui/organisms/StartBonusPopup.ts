@@ -1,6 +1,6 @@
 import { Text } from 'pixi.js';
 import { PopupUI } from '../molecules/PopupUI';
-import { Button } from '../atoms/Button';
+import { ButtonUI } from '../atoms/ButtonUI';
 
 export class StartBonusPopup extends PopupUI {
   constructor() {
@@ -46,7 +46,7 @@ export class StartBonusPopup extends PopupUI {
     freeSpinsText.anchor.set(0.5);
     freeSpinsText.y = 20;
 
-    const button = new Button({
+    const button = new ButtonUI({
       text: 'Claim bonus',
       width: 370,
       height: 84,

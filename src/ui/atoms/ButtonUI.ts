@@ -41,7 +41,7 @@ const DEFAULTS: Required<Omit<ButtonOptions, 'backgroundTexture'>> = {
   glowSize: 0
 };
 
-export class Button extends Container {
+export class ButtonUI extends Container {
   private bg!: Sprite | Graphics;
   private glow!: Graphics;
   private textField: Text;
