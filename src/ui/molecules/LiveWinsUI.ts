@@ -3,7 +3,7 @@ import { Assets, Container, Graphics, Sprite, Spritesheet, Text } from 'pixi.js'
 
 const flagsArray = ['01.png', '08.png', '09.png', '24.png', '32.png', '40.png', '00.png', '16.png', '48.png', '56.png'];
 
-export class LiveWins extends Container {
+export class LiveWinsUI extends Container {
   private onlineCountValues: number[] = [13826, 13880, 13894, 13849, 13893, 13817, 13821, 13812, 13899, 13815];
   private onlineCount: number = 13826;
   private greenCircleAlpha: number = 1;

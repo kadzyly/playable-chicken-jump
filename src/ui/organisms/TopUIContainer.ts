@@ -1,15 +1,15 @@
 import { Container } from 'pixi.js';
-import { LiveWins } from '../molecules/LiveWins';
+import { LiveWinsUI } from '../molecules/LiveWinsUI';
 import { WinInfoUI } from '../molecules/WinInfoUI';
 
 export class TopUIContainer extends Container {
-  private liveWins: LiveWins;
+  private liveWins: LiveWinsUI;
   private winInfoUI: WinInfoUI;
 
   constructor() {
     super();
 
-    this.liveWins = new LiveWins();
+    this.liveWins = new LiveWinsUI();
     this.winInfoUI = new WinInfoUI();
 
     this.addChild(this.liveWins, this.winInfoUI);
@@ -38,7 +38,7 @@ export class TopUIContainer extends Container {
     }
   }
 
-  public getLiveWins(): LiveWins {
+  public getLiveWins(): LiveWinsUI {
     return this.liveWins;
   }
 
