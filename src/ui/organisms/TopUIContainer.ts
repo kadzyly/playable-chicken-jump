@@ -109,12 +109,30 @@ export class TopUIContainer extends Container {
     this.liveWins.y = 220;
 
     this.winInfoUI.x = width / 2;
-    this.winInfoUI.y = 0;
+    this.winInfoUI.y = 80;
 
     this.liveWins.resize(width, height);
     this.winInfoUI.resize(width, height);
 
     this.winInfoUI.updatePosition(width, height);
+
+    // if container height more 32% of screen height
+    // make children smaller
+    const containerHeight = this.liveWins.y + this.liveWins.height * this.liveWins.scale.y;
+    const maxAllowedHeight = height * 0.32;
+
+    if (containerHeight > maxAllowedHeight) {
+      const scaleRatio = maxAllowedHeight / containerHeight;
+      this.liveWins.scale.set(scaleRatio);
+      this.winInfoUI.scale.set(scaleRatio);
+      this.liveWins.y = 220 * scaleRatio;
+      this.winInfoUI.y = 80 * scaleRatio;
+    } else {
+      this.liveWins.scale.set(1);
+      this.winInfoUI.scale.set(1);
+      this.liveWins.y = 220;
+      this.winInfoUI.y = 80;
+    }
   }
 
   private updateWinInfoLayout(horizontal: boolean): void {

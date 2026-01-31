@@ -30,7 +30,7 @@ export class WinInfoUI extends Container {
     // center horizontally
     this.x = screenWidth / 2;
     // top of the screen
-    this.y = 80;
+    this.y = 0;
   }
 
   public resize(width: number, height: number) {
