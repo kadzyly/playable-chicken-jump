@@ -1,6 +1,7 @@
 import { Assets, Container, Graphics, Sprite, Text } from 'pixi.js';
 
 export class LiveWins extends Container {
+  private onlineCountValues: number[] = [13826, 13880, 13894, 13849, 13893, 13817, 13821, 13812, 13899, 13815];
   private onlineCount: number = 13826;
   private greenCircleAlpha: number = 1;
   private greenCircleDirection: number = -0.01;
@@ -98,6 +99,10 @@ export class LiveWins extends Container {
       if (this.winMessageAlpha <= 0) {
         this.currentWinIndex = (this.currentWinIndex + 1) % this.winMessages.length;
         this.winMessageText.text = this.winMessages[this.currentWinIndex];
+
+        this.onlineCount = this.onlineCountValues[this.currentWinIndex];
+        this.onlineText.text = `Online: ${this.onlineCount}`;
+
         this.winMessageAlpha = 0;
         this.isTransitioning = false;
         this.winMessageTimer = 0;
