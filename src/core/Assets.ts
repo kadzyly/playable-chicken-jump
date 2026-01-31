@@ -28,6 +28,8 @@ import playerWinImage from 'assets/player_win_texture.png';
 import { ICE_FRAMES } from '../data/ice-frames';
 import popupBgAnimation from 'assets/popup_bg_animation.png';
 import { POPUP_BG_FRAMES } from '../data/popup-bg-frames';
+import coinsAnimation from 'assets/coins_texture.png';
+import { COINS_FRAMES } from '../data/coins-frames';
 
 export async function loadAssets(): Promise<void> {
   await PIXI.Assets.load([
@@ -41,6 +43,7 @@ export async function loadAssets(): Promise<void> {
     { alias: 'playerJumpTexture', src: playerJumpImage },
     { alias: 'playerWinTexture', src: playerWinImage },
     { alias: 'popupBgTexture', src: popupBgAnimation },
+    { alias: 'coinsTexture', src: coinsAnimation },
     { alias: 'bgMusic', src: bgMusicAsset },
     { alias: 'jumpMusic', src: jumpMusicAsset },
     { alias: 'buttonClickMusic', src: buttonClickMusic },
@@ -75,4 +78,9 @@ export async function loadAssets(): Promise<void> {
   const popupBgSheet = new PIXI.Spritesheet(popupBgTexture, POPUP_BG_FRAMES);
   await popupBgSheet.parse();
   PIXI.Cache.set('popupBgSheet', popupBgSheet);
+
+  const coinsTexture = PIXI.Assets.get('coinsTexture');
+  const coinsSheet = new PIXI.Spritesheet(coinsTexture, COINS_FRAMES);
+  await coinsSheet.parse();
+  PIXI.Cache.set('coinsSheet', coinsSheet);
 }

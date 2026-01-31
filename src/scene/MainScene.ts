@@ -11,6 +11,7 @@ import { PopupManager } from '../core/PopupManager';
 import { StartBonusPopup } from '../ui/organisms/StartBonusPopup';
 import { FinalResultPopup } from '../ui/organisms/FinalResultPopup';
 import { FinalScene } from '../ui/organisms/FinalScene';
+import { CoinAnimation } from '../entities/CoinAnimation';
 
 export class MainScene {
   private world: PIXI.Container;
@@ -24,6 +25,7 @@ export class MainScene {
   private scoreManager: ScoreManager;
   private popupManager: PopupManager;
   private finalScene: FinalScene | null = null;
+  private coinAnimation: CoinAnimation;
 
   // 0 - start island, then platforms (ice)
   private currentPlatformIndex = 0;
@@ -44,6 +46,7 @@ export class MainScene {
     this.setupInteraction();
     this.setupMusic();
     this.createPopups();
+    this.createCoinAnimation();
 
     // camera follow the character
     this.app.ticker.add(this.updateCamera, this);
@@ -154,6 +157,12 @@ export class MainScene {
 
     // start camera position
     this.world.x = 0;
+  }
+
+  private createCoinAnimation() {
+    this.coinAnimation = new CoinAnimation();
+    this.coinAnimation.visible = false;
+    this.world.addChild(this.coinAnimation);
   }
 
   private createPopups() {
@@ -307,6 +316,15 @@ export class MainScene {
         this.statsDisplay.updateFreeSpins(freeSpins);
 
         currentIce.hideBonusText();
+
+        const callbackCoinAnimation = () => {
+          this.coinAnimation.visible = false;
+        };
+
+        this.coinAnimation.position.set(toX, toY);
+        this.coinAnimation.visible = true;
+        void this.coinAnimation.playCoinAnimation(callbackCoinAnimation);
+
         SoundManager.playAddPointsMusic();
       }
 
