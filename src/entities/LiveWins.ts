@@ -1,4 +1,4 @@
-import { Container, Graphics, Text } from 'pixi.js';
+import { Assets, Container, Graphics, Sprite, Text } from 'pixi.js';
 
 export class LiveWins extends Container {
   private onlineCount: number = 13826;
@@ -35,37 +35,49 @@ export class LiveWins extends Container {
     this.drawBackground();
     this.addChild(this.background);
 
+    const firstLineTextY = 20;
+    const secondLineTextY = 55;
+
     this.liveWinsText = new Text('Live wins. ', {
-      fontFamily: 'Marvin400, Arial, sans-serif',
-      fontSize: 16,
+      fontFamily: 'Arial, sans-serif',
+      fontSize: 20,
+      fontWeight: 'bold',
       fill: 0xffffff
     });
-    this.liveWinsText.x = 10;
-    this.liveWinsText.y = 10;
+    this.liveWinsText.x = 22;
+    this.liveWinsText.y = firstLineTextY;
 
     this.greenCircle = new Graphics();
-    this.greenCircle.circle(0, 0, 4);
+    this.greenCircle.circle(0, 0, 6);
     this.greenCircle.fill({ color: 0x00ff00 });
-    this.greenCircle.x = 110;
-    this.greenCircle.y = 15;
+    this.greenCircle.x = 135;
+    this.greenCircle.y = firstLineTextY + firstLineTextY / 2;
 
     this.onlineText = new Text(`Online: ${this.onlineCount}`, {
-      fontFamily: 'Marvin400, Arial, sans-serif',
-      fontSize: 16,
+      fontFamily: 'Arial, sans-serif',
+      fontSize: 20,
+      fontWeight: 'bold',
       fill: 0xffffff
     });
-    this.onlineText.x = 120;
-    this.onlineText.y = 10;
+    this.onlineText.x = 148;
+    this.onlineText.y = firstLineTextY;
 
     this.winMessageText = new Text(this.winMessages[this.currentWinIndex], {
-      fontFamily: 'Marvin400, Arial, sans-serif',
-      fontSize: 14,
+      fontFamily: 'Arial, sans-serif',
+      fontSize: 18,
       fill: 0xffff00
     });
-    this.winMessageText.x = 10;
-    this.winMessageText.y = 35;
+    this.winMessageText.x = 22;
+    this.winMessageText.y = secondLineTextY;
 
-    this.addChild(this.liveWinsText, this.greenCircle, this.onlineText, this.winMessageText);
+    const decorSnowAsset = Assets.get('decorLiveWinsSnow');
+    const decorSnow = new Sprite(decorSnowAsset);
+    decorSnow.scale.set(0.5);
+    decorSnow.anchor.set(1, 0);
+    decorSnow.y = -10;
+    decorSnow.x = 310;
+
+    this.addChild(decorSnow, this.liveWinsText, this.greenCircle, this.onlineText, this.winMessageText);
   }
 
   update(): void {
@@ -99,8 +111,8 @@ export class LiveWins extends Container {
   private drawBackground(): void {
     this.background.clear();
 
-    const width = 260;
-    const height = 60;
+    const width = 300;
+    const height = 92;
     const borderRadius = 10;
     const borderWidth = 2;
 
