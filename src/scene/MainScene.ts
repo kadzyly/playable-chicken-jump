@@ -191,7 +191,7 @@ export class MainScene {
     const startBonusPopup = new StartBonusPopup();
 
     this.app.stage.addChild(startBonusPopup);
-    // void this.popupManager.show(startBonusPopup);
+    void this.popupManager.show(startBonusPopup);
     SoundManager.playStartBonusMusic();
 
     startBonusPopup.on('closeClick', () => {
