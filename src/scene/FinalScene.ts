@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { Graphics, Sprite, Text, TextStyle } from 'pixi.js';
-import { Character } from '../../entities/Character';
-import { ButtonUI } from '../atoms/ButtonUI';
+import { Character } from '../entities/Character';
+import { ButtonUI } from '../ui/atoms/ButtonUI';
 import { sdk } from '@smoud/playable-sdk';
 
 export class FinalScene extends PIXI.Container {

@@ -9,7 +9,7 @@ import { ScoreManager } from '../core/ScoreManager';
 import { PopupManager } from '../core/PopupManager';
 import { StartBonusPopup } from '../ui/organisms/StartBonusPopup';
 import { FinalResultPopup } from '../ui/organisms/FinalResultPopup';
-import { FinalScene } from '../ui/organisms/FinalScene';
+import { FinalScene } from './FinalScene';
 import { CoinAnimation } from '../entities/CoinAnimation';
 import { TopUIContainer } from '../ui/organisms/TopUIContainer';
 
