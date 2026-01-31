@@ -66,7 +66,7 @@ export class MainScene {
 
     if (!this.waterBg || !this.skyBg) return;
 
-    this.roundControls.updatePosition(width, height);
+    this.roundControls.resize(width, height);
     this.statsDisplay.resize(width, height);
     this.popupManager.resize(width, height);
     this.updateLiveWinsPosition();
