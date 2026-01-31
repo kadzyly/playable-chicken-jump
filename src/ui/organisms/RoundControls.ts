@@ -52,14 +52,14 @@ export class RoundControls extends Container {
       fontSize: 20,
       fontWeight: '400',
       wordWrap: true,
-      wordWrapWidth: screenWidth * 0.8,
+      wordWrapWidth: screenWidth * 0.95,
       fill: '#ffffff',
       stroke: { color: 0x000000, width: 2 },
       align: 'center'
     });
 
     this.hintText = new Text({
-      text: 'Click to make the chicken jump and collect money',
+      text: 'Click to make the chicken\njump and collect money',
       style: hintStyle
     });
   }

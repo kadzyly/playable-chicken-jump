@@ -1,10 +1,10 @@
-import { Container } from 'pixi.js';
+import { Assets, Container, Sprite } from 'pixi.js';
 import { PanelUI } from '../atoms/PanelUI';
 import { ScoreManager } from '../../core/ScoreManager';
 
-const elementWidth = 280;
-const elementHeight = 52;
-const horizontalGap = 20;
+const elementWidth = 330;
+const elementHeight = 64;
+const horizontalGap = 30;
 
 export class WinInfoUI extends Container {
   private summaPanel: PanelUI;
@@ -25,7 +25,7 @@ export class WinInfoUI extends Container {
     // center horizontally
     this.x = screenWidth / 2;
     // top of the screen
-    this.y = horizontalGap + elementHeight / 2;
+    this.y = 80;
   }
 
   public getCashButton(): PanelUI {
@@ -67,7 +67,7 @@ export class WinInfoUI extends Container {
   private createElements(buttonWidth: number, buttonHeight: number) {
     this.summaPanel = new PanelUI({
       text: '',
-      fontSize: 40,
+      fontSize: 50,
       width: buttonWidth,
       height: buttonHeight,
       backgroundColor: 0x13bc0b
@@ -75,7 +75,7 @@ export class WinInfoUI extends Container {
 
     this.freeSpinPanel = new PanelUI({
       text: '',
-      fontSize: 34,
+      fontSize: 38,
       width: buttonWidth,
       height: buttonHeight,
       backgroundColor: 0xaf191a
@@ -88,6 +88,22 @@ export class WinInfoUI extends Container {
     this.summaPanel.y = 0;
     this.freeSpinPanel.y = elementHeight + horizontalGap;
 
+    const decorSnowBigAsset = Assets.get('decorSnow');
+    const decorSnowBig = new Sprite(decorSnowBigAsset);
+    decorSnowBig.anchor.set(1, 0);
+    decorSnowBig.scale.set(0.5, 0.5);
+    decorSnowBig.y = -25;
+    decorSnowBig.x = 340;
+
+    const decorSnowAsset = Assets.get('decorLiveWinsSnow');
+    const decorSnow = new Sprite(decorSnowAsset);
+    decorSnow.anchor.set(0, 0);
+    decorSnow.scale.set(-0.55, 0.55);
+    decorSnow.y = -15;
+    decorSnow.x = 55;
+
+    this.summaPanel.addChild(decorSnowBig);
+    this.freeSpinPanel.addChild(decorSnow);
     container.addChild(this.summaPanel, this.freeSpinPanel);
 
     this.addChild(container);

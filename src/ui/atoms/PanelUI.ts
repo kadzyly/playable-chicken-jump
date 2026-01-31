@@ -92,7 +92,7 @@ export class PanelUI extends Container {
     });
 
     text.anchor.set(0.5);
-    text.position.set(this.opts.width / 2, this.opts.height / 2);
+    text.position.set(this.opts.width / 2, this.opts.height / 2 + 4);
 
     return text;
   }
