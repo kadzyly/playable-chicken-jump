@@ -35,7 +35,7 @@ export class WinInfoUI extends Container {
 
   public resize(width: number, height: number) {
     const totalContentWidth = elementWidth;
-    const maxW = width * 0.9; // 90% of screen width
+    const maxW = width * 0.7; // 70% of screen width
 
     this.baseScale = totalContentWidth > maxW ? maxW / totalContentWidth : 1;
     this.scale.set(this.baseScale);

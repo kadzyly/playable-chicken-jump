@@ -96,7 +96,7 @@ export class LiveWinsUI extends Container {
 
   public resize(width: number, height: number) {
     const contentWidth = 300;
-    const maxW = width * 0.8; // 80% of screen width
+    const maxW = width * 0.6; // 60% of screen width
     this.baseScale = contentWidth > maxW ? maxW / contentWidth : 1;
 
     this.scale.set(this.baseScale);

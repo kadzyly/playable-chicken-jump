@@ -106,7 +106,7 @@ export class TopUIContainer extends Container {
     this.winInfoUI.setAutoPositioning(true);
 
     this.liveWins.x = 0;
-    this.liveWins.y = this.liveWins.height * 2.3;
+    this.liveWins.y = 220;
 
     this.winInfoUI.x = width / 2;
     this.winInfoUI.y = 0;
