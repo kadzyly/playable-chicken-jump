@@ -92,7 +92,7 @@ export class WinInfoUI extends Container {
     const decorSnowBig = new Sprite(decorSnowBigAsset);
     decorSnowBig.anchor.set(1, 0);
     decorSnowBig.scale.set(0.5, 0.5);
-    decorSnowBig.y = -25;
+    decorSnowBig.y = -28;
     decorSnowBig.x = 340;
 
     const decorSnowAsset = Assets.get('decorLiveWinsSnow');
