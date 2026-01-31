@@ -93,7 +93,7 @@ export class MainScene {
     this.startIsland.scale.set(width >= 768 ? 1.3 : 1.2);
     this.startIsland.x = width >= 768 ? -70 : -180;
 
-    const iceY = centerOfWaterY - 40;
+    const iceY = centerOfWaterY - 60;
     this.startIsland.y = iceY + 100 * this.startIsland.scale.y;
 
     const firstIceXOffset = width >= 768 ? 390 : 240;
