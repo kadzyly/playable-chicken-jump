@@ -9,6 +9,7 @@ const horizontalGap = 30;
 export class WinInfoUI extends Container {
   private summaPanel: PanelUI;
   private freeSpinPanel: PanelUI;
+  private baseScale = 1;
 
   constructor() {
     super();
@@ -26,6 +27,16 @@ export class WinInfoUI extends Container {
     this.x = screenWidth / 2;
     // top of the screen
     this.y = 80;
+  }
+
+  public resize(width: number, height: number) {
+    const totalContentWidth = elementWidth;
+    const maxW = width * 0.9; // 90% of screen width
+
+    this.baseScale = totalContentWidth > maxW ? maxW / totalContentWidth : 1;
+    this.scale.set(this.baseScale);
+
+    this.updatePosition(width, height);
   }
 
   public getCashButton(): PanelUI {
