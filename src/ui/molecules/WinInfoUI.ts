@@ -1,6 +1,7 @@
 import { Assets, Container, Sprite } from 'pixi.js';
 import { PanelUI } from '../atoms/PanelUI';
 import { ScoreManager } from '../../core/ScoreManager';
+import { ScreenAdapter } from '../../core/ScreenAdapter';
 
 const elementWidth = 330;
 const elementHeight = 64;
@@ -12,9 +13,11 @@ export class WinInfoUI extends Container {
   private baseScale = 1;
   private isHorizontalLayout = false;
   private useAutoPositioning = true;
+  private screenAdapter: ScreenAdapter;
 
   constructor() {
     super();
+    this.screenAdapter = ScreenAdapter.getInstance();
 
     this.createElements(elementWidth, elementHeight);
     this.layoutElements(elementHeight, horizontalGap);
@@ -22,6 +25,8 @@ export class WinInfoUI extends Container {
     const scoreManager = ScoreManager.getInstance();
     this.setScore(scoreManager.getCurrentScore());
     this.setFreeSpins(scoreManager.getCurrentFreeSpins());
+
+    this.resize(this.screenAdapter.width, this.screenAdapter.height);
   }
 
   public updatePosition(screenWidth: number, screenHeight: number) {
@@ -34,8 +39,12 @@ export class WinInfoUI extends Container {
   }
 
   public resize(width: number, height: number) {
-    const totalContentWidth = elementWidth;
-    const maxW = width * 0.7; // 70% of screen width
+    const totalContentWidth =
+      this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop()
+        ? elementWidth + horizontalGap + elementWidth
+        : elementWidth;
+    const scale = this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop() ? 0.5 : 0.7;
+    const maxW = width * scale; // 70% of screen width
 
     this.baseScale = totalContentWidth > maxW ? maxW / totalContentWidth : 1;
     this.scale.set(this.baseScale);

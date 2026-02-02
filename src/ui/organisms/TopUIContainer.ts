@@ -1,18 +1,22 @@
 import { Container } from 'pixi.js';
 import { LiveWinsUI } from '../molecules/LiveWinsUI';
 import { WinInfoUI } from '../molecules/WinInfoUI';
+import { ScreenAdapter } from '../../core/ScreenAdapter';
 
 export class TopUIContainer extends Container {
   private liveWins: LiveWinsUI;
   private winInfoUI: WinInfoUI;
+  private screenAdapter: ScreenAdapter;
 
   constructor() {
     super();
+    this.screenAdapter = ScreenAdapter.getInstance();
 
     this.liveWins = new LiveWinsUI();
     this.winInfoUI = new WinInfoUI();
 
     this.addChild(this.liveWins, this.winInfoUI);
+    this.resize(this.screenAdapter.width, this.screenAdapter.height);
   }
 
   public resize(width: number, height: number): void {
@@ -23,16 +27,20 @@ export class TopUIContainer extends Container {
     const horizontalGap = 40;
     const containerGap = 100;
 
-    const isDesktop = width >= 1024;
-    const isTablet = width >= 768 && !isDesktop;
-
-    if (isDesktop) {
+    if (this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop()) {
+      console.log('TTT layoutLandscape');
+      // Landscape: All elements horizontal and smaller
+      this.layoutLandscape(width, height, liveWinsWidth);
+    } else if (this.screenAdapter.isDesktop()) {
+      console.log('TTT isDesktop');
       // Desktop: All elements horizontal
       this.layoutDesktop(width, height, liveWinsWidth, winInfoPanelWidth, winInfoPanelHeight, horizontalGap, containerGap);
-    } else if (isTablet) {
+    } else if (this.screenAdapter.isTablet()) {
+      console.log('TTT isTablet');
       // Tablet: LiveWins and WinInfo horizontal
       this.layoutTablet(width, height, liveWinsWidth, winInfoPanelWidth, winInfoPanelHeight, containerGap);
     } else {
+      console.log('TTT Mobile');
       // Mobile: Vertical layout (default)
       this.layoutMobile(width, height);
     }
@@ -48,6 +56,26 @@ export class TopUIContainer extends Container {
 
   public update(): void {
     this.liveWins.update();
+  }
+
+  private layoutLandscape(width: number, height: number, liveWinsWidth: number): void {
+    this.winInfoUI.setAutoPositioning(false);
+
+    this.liveWins.resize(width, height);
+    this.winInfoUI.resize(width, height);
+
+    this.liveWins.x = 0;
+    this.liveWins.y = 10;
+
+    const gapX = this.screenAdapter.isTablet() ? 60 : 35;
+    const offsetY = this.screenAdapter.isTablet() ? 50 : 40;
+    this.winInfoUI.x = width * 0.42 + gapX;
+    this.winInfoUI.y = offsetY;
+
+    this.updateWinInfoLayout(true);
+
+    this.x = 0;
+    this.y = 0;
   }
 
   private layoutDesktop(
@@ -67,7 +95,7 @@ export class TopUIContainer extends Container {
     this.liveWins.x = 0;
     this.liveWins.y = 50;
 
-    this.winInfoUI.x = liveWinsWidth + containerGap;
+    this.winInfoUI.x = 400 + containerGap;
     this.winInfoUI.y = 95;
 
     this.updateWinInfoLayout(true);
@@ -120,6 +148,8 @@ export class TopUIContainer extends Container {
     // make children smaller
     const containerHeight = this.liveWins.y + this.liveWins.height * this.liveWins.scale.y;
     const maxAllowedHeight = height * 0.3;
+
+    this.updateWinInfoLayout(false);
 
     if (containerHeight > maxAllowedHeight) {
       const scaleRatio = maxAllowedHeight / containerHeight;

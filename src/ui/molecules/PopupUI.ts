@@ -1,5 +1,6 @@
 import { Assets, Container, Sprite, Texture, Ticker } from 'pixi.js';
 import { PopupBackground } from '../atoms/PopupBackground';
+import { ScreenAdapter } from '../../core/ScreenAdapter';
 
 export abstract class PopupUI extends Container {
   protected bg: Sprite;
@@ -14,9 +15,12 @@ export abstract class PopupUI extends Container {
   private animTo = 0;
   private onComplete?: () => void;
   private baseScale = 1;
+  private screenAdapter: ScreenAdapter;
 
   constructor() {
     super();
+
+    this.screenAdapter = ScreenAdapter.getInstance();
 
     this.bg = new Sprite(Texture.WHITE);
     this.bg.tint = 0x000000;
@@ -59,10 +63,16 @@ export abstract class PopupUI extends Container {
     this.panel.y = height * 0.5;
 
     const contentWidth = this.popupBackground.width;
-    // looks like ~0.9, because has gradient effect
-    const maxW = width * 1.2;
-
-    this.baseScale = contentWidth > maxW ? maxW / contentWidth : 1;
+    const contentHeight = this.popupBackground.height;
+    if (this.screenAdapter.isLandscape()) {
+      // looks like ~0.9, because has gradient effect
+      const maxH = height * 1.2;
+      this.baseScale = contentHeight > maxH ? maxH / contentHeight : 1;
+    } else {
+      // looks like ~0.9, because has gradient effect
+      const maxW = width * 1.2;
+      this.baseScale = contentWidth > maxW ? maxW / contentWidth : 1;
+    }
 
     if (!this.ticker && this.animTo === 1) {
       this.panel.scale.set(this.baseScale);

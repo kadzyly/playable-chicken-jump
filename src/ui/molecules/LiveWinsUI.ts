@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { Assets, Container, Graphics, Sprite, Spritesheet, Text } from 'pixi.js';
+import { ScreenAdapter } from '../../core/ScreenAdapter';
 
 const flagsArray = ['01.png', '08.png', '09.png', '24.png', '32.png', '40.png', '00.png', '16.png', '48.png', '56.png'];
 
@@ -34,10 +35,12 @@ export class LiveWinsUI extends Container {
   private background: Graphics;
   private flagSheet: Spritesheet;
   private flagSprite: Sprite;
+  private screenAdapter: ScreenAdapter;
 
   constructor() {
     super();
 
+    this.screenAdapter = ScreenAdapter.getInstance();
     this.background = new Graphics();
     this.drawBackground();
     this.addChild(this.background);
@@ -92,11 +95,14 @@ export class LiveWinsUI extends Container {
     this.flagSprite.scale.set(0.2);
 
     this.addChild(decorSnow, this.liveWinsText, this.greenCircle, this.onlineText, this.flagSprite, this.winMessageText);
+    this.resize(this.screenAdapter.width, this.screenAdapter.height);
   }
 
   public resize(width: number, height: number) {
     const contentWidth = 300;
-    const maxW = width * 0.6; // 60% of screen width
+
+    const scale = this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop() ? 0.3 : 0.6;
+    const maxW = width * scale;
     this.baseScale = contentWidth > maxW ? maxW / contentWidth : 1;
 
     this.scale.set(this.baseScale);
