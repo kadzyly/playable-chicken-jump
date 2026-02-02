@@ -76,14 +76,50 @@ export class MainScene {
     const waterTopY = height - waterHeight;
     const centerOfWaterY = waterTopY + waterHeight / 2;
 
-    this.character.scale.set(width >= 768 ? 0.9 : 0.8);
-    this.startIsland.scale.set(width >= 768 ? 1.3 : 1.2);
+    let iceScale: number;
+    let characterScale: number;
+    let startIslandScale: number;
+    let spaceBetweenIces = 34;
+    let firstIceLeftOffset: number;
 
-    const iceScale = width >= 768 ? 0.8 : 0.7;
+    switch (true) {
+      // desktop
+      case width >= 768:
+        iceScale = 0.8;
+        characterScale = 0.9;
+        startIslandScale = 1.3;
+        firstIceLeftOffset = 440;
+        break;
+      // mobile (small)
+      case width <= 432 && width > 360:
+        iceScale = 0.6;
+        characterScale = 0.6;
+        startIslandScale = 1;
+        spaceBetweenIces = 24;
+        firstIceLeftOffset = 220;
+        break;
+      // mobile (smallest)
+      case width <= 360:
+        iceScale = 0.6;
+        characterScale = 0.55;
+        startIslandScale = 0.95;
+        spaceBetweenIces = 20;
+        firstIceLeftOffset = 175;
+        break;
+      // mobile (medium)
+      default:
+        iceScale = 0.7;
+        characterScale = 0.8;
+        startIslandScale = 1.2;
+        firstIceLeftOffset = 290;
+        break;
+    }
+
     const targetIceWidth = 298 * iceScale;
-    const spaceBetweenIces = 34;
-
     const finalIceStepX = targetIceWidth + spaceBetweenIces;
+
+    this.character.scale.set(characterScale);
+    this.startIsland.scale.set(startIslandScale);
 
     this.ices.forEach((ice, i) => {
       ice.scale.set(iceScale);
@@ -92,14 +128,12 @@ export class MainScene {
     // horizontal placement of platforms
     // - at the first: start island and one ice
     // - next: 2 ices on the screen
-    this.startIsland.scale.set(width >= 768 ? 1.3 : 1.2);
     this.startIsland.x = width >= 768 ? -70 : -180;
 
     const iceY = centerOfWaterY - 60;
     this.startIsland.y = iceY + 100 * this.startIsland.scale.y;
 
-    const firstIceXOffset = width >= 768 ? 390 : 240;
-    const firstIceX = firstIceXOffset + 50 + targetIceWidth / 2;
+    const firstIceX = firstIceLeftOffset + targetIceWidth / 2;
 
     this.ices.forEach((ice, index) => {
       if (index === 0) {

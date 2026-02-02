@@ -116,10 +116,10 @@ export class TopUIContainer extends Container {
 
     this.winInfoUI.updatePosition(width, height);
 
-    // if container height more 32% of screen height
+    // if container height more 30% of screen height
     // make children smaller
     const containerHeight = this.liveWins.y + this.liveWins.height * this.liveWins.scale.y;
-    const maxAllowedHeight = height * 0.32;
+    const maxAllowedHeight = height * 0.3;
 
     if (containerHeight > maxAllowedHeight) {
       const scaleRatio = maxAllowedHeight / containerHeight;

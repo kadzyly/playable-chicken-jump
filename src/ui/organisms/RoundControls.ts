@@ -14,8 +14,11 @@ export class RoundControls extends Container {
     const buttonHeight = 70;
     const horizontalGap = 14;
     const verticalGap = 18;
+    const isDesktop = screenWidth >= 768;
 
     this.createHintText(screenWidth);
+    this.setHintTextAdaptive(isDesktop);
+    this.fitTextToWidth(this.hintText, screenWidth);
     this.createButtons(buttonWidth, buttonHeight);
     this.setupButtonEvents();
     this.layoutButtons(buttonWidth, horizontalGap);
@@ -42,10 +45,7 @@ export class RoundControls extends Container {
 
     const isDesktop = width >= 768;
 
-    const hintText = this.getHintTextAdaptive(isDesktop);
-    if (this.hintText.text !== hintText) {
-      this.hintText.text = hintText;
-    }
+    this.setHintTextAdaptive(isDesktop);
     this.fitTextToWidth(this.hintText, width);
     this.scale.set(this.baseScale);
     this.updatePosition(width, height);
@@ -80,6 +80,7 @@ export class RoundControls extends Container {
       style: {
         fontFamily: 'Marvin400, Arial, sans-serif',
         fontSize: 30,
+        lineHeight: 30,
         fontWeight: '400',
         wordWrap: true,
         wordWrapWidth: screenWidth,
@@ -103,11 +104,45 @@ export class RoundControls extends Container {
       : 'Click\u00A0to\u00A0make\u00A0the\u00A0chicken\njump\u00A0and\u00A0collect\u00A0money';
   }
 
-  private fitTextToWidth(text: Text, maxWidth: number, minFontSize = 16) {
-    const style = text.style as any;
-    text.style.fontSize = 30;
-    while (text.width > maxWidth && style.fontSize > minFontSize) {
-      text.style.fontSize = style.fontSize - 1;
+  private setHintTextAdaptive(isDesktop: boolean) {
+    const text = this.getHintTextAdaptive(isDesktop);
+
+    if (this.hintText.text !== text) {
+      this.hintText.text = text;
+    }
+
+    this.hintText.style.wordWrap = !isDesktop;
+  }
+
+  private fitTextToWidth(text: Text, maxWidth: number, minFontSize = 20, maxFontSize = 30) {
+    let fontSize = minFontSize;
+
+    // first step: set the smollest size
+    text.style.fontSize = fontSize;
+    text.style.lineHeight = fontSize;
+
+    // try to make max size
+    while (fontSize < maxFontSize) {
+      const nextSize = fontSize + 1;
+
+      text.style.fontSize = nextSize;
+      text.style.lineHeight = nextSize;
+
+      if (text.width > maxWidth) {
+        text.style.fontSize = fontSize;
+        text.style.lineHeight = fontSize;
+        break;
+      }
+
+      fontSize = nextSize;
+    }
+
+    // min size
+    while (text.width > maxWidth && fontSize > minFontSize) {
+      fontSize--;
+
+      text.style.fontSize = fontSize;
+      text.style.lineHeight = fontSize;
     }
   }
 
