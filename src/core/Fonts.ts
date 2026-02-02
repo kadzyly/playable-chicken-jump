@@ -1,4 +1,4 @@
-import marvinFontUrl from 'assets/Marvin400.otf';
+import marvinFontUrl from 'assets/Marvin.ttf';
 
 let loaded = false;
 

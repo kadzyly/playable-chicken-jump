@@ -17,10 +17,10 @@ export class StartBonusPopup extends PopupUI {
     });
 
     const sumText = new Text({
-      text: '500€+250',
+      text: '500€ + 250',
       style: {
         fontFamily: 'Marvin400, Arial',
-        fontSize: 70,
+        fontSize: 60,
         fill: 0xffffff,
         align: 'center',
         stroke: { color: 0x000000, width: 4 }
@@ -38,10 +38,10 @@ export class StartBonusPopup extends PopupUI {
     });
 
     titleText.anchor.set(0.5);
-    titleText.y = -100;
+    titleText.y = -110;
 
     sumText.anchor.set(0.5);
-    sumText.y = -40;
+    sumText.y = -50;
 
     freeSpinsText.anchor.set(0.5);
     freeSpinsText.y = 20;
@@ -58,7 +58,7 @@ export class StartBonusPopup extends PopupUI {
       glowAlpha: 0.3,
       glowSize: 10
     });
-    button.y = 100;
+    button.y = 110;
 
     button.on('click', () => {
       this.emit('closeClick');
