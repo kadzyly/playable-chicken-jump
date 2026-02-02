@@ -40,9 +40,11 @@ export class MainScene {
     this.popupManager = PopupManager.getInstance();
 
     this.createBackground();
-    this.createEntities();
-    this.createBottomUI();
+    this.createStartIsland();
+    this.createIces();
     this.createTopUI();
+    this.createCharacter();
+    this.createBottomUI();
     this.setupInteraction();
     this.setupMusic();
     this.createPopups();
@@ -196,20 +198,26 @@ export class MainScene {
     this.world.addChild(this.skyBg, this.waterBg);
   }
 
-  private createEntities(): void {
+  private createStartIsland() {
     this.startIsland = new StartIsland();
+    this.world.addChild(this.startIsland);
+  }
+  private createCharacter() {
     this.character = new Character();
-
-    // create 6 ices
+    this.world.addChild(this.character);
+  }
+  private createIces() {
     this.ices = [];
     const defaultIceText = 'x10';
+
+    // create 6 ices
     for (let i = 0; i < 6; i++) {
       const bonus = this.scoreManager.Bonuses[i];
 
       this.ices.push(new Ice(bonus ? bonus.title : defaultIceText));
     }
 
-    this.world.addChild(this.startIsland, ...this.ices, this.character);
+    this.world.addChild(...this.ices);
   }
 
   private createBottomUI() {
