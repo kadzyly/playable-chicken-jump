@@ -28,19 +28,15 @@ export class TopUIContainer extends Container {
     const containerGap = 100;
 
     if (this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop()) {
-      console.log('TTT layoutLandscape');
       // Landscape: All elements horizontal and smaller
       this.layoutLandscape(width, height, liveWinsWidth);
     } else if (this.screenAdapter.isDesktop()) {
-      console.log('TTT isDesktop');
       // Desktop: All elements horizontal
       this.layoutDesktop(width, height, liveWinsWidth, winInfoPanelWidth, winInfoPanelHeight, horizontalGap, containerGap);
     } else if (this.screenAdapter.isTablet()) {
-      console.log('TTT isTablet');
       // Tablet: LiveWins and WinInfo horizontal
       this.layoutTablet(width, height, liveWinsWidth, winInfoPanelWidth, winInfoPanelHeight, containerGap);
     } else {
-      console.log('TTT Mobile');
       // Mobile: Vertical layout (default)
       this.layoutMobile(width, height);
     }
