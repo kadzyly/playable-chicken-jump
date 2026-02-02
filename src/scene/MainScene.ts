@@ -12,6 +12,7 @@ import { FinalResultPopup } from '../ui/organisms/FinalResultPopup';
 import { FinalScene } from './FinalScene';
 import { CoinAnimation } from '../entities/CoinAnimation';
 import { TopUIContainer } from '../ui/organisms/TopUIContainer';
+import { ScreenAdapter } from '../core/ScreenAdapter';
 
 export class MainScene {
   private world: PIXI.Container;
@@ -26,6 +27,7 @@ export class MainScene {
   private popupManager: PopupManager;
   private finalScene: FinalScene | null = null;
   private coinAnimation: CoinAnimation;
+  private screenAdapter: ScreenAdapter;
 
   // 0 - start island, then platforms (ice)
   private currentPlatformIndex = 0;
@@ -38,6 +40,7 @@ export class MainScene {
     this.app.stage.addChild(this.world);
     this.scoreManager = ScoreManager.getInstance();
     this.popupManager = PopupManager.getInstance();
+    this.screenAdapter = ScreenAdapter.getInstance();
 
     this.createBackground();
     this.createStartIsland();
@@ -70,11 +73,15 @@ export class MainScene {
     this.popupManager.resize(width, height);
 
     // heights: sky 60%, water 40%
-    const skyHeight = height * 0.62;
-    const waterHeight = height * 0.38;
+    let skyHeight = height * 0.62;
+    let waterHeight = height * 0.38;
 
     const waterTopY = height - waterHeight;
-    const centerOfWaterY = waterTopY + waterHeight / 2;
+    let centerOfWaterY = waterTopY + waterHeight / 2;
+
+    if (this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop()) {
+      centerOfWaterY = waterTopY + waterHeight / 1.4;
+    }
 
     let iceScale: number;
     let characterScale: number;
@@ -83,15 +90,22 @@ export class MainScene {
     let firstIceLeftOffset: number;
 
     switch (true) {
+      // landscape
+      case this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop():
+        iceScale = 0.5;
+        characterScale = 0.6;
+        startIslandScale = 1;
+        firstIceLeftOffset = 330;
+        break;
       // desktop
-      case width >= 768:
+      case this.screenAdapter.isDesktop() || this.screenAdapter.isTablet():
         iceScale = 0.8;
         characterScale = 0.9;
         startIslandScale = 1.3;
         firstIceLeftOffset = 440;
         break;
       // mobile (small)
-      case width <= 432 && width > 360:
+      case this.screenAdapter.isMobile() && !this.screenAdapter.isMobileXs():
         iceScale = 0.6;
         characterScale = 0.6;
         startIslandScale = 1;
@@ -99,7 +113,7 @@ export class MainScene {
         firstIceLeftOffset = 220;
         break;
       // mobile (smallest)
-      case width <= 360:
+      case this.screenAdapter.isMobileXs():
         iceScale = 0.6;
         characterScale = 0.55;
         startIslandScale = 0.95;
@@ -244,8 +258,8 @@ export class MainScene {
     this.ices = [];
     const defaultIceText = 'x10';
 
-    // create 6 ices
-    for (let i = 0; i < 6; i++) {
+    // create 8 ices
+    for (let i = 0; i < 8; i++) {
       const bonus = this.scoreManager.Bonuses[i];
 
       this.ices.push(new Ice(bonus ? bonus.title : defaultIceText));

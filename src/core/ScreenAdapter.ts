@@ -39,6 +39,10 @@ export class ScreenAdapter {
     return this._width <= 768;
   }
 
+  public isMobileXs(): boolean {
+    return this._width <= 360;
+  }
+
   public isTablet(): boolean {
     return this._width > 768 && this._width <= 1024;
   }

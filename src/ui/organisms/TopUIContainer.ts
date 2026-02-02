@@ -68,7 +68,7 @@ export class TopUIContainer extends Container {
     this.liveWins.y = 10;
 
     const gapX = this.screenAdapter.isTablet() ? 60 : 35;
-    const offsetY = this.screenAdapter.isTablet() ? 50 : 40;
+    const offsetY = this.screenAdapter.isTablet() ? 40 : 35;
     this.winInfoUI.x = width * 0.42 + gapX;
     this.winInfoUI.y = offsetY;
 

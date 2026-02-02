@@ -1,23 +1,26 @@
 import { Container, Text } from 'pixi.js';
 import { ButtonUI } from '../atoms/ButtonUI';
+import { ScreenAdapter } from '../../core/ScreenAdapter';
 
 export class RoundControls extends Container {
   private cashButton: ButtonUI;
   private goButton: ButtonUI;
   private hintText: Text;
   private baseScale = 1;
+  private screenAdapter: ScreenAdapter;
 
   constructor(screenWidth: number, screenHeight: number) {
     super();
+
+    this.screenAdapter = ScreenAdapter.getInstance();
 
     const buttonWidth = 220;
     const buttonHeight = 70;
     const horizontalGap = 14;
     const verticalGap = 18;
-    const isDesktop = screenWidth >= 768;
 
     this.createHintText(screenWidth);
-    this.setHintTextAdaptive(isDesktop);
+    this.setHintTextAdaptive(this.screenAdapter.isDesktop());
     this.fitTextToWidth(this.hintText, screenWidth);
     this.createButtons(buttonWidth, buttonHeight);
     this.setupButtonEvents();
@@ -28,7 +31,7 @@ export class RoundControls extends Container {
   public updatePosition(screenWidth: number, screenHeight: number) {
     // for desktop: offset
     // for mobile: offset * 2
-    const baseMargin = 30;
+    const baseMargin = this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop() ? 15 : 30;
     const bottomMargin = this.baseScale < 1 ? baseMargin : baseMargin / 2;
 
     this.x = screenWidth / 2;
@@ -40,12 +43,11 @@ export class RoundControls extends Container {
     const horizontalGap = 14;
     const totalContentWidth = buttonWidth + horizontalGap + buttonWidth;
 
-    const maxW = width * 0.9;
+    const scale = this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop() ? 0.3 : 0.9;
+    const maxW = width * scale;
     this.baseScale = totalContentWidth > maxW ? maxW / totalContentWidth : 1;
 
-    const isDesktop = width >= 768;
-
-    this.setHintTextAdaptive(isDesktop);
+    this.setHintTextAdaptive(this.screenAdapter.isDesktop());
     this.fitTextToWidth(this.hintText, width);
     this.scale.set(this.baseScale);
     this.updatePosition(width, height);
@@ -72,8 +74,7 @@ export class RoundControls extends Container {
   }
 
   private createHintText(screenWidth: number) {
-    const isDesktop = screenWidth >= 768;
-    const hintText = this.getHintTextAdaptive(isDesktop);
+    const hintText = this.getHintTextAdaptive();
 
     this.hintText = new Text({
       text: hintText,
@@ -98,20 +99,24 @@ export class RoundControls extends Container {
     });
   }
 
-  private getHintTextAdaptive(isDesktop: boolean) {
-    return isDesktop
+  private isOneLine() {
+    return this.screenAdapter.isDesktop() || this.screenAdapter.isLandscape() || this.screenAdapter.isTablet();
+  }
+
+  private getHintTextAdaptive() {
+    return this.isOneLine()
       ? 'Click to make the chicken jump and collect money'
       : 'Click\u00A0to\u00A0make\u00A0the\u00A0chicken\njump\u00A0and\u00A0collect\u00A0money';
   }
 
   private setHintTextAdaptive(isDesktop: boolean) {
-    const text = this.getHintTextAdaptive(isDesktop);
+    const text = this.getHintTextAdaptive();
 
     if (this.hintText.text !== text) {
       this.hintText.text = text;
     }
 
-    this.hintText.style.wordWrap = !isDesktop;
+    this.hintText.style.wordWrap = !this.isOneLine();
   }
 
   private fitTextToWidth(text: Text, maxWidth: number, minFontSize = 20, maxFontSize = 30) {

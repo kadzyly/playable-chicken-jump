@@ -101,7 +101,7 @@ export class LiveWinsUI extends Container {
   public resize(width: number, height: number) {
     const contentWidth = 300;
 
-    const scale = this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop() ? 0.3 : 0.6;
+    const scale = this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop() ? 0.25 : 0.6;
     const maxW = width * scale;
     this.baseScale = contentWidth > maxW ? maxW / contentWidth : 1;
 
