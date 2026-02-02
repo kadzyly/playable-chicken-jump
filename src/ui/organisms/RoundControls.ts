@@ -40,6 +40,13 @@ export class RoundControls extends Container {
     const maxW = width * 0.9;
     this.baseScale = totalContentWidth > maxW ? maxW / totalContentWidth : 1;
 
+    const isDesktop = width >= 768;
+
+    const hintText = this.getHintTextAdaptive(isDesktop);
+    if (this.hintText.text !== hintText) {
+      this.hintText.text = hintText;
+    }
+    this.fitTextToWidth(this.hintText, width);
     this.scale.set(this.baseScale);
     this.updatePosition(width, height);
   }
@@ -65,14 +72,17 @@ export class RoundControls extends Container {
   }
 
   private createHintText(screenWidth: number) {
+    const isDesktop = screenWidth >= 768;
+    const hintText = this.getHintTextAdaptive(isDesktop);
+
     this.hintText = new Text({
-      text: 'Click to make the chicken jump and collect money',
+      text: hintText,
       style: {
         fontFamily: 'Marvin400, Arial, sans-serif',
         fontSize: 30,
         fontWeight: '400',
         wordWrap: true,
-        wordWrapWidth: screenWidth * 0.95,
+        wordWrapWidth: screenWidth,
         fill: '#ffffff',
         stroke: { color: 0x000000, width: 2 },
         align: 'center',
@@ -85,6 +95,20 @@ export class RoundControls extends Container {
         }
       }
     });
+  }
+
+  private getHintTextAdaptive(isDesktop: boolean) {
+    return isDesktop
+      ? 'Click to make the chicken jump and collect money'
+      : 'Click\u00A0to\u00A0make\u00A0the\u00A0chicken\njump\u00A0and\u00A0collect\u00A0money';
+  }
+
+  private fitTextToWidth(text: Text, maxWidth: number, minFontSize = 16) {
+    const style = text.style as any;
+    text.style.fontSize = 30;
+    while (text.width > maxWidth && style.fontSize > minFontSize) {
+      text.style.fontSize = style.fontSize - 1;
+    }
   }
 
   private createButtons(buttonWidth: number, buttonHeight: number) {
