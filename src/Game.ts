@@ -21,15 +21,15 @@ export class Game {
     screenAdapter.updateDimensions(width, height);
 
     this.app.renderer.resize(width, height);
-    this.scene.resize(width, height, screenAdapter.isLandscape());
+    this.scene.resize(width, height);
   }
 
   private async init(width: number, height: number): Promise<void> {
     this.app = await createApp(width, height);
-    
+
     const screenAdapter = ScreenAdapter.getInstance();
     screenAdapter.updateDimensions(width, height);
-    
+
     await loadAssets();
     await loadFonts();
 
