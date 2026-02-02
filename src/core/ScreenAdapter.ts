@@ -36,7 +36,7 @@ export class ScreenAdapter {
   }
 
   public isMobile(): boolean {
-    return this._width <= 768;
+    return this._width < 768;
   }
 
   public isMobileXs(): boolean {
@@ -44,11 +44,11 @@ export class ScreenAdapter {
   }
 
   public isTablet(): boolean {
-    return this._width > 768 && this._width <= 1024;
+    return this._width >= 768 && this._width < 1024;
   }
 
   public isDesktop(): boolean {
-    return this._width > 1024;
+    return this._width >= 1024;
   }
 
   public getAspectRatio(): number {

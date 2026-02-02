@@ -89,6 +89,7 @@ export class MainScene {
     let spaceBetweenIces = 34;
     let firstIceLeftOffset: number;
 
+    this.startIsland.x = -180;
     switch (true) {
       // landscape
       case this.screenAdapter.isLandscape() && !this.screenAdapter.isDesktop():
@@ -96,6 +97,7 @@ export class MainScene {
         characterScale = 0.6;
         startIslandScale = 1;
         firstIceLeftOffset = 330;
+        this.startIsland.x = -70;
         break;
       // desktop
       case this.screenAdapter.isDesktop() || this.screenAdapter.isTablet():
@@ -103,6 +105,7 @@ export class MainScene {
         characterScale = 0.9;
         startIslandScale = 1.3;
         firstIceLeftOffset = 440;
+        this.startIsland.x = -70;
         break;
       // mobile (small)
       case this.screenAdapter.isMobile() && !this.screenAdapter.isMobileXs():
@@ -138,11 +141,6 @@ export class MainScene {
     this.ices.forEach((ice, i) => {
       ice.scale.set(iceScale);
     });
-
-    // horizontal placement of platforms
-    // - at the first: start island and one ice
-    // - next: 2 ices on the screen
-    this.startIsland.x = width >= 768 ? -70 : -180;
 
     const iceY = centerOfWaterY - 60;
     this.startIsland.y = iceY + 100 * this.startIsland.scale.y;
