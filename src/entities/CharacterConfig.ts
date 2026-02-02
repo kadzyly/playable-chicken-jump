@@ -91,9 +91,30 @@ export const CHARACTER_ANIMATIONS = {
       'player_win_00031.png',
       'player_win_00032.png',
       'player_win_00033.png',
-      'player_win_00034.png'
+      'player_win_00034.png',
+
+      'player_win_00010.png',
+      'player_win_00009.png',
+      'player_win_00008.png',
+      'player_win_00007.png',
+      'player_win_00006.png',
+      'player_win_00005.png',
+      'player_win_00004.png',
+      'player_win_00003.png',
+      'player_win_00002.png',
+      'player_win_00001.png',
+
+      'player_win_00000.png',
+      'player_win_00001.png',
+      'player_win_00000.png',
+      'player_win_00001.png',
+      'player_win_00000.png',
+      'player_win_00001.png',
+      'player_win_00000.png',
+      'player_win_00001.png',
+      'player_win_00000.png'
     ],
     speed: 0.5,
-    loop: false
+    loop: true
   }
 };
