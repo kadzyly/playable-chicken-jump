@@ -56,8 +56,6 @@ export class FinalScene extends PIXI.Container {
     this.installButton.addChild(decorSnow);
     this.characterContainer.addChild(this.installButton);
 
-    this.addChild(this.characterContainer);
-
     this.topContainer = new PIXI.Container();
     this.topBg = new Graphics();
     this.topText = new Text({
@@ -76,6 +74,7 @@ export class FinalScene extends PIXI.Container {
 
     this.topContainer.addChild(this.topBg, this.topBanner, this.topText);
     this.addChild(this.topContainer);
+    this.addChild(this.characterContainer);
 
     this.resize(width, height);
   }
@@ -121,12 +120,14 @@ export class FinalScene extends PIXI.Container {
     this.topBanner.scale.set(1.1);
 
     const contentWidth = topBgWidth + 48;
+    const contentHeight = topBgHeight + 48;
     const maxW = width * 0.9; // 90% of screen width
+    const maxH = height * 0.3; // 30% of screen height
 
-    this.baseScale = contentWidth > maxW ? maxW / contentWidth : 1;
+    this.baseScale = contentWidth > maxW || contentHeight > maxH ? Math.min(maxW / contentWidth, maxH / contentHeight) : 1;
     this.topContainer.scale.set(this.baseScale);
 
     this.topContainer.x = width / 2;
-    this.topContainer.y = 170;
+    this.topContainer.y = 170 * this.baseScale;
   }
 }
